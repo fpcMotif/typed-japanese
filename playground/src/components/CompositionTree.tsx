@@ -12,6 +12,7 @@ export const CATEGORY_META: Record<
   verb: { jp: "動詞", en: "Verb", varName: "--cat-verb" },
   adjective: { jp: "形容詞", en: "Adjective", varName: "--cat-adjective" },
   noun: { jp: "名詞", en: "Noun", varName: "--cat-noun" },
+  adverb: { jp: "副詞", en: "Adverb", varName: "--cat-adverb" },
   particle: { jp: "助詞", en: "Particle", varName: "--cat-particle" },
   form: { jp: "活用形", en: "Form", varName: "--cat-form" },
   demonstrative: { jp: "指示詞", en: "Demonstrative", varName: "--cat-demonstrative" },

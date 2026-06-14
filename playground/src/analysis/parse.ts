@@ -9,6 +9,7 @@
  * `typescript` is loaded lazily so it lands in its own chunk.
  */
 import type * as TS from "typescript";
+import { VOCAB } from "../vocab/dictionary";
 
 let tsmod: typeof TS | null = null;
 async function loadTs(): Promise<typeof TS> {
@@ -22,6 +23,7 @@ export type GrammarCategory =
   | "verb"
   | "adjective"
   | "noun"
+  | "adverb"
   | "particle"
   | "form"
   | "demonstrative"
@@ -116,6 +118,104 @@ function classifyLiteral(value: string): GrammarCategory {
   return "literal";
 }
 
+// --- literal tokenization against the vocabulary table -----------------------
+// A template literal's text between `${…}` interpolations (e.g. "ここで電話を")
+// bundles several words. Split it into known words/particles via longest-match
+// over the vocabulary so each becomes its own, lookup-able node.
+
+const SURFACES = new Set<string>(VOCAB.keys());
+let SURFACE_MAXLEN = 1;
+for (const k of SURFACES) if (k.length > SURFACE_MAXLEN) SURFACE_MAXLEN = k.length;
+
+function posToCategory(pos: string): GrammarCategory {
+  if (pos.startsWith("verb")) return "verb";
+  if (pos === "i-adjective" || pos === "na-adjective") return "adjective";
+  if (pos === "adverb") return "adverb";
+  if (pos === "noun" || pos === "pronoun" || pos === "counter" || pos === "number" || pos === "expression")
+    return "noun";
+  // particle, copula, suffix, conjunction, prefix, interjection
+  return "particle";
+}
+
+function categorizeSurface(s: string): GrammarCategory {
+  const c = classifyLiteral(s);
+  if (c !== "literal") return c;
+  const e = VOCAB.get(s);
+  return e ? posToCategory(e.pos) : "literal";
+}
+
+interface Tok {
+  surface: string;
+  category: GrammarCategory;
+}
+
+const KANJI = /[㐀-鿿々〆ヶ]/;
+
+function tokenizeLiteral(text: string): Tok[] {
+  const out: Tok[] = [];
+  let plain = "";
+  const flush = () => {
+    if (plain) out.push({ surface: plain, category: "literal" });
+    plain = "";
+  };
+  for (let i = 0; i < text.length; ) {
+    // Treat a run of kanji atomically: only emit it as a word if the WHOLE run
+    // is a known word, otherwise keep it together as one literal. This avoids
+    // mis-splitting an unknown compound (電話 → 電 + 話) into a wrong reading.
+    if (KANJI.test(text[i]!)) {
+      let j = i;
+      while (j < text.length && KANJI.test(text[j]!)) j++;
+      const run = text.slice(i, j);
+      if (SURFACES.has(run)) {
+        flush();
+        out.push({ surface: run, category: categorizeSurface(run) });
+      } else {
+        plain += run;
+      }
+      i = j;
+      continue;
+    }
+    // Kana / other: longest vocabulary match (particles, suffixes, kana words).
+    let matched: string | null = null;
+    const maxL = Math.min(SURFACE_MAXLEN, text.length - i);
+    for (let len = maxL; len >= 1; len--) {
+      const sub = text.slice(i, i + len);
+      if (SURFACES.has(sub) && !KANJI.test(sub[0]!)) {
+        matched = sub;
+        break;
+      }
+    }
+    if (matched) {
+      flush();
+      out.push({ surface: matched, category: categorizeSurface(matched) });
+      i += matched.length;
+    } else {
+      plain += text[i];
+      i += 1;
+    }
+  }
+  flush();
+  return out;
+}
+
+function literalNodes(
+  text: string,
+  idPrefix: string,
+  start: number,
+  end: number
+): CompositionNode[] {
+  return tokenizeLiteral(text).map((tok, k) => ({
+    id: `${idPrefix}.${k}`,
+    label: tok.category === "literal" ? `"${tok.surface}"` : tok.surface,
+    ctor: null,
+    category: tok.category,
+    text: `"${tok.surface}"`,
+    start,
+    end,
+    children: [],
+  }));
+}
+
 // --- parsing -----------------------------------------------------------------
 
 export async function analyze(code: string): Promise<Analysis> {
@@ -184,14 +284,17 @@ export async function buildTree(
     const end = node.getEnd();
     const text = node.getText(sf).trim();
 
-    // String literal leaf.
+    // String literal leaf. A standalone literal type-argument is a single,
+    // deliberate token (a form name like "て形", a particle like "は") — classify
+    // it as one node, never split it. (Multi-word glue lives in template chunks,
+    // which ARE tokenized below.)
     if (ts.isLiteralTypeNode(node) && ts.isStringLiteral(node.literal)) {
       const value = node.literal.text;
       return {
         id: idPath,
         label: `"${value}"`,
         ctor: null,
-        category: classifyLiteral(value),
+        category: categorizeSurface(value),
         text,
         start,
         end,
@@ -202,22 +305,16 @@ export async function buildTree(
     // Template literal type: `${A}いる` — the glue most real sentences use.
     // Decompose into its literal chunks and embedded type expressions.
     if (ts.isTemplateLiteralTypeNode(node)) {
-      const chunk = (value: string, k: number): CompositionNode => ({
-        id: `${idPath}.c${k}`,
-        label: `"${value}"`,
-        ctor: null,
-        category: classifyLiteral(value),
-        text: `"${value}"`,
-        start,
-        end,
-        children: [],
-      });
       const kids: CompositionNode[] = [];
       let k = 0;
-      if (node.head.text) kids.push(chunk(node.head.text, k++));
+      const pushLiteral = (value: string) => {
+        for (const n of literalNodes(value, `${idPath}.c${k}`, start, end)) kids.push(n);
+        k += 1;
+      };
+      if (node.head.text) pushLiteral(node.head.text);
       node.templateSpans.forEach((span, i) => {
         kids.push(build(span.type, `${idPath}.${i}`));
-        if (span.literal.text) kids.push(chunk(span.literal.text, k++));
+        if (span.literal.text) pushLiteral(span.literal.text);
       });
       return {
         id: idPath,

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · Where TypeScript meets Japanese</title>
+<style>
+  :root{
+    --paper:#fffdf9; --washi:#f6efe4; --ink:#2b2622; --muted:#7a6f64;
+    --sakura:#c8607f; --sakura-soft:#f6dde5; --rule:#e7ddcd; --code-bg:#fbf4ea;
+    --tok-type:#9a5b2c; --tok-str:#3f7d56; --tok-key:#b25a86; --tok-com:#b1a392;
+    --ok:#2f6043; --no:#a8345b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--washi);color:var(--ink);font-size:18px;line-height:1.72;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;}
+  .wrap{max-width:46rem;margin:0 auto;padding:3.2rem 1.5rem 5rem;background:var(--paper);box-shadow:0 0 0 1px var(--rule)}
+  @media(min-width:900px){.wrap{margin:2.4rem auto;border-radius:3px}}
+  .kicker{font:600 .78rem/1.4 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sakura)}
+  h1{font-size:2.05rem;margin:.25rem 0 .15rem;font-weight:600;line-height:1.2}
+  .sub{color:var(--muted);font-style:italic;margin:.3rem 0 1.4rem;font-size:1.05rem}
+  h2{font-size:1.36rem;margin:2.7rem 0 .5rem;padding-top:1.1rem;border-top:1px solid var(--rule);font-weight:600;line-height:1.25}
+  h2 .n{display:inline-block;min-width:1.6em;color:var(--sakura);font:600 1rem/1 system-ui,sans-serif;vertical-align:.14em}
+  h3{font-size:1.06rem;margin:1.5rem 0 .25rem;font-weight:600}
+  p{margin:.75rem 0}
+  a{color:var(--sakura);text-underline-offset:2px}
+  .lead{font-size:1.14rem}
+  .jp{font-weight:600;font-style:normal}
+  code{font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+    background:var(--code-bg);padding:.06em .35em;border-radius:3px;font-size:.84em}
+  pre{background:var(--code-bg);border:1px solid var(--rule);border-left:3px solid var(--sakura);
+    padding:.9rem 1.05rem;border-radius:4px;overflow:auto;font-size:.83rem;line-height:1.62;
+    font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;}
+  pre .tok-type{color:var(--tok-type)} pre .tok-str{color:var(--tok-str)}
+  pre .tok-key{color:var(--tok-key)} pre .tok-com{color:var(--tok-com);font-style:italic}
+  blockquote.big{margin:1.4rem 0;padding:1rem 1.2rem;background:var(--sakura-soft);border-radius:6px;font-size:1.12rem;line-height:1.55}
+  blockquote.big b{color:#933354}
+  aside.note{font-size:.92rem;color:var(--muted);border-left:2px solid var(--sakura-soft);padding:.15rem 0 .15rem .85rem;margin:.9rem 0;font-style:italic}
+  table.kv{border-collapse:collapse;width:100%;font-size:.92rem;margin:.7rem 0}
+  table.kv th,table.kv td{text-align:left;vertical-align:top;padding:.45rem .55rem;border-bottom:1px solid var(--rule)}
+  table.kv th{color:var(--muted);font-weight:600;white-space:nowrap}
+  table.kv td .jp{font-size:1.05em}
+  .win{border:1px dashed var(--sakura);background:#fff;border-radius:7px;padding:1rem 1.2rem;margin:1.7rem 0}
+  .win h3{margin-top:0;color:var(--sakura)}
+  /* interactive */
+  .reveal{margin:.7rem 0}
+  .reveal>button{background:var(--sakura-soft);border:none;border-radius:20px;padding:.32rem 1rem;cursor:pointer;color:#7a2e49;font:inherit;font-size:.92rem}
+  .reveal .ans{display:none;margin-top:.5rem;padding:.6rem .9rem;background:#fff;border:1px solid var(--rule);border-radius:6px;font-size:.93rem}
+  .reveal.open .ans{display:block}
+  .quiz{margin:.4rem 0}
+  .q{margin:1.2rem 0}
+  .q .stem{font-weight:600}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin:.55rem 0 .2rem}
+  .opts button{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:.34rem .95rem;cursor:pointer;font:inherit;font-size:.92rem;transition:.15s}
+  .opts button:hover{border-color:var(--sakura)}
+  .opts button.ok{background:#e8f5ec;border-color:var(--ok);color:var(--ok)}
+  .opts button.no{background:#fce8ee;border-color:var(--sakura);color:var(--no)}
+  .fb{font-size:.9rem;color:var(--muted);min-height:1.2em;margin-top:.15rem}
+  .fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+  footer{margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--rule);font-size:.9rem;color:var(--muted)}
+  footer a{font-weight:600}
+  .src{font-size:.82rem;color:var(--muted);margin-top:.3rem}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:2rem 0}
+  @media print{body{background:#fff}.wrap{box-shadow:none;margin:0;max-width:none}.reveal .ans{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">🌸 Typed Japanese · Lesson 1</div>
+  <h1>Where TypeScript meets Japanese</h1>
+  <p class="sub">Your mission: grow both at once. This lesson gives you the one idea that makes
+  that possible — then a single first step on each side.</p>
+
+  <blockquote class="big">
+    A Japanese verb is a <b>type</b>. Conjugating it is a <b>type-level function</b>.
+    A grammar mistake is a <b>type error</b> the compiler catches before the code ever runs.
+  </blockquote>
+
+  <p class="lead">If that sentence makes sense by the end of this page, you've understood the
+  heart of the whole project. Let's earn it.</p>
+
+
+  <h2><span class="n">1</span> Why these two fit together</h2>
+
+  <p>It looks like a joke pairing — a programming language and a human language. But they
+  share a backbone: <strong>strict rules for combining small pieces</strong>. Each side brings
+  exactly what the other needs.</p>
+
+  <h3>What's special about <em>Japanese</em></h3>
+  <p>Japanese conjugation is unusually <strong>systematic</strong>. Take a verb apart and it's almost
+  mechanical: a fixed <em>stem</em>, plus an <em>ending</em> that changes by a clear rule depending on
+  which <em>form</em> you want.<a href="#s1" class="src">¹</a> "to buy" runs:</p>
+
+  <table class="kv">
+    <tr><th>Dictionary</th><td><span class="jp">買う</span> &nbsp;kau</td></tr>
+    <tr><th>Te-form</th><td><span class="jp">買って</span> &nbsp;katte</td></tr>
+    <tr><th>Past</th><td><span class="jp">買った</span> &nbsp;katta</td></tr>
+    <tr><th>Negative</th><td><span class="jp">買わない</span> &nbsp;kawanai</td></tr>
+  </table>
+
+  <p>That is <em>a function in disguise</em>: give it (verb, form), get back a string. Where English
+  has a pile of exceptions, Japanese has tables. Tables are easy to teach a computer.</p>
+
+  <h3>What's special about <em>TypeScript</em></h3>
+  <p>Most languages' type systems only *check* your code. TypeScript's type system can also
+  <strong>compute</strong> — it runs a small program <em>at compile time</em>, before anything executes. And
+  crucially, it can compute <strong>on text</strong>: it can take string-shaped types apart and glue new
+  ones together.<a href="#s2" class="src">²</a> Three features make this possible, and you'll meet all three in §2.</p>
+
+  <h3>The handshake</h3>
+  <p>Put them together and the match is almost too neat:</p>
+  <table class="kv">
+    <tr><th>Japanese idea</th><th>TypeScript tool</th></tr>
+    <tr><td>a specific word, e.g. <span class="jp">話す</span></td><td>a <strong>literal type</strong> <code><span style="color:var(--tok-str)">"話す"</span></code></td></tr>
+    <tr><td>a verb (stem + ending)</td><td>an object <strong>type</strong> <code>{ stem; ending }</code></td></tr>
+    <tr><td>conjugation rule</td><td>a <strong>type-level function</strong></td></tr>
+    <tr><td>"that's the wrong form"</td><td>a <strong>type error</strong> 🔴</td></tr>
+  </table>
+
+  <p>Here is that last row, real and alive, from this repo:<a href="#s3" class="src">³</a></p>
+<pre><span class="tok-com">// 話す = "to speak": a godan verb, stem 話 + ending す</span>
+<span class="tok-key">type</span> <span class="tok-type">話す</span> = <span class="tok-type">GodanVerb</span> &amp; { stem: <span class="tok-str">"話"</span>; ending: <span class="tok-str">"す"</span> };
+
+<span class="tok-com">// Conjugate it into the polite ます形 form. Result is the literal type "話し".</span>
+<span class="tok-key">type</span> <span class="tok-type">Result</span> = <span class="tok-type">ConjugateVerb</span>&lt;<span class="tok-type">話す</span>, <span class="tok-str">"ます形"</span>&gt;;
+
+<span class="tok-key">const</span> ok:  <span class="tok-type">Result</span> = <span class="tok-str">"話し"</span>;   <span class="tok-com">// ✓ compiles — correct conjugation</span>
+<span class="tok-key">const</span> bad: <span class="tok-type">Result</span> = <span class="tok-str">"話す"</span>;   <span class="tok-com">// 🔴 Type error: "話す" is not "話し"</span></pre>
+
+  <aside class="note">The compiler computed <span class="jp">話し</span> on its own — you never wrote it. That's the type
+  system <em>running the grammar rule</em> for you. Spell the conjugation wrong and your editor underlines
+  it in red, instantly. That red squiggle is the whole pitch of Typed Japanese.</aside>
+
+
+  <h2><span class="n">2</span> First step — TypeScript</h2>
+  <p>The one skill the entire library is built on: a <strong>type-level function</strong>. Forget Japanese for
+  sixty seconds and watch it on English, the way the author introduces it.<a href="#s4" class="src">⁴</a></p>
+
+  <p>A normal runtime function:</p>
+<pre><span class="tok-key">function</span> conjugate(verb, form) {
+  <span class="tok-key">if</span> (form === <span class="tok-str">"past"</span>) <span class="tok-key">return</span> verb + <span class="tok-str">"ed"</span>;
+  <span class="tok-key">if</span> (form === <span class="tok-str">"progressive"</span>) <span class="tok-key">return</span> verb + <span class="tok-str">"ing"</span>;
+  <span class="tok-key">return</span> verb;
+}</pre>
+
+  <p>The same logic, lifted into the <em>type</em> level:</p>
+<pre><span class="tok-key">type</span> <span class="tok-type">Conjugate</span>&lt;<span class="tok-type">Verb</span> <span class="tok-key">extends</span> <span class="tok-type">string</span>, <span class="tok-type">Form</span> <span class="tok-key">extends</span> <span class="tok-type">EnglishForm</span>&gt; =
+    <span class="tok-type">Form</span> <span class="tok-key">extends</span> <span class="tok-str">"past"</span>        ? <span class="tok-str">`${Verb}ed`</span>
+  : <span class="tok-type">Form</span> <span class="tok-key">extends</span> <span class="tok-str">"progressive"</span> ? <span class="tok-str">`${Verb}ing`</span>
+  : <span class="tok-type">Verb</span>;
+
+<span class="tok-key">type</span> <span class="tok-type">A</span> = <span class="tok-type">Conjugate</span>&lt;<span class="tok-str">"walk"</span>, <span class="tok-str">"past"</span>&gt;;        <span class="tok-com">// "walked"</span>
+<span class="tok-key">type</span> <span class="tok-type">B</span> = <span class="tok-type">Conjugate</span>&lt;<span class="tok-str">"talk"</span>, <span class="tok-str">"progressive"</span>&gt;; <span class="tok-com">// "talking"</span></pre>
+
+  <p>Three tools, and that's the whole toolkit for now:</p>
+  <table class="kv">
+    <tr><th>1 · Generics</th><td>The <code>&lt;Verb, Form&gt;</code> in angle brackets are the function's <strong>inputs</strong>.</td></tr>
+    <tr><th>2 · Conditional types</th><td><code>Form extends "past" ? … : …</code> is type-level <strong>if/else</strong>.</td></tr>
+    <tr><th>3 · Template literals</th><td><code>`${Verb}ed`</code> <strong>glues strings together</strong> — at the type level.</td></tr>
+  </table>
+
+  <p>Swap English's <code>"ed"/"ing"</code> for Japanese endings and you have <em>exactly</em> the real
+  <code>ConjugateVerb</code> — just with more branches. You already understand its skeleton.</p>
+
+  <div class="reveal">
+    <button type="button">▶ Micro-task: what is <code>Conjugate&lt;"jump", "progressive"&gt;</code>?</button>
+    <div class="ans">It's the literal type <code><span style="color:var(--tok-str)">"jumping"</span></code>. The second branch matched, and
+    <code>`${"jump"}ing`</code> glued to <span style="color:var(--tok-str)">"jumping"</span>. No code ran — the
+    <em>compiler</em> worked it out. That's a type-level function.</div>
+  </div>
+
+
+  <h2><span class="n">3</span> First step — Japanese</h2>
+  <p>To feed a verb to that function, you must first see a verb the way the type system does:
+  <strong>stem + ending</strong>, belonging to one of <strong>three groups</strong>.<a href="#s5" class="src">⁵</a></p>
+
+  <table class="kv">
+    <tr><th>Verb</th><th>Means</th><th>Group</th><th>Stem</th><th>Ending</th></tr>
+    <tr><td><span class="jp">話す</span> hanasu</td><td>to speak</td><td>godan 五段</td><td><span class="jp">話</span></td><td><span class="jp">す</span></td></tr>
+    <tr><td><span class="jp">食べる</span> taberu</td><td>to eat</td><td>ichidan 一段</td><td><span class="jp">食べ</span></td><td><span class="jp">る</span></td></tr>
+    <tr><td><span class="jp">する</span> suru</td><td>to do</td><td>irregular 不規則</td><td>—</td><td>whole word</td></tr>
+  </table>
+
+  <ul>
+    <li><strong>Godan (五段)</strong> — "five-row." The most common. Ends in one of う・く・ぐ・す・つ・ぬ・ぶ・む・る, and that ending shifts across the あいうえお vowel rows when conjugated.</li>
+    <li><strong>Ichidan (一段)</strong> — "one-row." Always ends in <span class="jp">る</span>; conjugating just means drop る, add the form. The easiest group.</li>
+    <li><strong>Irregular (不規則)</strong> — only two exist: <span class="jp">する</span> (to do) and <span class="jp">来る／くる</span> (to come). Memorise them.</li>
+  </ul>
+
+  <aside class="note">Careful: some godan verbs <em>also</em> end in る (like <span class="jp">走る</span>, to run), so る alone
+  doesn't prove ichidan. The reliable test: look at the polite form — <span class="jp">〜ります</span> = godan,
+  plain <span class="jp">〜ます</span> = ichidan.<a href="#s5" class="src">⁵</a></aside>
+
+  <div class="reveal">
+    <button type="button">▶ Micro-task: classify 書く · 見る · 来る</button>
+    <div class="ans"><span class="jp">書く</span> (kaku, to write) → <strong>godan</strong> (ends in く). &nbsp;
+    <span class="jp">見る</span> (miru, to see) → <strong>ichidan</strong> (る, and polite form is 見ます). &nbsp;
+    <span class="jp">来る</span> (kuru, to come) → <strong>irregular</strong> (one of the famous two).</div>
+  </div>
+
+
+  <div class="win">
+    <h3>🎉 Your tangible win</h3>
+    <p style="margin-bottom:.3rem">Go back to the project's README. Its very first verb example is:</p>
+<pre style="margin:.4rem 0"><span class="tok-key">type</span> <span class="tok-type">話すます形</span> = <span class="tok-type">ConjugateVerb</span>&lt;<span class="tok-type">話す</span>, <span class="tok-str">"ます形"</span>&gt;; <span class="tok-com">// 話し</span></pre>
+    <p style="margin-bottom:0">You can now read <em>every piece</em>: <span class="jp">話す</span> is a <strong>godan verb type</strong> (stem 話 + ending す);
+    <code>ConjugateVerb&lt;…&gt;</code> is a <strong>type-level function</strong>; <code><span style="color:var(--tok-str)">"ます形"</span></code>
+    is the form you asked for; and <span class="jp">話し</span> is what the <strong>compiler computed</strong>. That's lesson 1. 🌸</p>
+  </div>
+
+
+  <h2><span class="n">✓</span> Lock it in (retrieval practice)</h2>
+  <p>Don't re-read — <em>recall</em>. Recalling from memory is what makes it stick. One tap each:</p>
+
+  <div class="quiz">
+    <div class="q">
+      <div class="stem">1. Conjugation in this project is implemented at the type level as a …</div>
+      <div class="opts">
+        <button data-correct="1" data-why="Inputs in, output type out — a function.">function</button>
+        <button>statement</button>
+        <button>container</button>
+        <button>component</button>
+      </div>
+      <div class="fb"></div>
+    </div>
+    <div class="q">
+      <div class="stem">2. Every Japanese verb is modeled as a stem plus an …</div>
+      <div class="opts">
+        <button data-correct="1" data-why="Stem stays; the ending is what conjugates.">ending</button>
+        <button>prefix</button>
+        <button>accent</button>
+        <button>suffix</button>
+      </div>
+      <div class="fb"></div>
+    </div>
+    <div class="q">
+      <div class="stem">3. A grammatically wrong sentence shows up in your editor as a …</div>
+      <div class="opts">
+        <button data-correct="1" data-why="Caught at compile time — before the code runs.">type error</button>
+        <button>runtime bug</button>
+        <button>syntax crash</button>
+        <button>silent pass</button>
+      </div>
+      <div class="fb"></div>
+    </div>
+  </div>
+
+
+  <hr class="soft">
+
+  <h3>📖 Read this next (one primary source)</h3>
+  <p>The author's own essay, in this repo:
+  <a href="../../blog.md"><em>Expressing Japanese Grammar Through TypeScript</em></a>.
+  Read just the opening through "Basics of Japanese Verb Conjugation" — it walks the exact
+  path you took today, in more depth. It's the single best source for this project.</p>
+
+  <h3>💬 I'm your teacher — ask me</h3>
+  <p>Anything fuzzy? A line of code, a kana, "why <em>that</em> ending?" — ask in the chat. That back-and-forth
+  is half the learning. Good next questions: <em>"Show me する conjugated through every form,"</em> or
+  <em>"Let's open the playground and break something on purpose."</em></p>
+
+  <footer>
+    <strong>Where this sits:</strong>
+    <a href="../reference/glossary.html">Glossary ↗</a> ·
+    <a href="../MISSION.md">Mission</a> ·
+    <a href="../../src/verb-types.d.ts">src/verb-types.d.ts ↗</a> ·
+    <a href="../../README.md">README</a>
+    &nbsp;·&nbsp; <em>Next: hands-on conjugation in the playground.</em>
+
+    <div class="src" style="margin-top:1rem" id="sources">
+      <div id="s1">¹ Japanese verb groups &amp; stem/ending — <a href="https://www.tofugu.com/japanese-grammar/verb-conjugation-groups/">Tofugu: Verb Conjugation Groups</a>; project <a href="../../blog.md">blog.md</a>.</div>
+      <div id="s2">² Type-level string computation — <a href="https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html">TS Handbook: Template Literal Types</a> (since TS 4.1).</div>
+      <div id="s3">³ Adapted from <a href="../../src/verb-types.d.ts">src/verb-types.d.ts</a> &amp; <a href="../../src/examples/example-verb.ts">example-verb.ts</a> (real, compiler-checked).</div>
+      <div id="s4">⁴ English-verb introduction — project <a href="../../blog.md">blog.md</a>, "From Imperative Programming to Type Programming." Conditional types: <a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">TS Handbook</a>.</div>
+      <div id="s5">⁵ Three groups &amp; the godan-vs-ichidan test — <a href="https://www.tofugu.com/japanese-grammar/verb-conjugation-groups/">Tofugu: Verb Conjugation Groups</a>.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.opts').forEach(function(g){
+    g.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      var correct = b.dataset.correct === '1';
+      g.querySelectorAll('button').forEach(function(x){ x.classList.remove('ok','no'); });
+      b.classList.add(correct ? 'ok' : 'no');
+      var fb = g.parentElement.querySelector('.fb');
+      fb.textContent = correct ? ('✓ ' + (b.dataset.why || 'Correct.')) : '✗ Not quite — recall, then try again.';
+      fb.className = 'fb ' + (correct ? 'ok' : 'no');
+    });
+  });
+  document.querySelectorAll('.reveal > button').forEach(function(btn){
+    btn.addEventListener('click', function(){ btn.parentElement.classList.toggle('open'); });
+  });
+</script>
+</body>
+</html>

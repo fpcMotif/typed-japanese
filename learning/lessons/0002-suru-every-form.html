@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 · する through every form</title>
+<style>
+  :root{
+    --paper:#fffdf9; --washi:#f6efe4; --ink:#2b2622; --muted:#7a6f64;
+    --sakura:#c8607f; --sakura-soft:#f6dde5; --rule:#e7ddcd; --code-bg:#fbf4ea;
+    --tok-type:#9a5b2c; --tok-str:#3f7d56; --tok-key:#b25a86; --tok-com:#b1a392;
+    --ok:#2f6043; --no:#a8345b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--washi);color:var(--ink);font-size:18px;line-height:1.72;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;}
+  .wrap{max-width:46rem;margin:0 auto;padding:3.2rem 1.5rem 5rem;background:var(--paper);box-shadow:0 0 0 1px var(--rule)}
+  @media(min-width:900px){.wrap{margin:2.4rem auto;border-radius:3px}}
+  .kicker{font:600 .78rem/1.4 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sakura)}
+  h1{font-size:2.05rem;margin:.25rem 0 .15rem;font-weight:600;line-height:1.2}
+  h1 .jp{font-weight:600}
+  .sub{color:var(--muted);font-style:italic;margin:.3rem 0 1.4rem;font-size:1.05rem}
+  h2{font-size:1.36rem;margin:2.6rem 0 .5rem;padding-top:1.1rem;border-top:1px solid var(--rule);font-weight:600;line-height:1.25}
+  h2 .n{display:inline-block;min-width:1.6em;color:var(--sakura);font:600 1rem/1 system-ui,sans-serif;vertical-align:.14em}
+  h3{font-size:1.06rem;margin:1.4rem 0 .25rem;font-weight:600}
+  p{margin:.75rem 0}
+  a{color:var(--sakura);text-underline-offset:2px}
+  .lead{font-size:1.12rem}
+  .jp{font-weight:600;font-style:normal}
+  code{font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+    background:var(--code-bg);padding:.06em .35em;border-radius:3px;font-size:.84em}
+  pre{background:var(--code-bg);border:1px solid var(--rule);border-left:3px solid var(--sakura);
+    padding:.9rem 1.05rem;border-radius:4px;overflow:auto;font-size:.83rem;line-height:1.62;
+    font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;}
+  pre .tok-type{color:var(--tok-type)} pre .tok-str{color:var(--tok-str)} pre .tok-com{color:var(--tok-com);font-style:italic} pre .tok-key{color:var(--tok-key)}
+  blockquote.big{margin:1.3rem 0;padding:1rem 1.2rem;background:var(--sakura-soft);border-radius:6px;font-size:1.1rem;line-height:1.5}
+  blockquote.big b{color:#933354}
+  aside.note{font-size:.92rem;color:var(--muted);border-left:2px solid var(--sakura-soft);padding:.15rem 0 .15rem .85rem;margin:.9rem 0;font-style:italic}
+  .tablecard{overflow-x:auto;margin:.6rem 0}
+  table.conj{border-collapse:collapse;width:100%;font-size:.9rem;min-width:34rem}
+  table.conj th,table.conj td{text-align:left;vertical-align:middle;padding:.5rem .55rem;border-bottom:1px solid var(--rule)}
+  table.conj thead th{color:var(--muted);font:600 .76rem/1.3 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.04em;border-bottom:1.5px solid var(--rule)}
+  table.conj .form{white-space:nowrap}
+  table.conj .form .en{display:block;font-size:.76rem;color:var(--muted);font-weight:400}
+  table.conj .lib{font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--tok-str);background:var(--code-bg);border-radius:3px;padding:.12em .4em;white-space:nowrap}
+  table.conj .full{font-size:1.18rem;font-weight:600}
+  table.conj .full .romaji{display:block;font-size:.74rem;color:var(--muted);font-weight:400}
+  table.conj .mean{font-size:.86rem;color:#574e45}
+  .grouplabel{font:600 .8rem/1 system-ui,sans-serif;color:var(--sakura);letter-spacing:.08em;text-transform:uppercase;margin:1.4rem 0 .3rem}
+  .formula{background:#fff;border:1px solid var(--rule);border-radius:7px;padding:1rem 1.2rem;margin:1.2rem 0;font-size:1.05rem;line-height:2.1}
+  .formula b{font-weight:600}
+  .formula .base{color:var(--tok-str)} .formula .tail{color:var(--sakura)} .formula .res{color:var(--ink)}
+  .win{border:1px dashed var(--sakura);background:#fff;border-radius:7px;padding:1rem 1.2rem;margin:1.6rem 0}
+  .win h3{margin-top:0;color:var(--sakura)}
+  .reveal{margin:.7rem 0}
+  .reveal>button{background:var(--sakura-soft);border:none;border-radius:20px;padding:.32rem 1rem;cursor:pointer;color:#7a2e49;font:inherit;font-size:.92rem}
+  .reveal .ans{display:none;margin-top:.5rem;padding:.6rem .9rem;background:#fff;border:1px solid var(--rule);border-radius:6px;font-size:.93rem}
+  .reveal.open .ans{display:block}
+  .q{margin:1.2rem 0}
+  .q .stem{font-weight:600}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin:.55rem 0 .2rem}
+  .opts button{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:.34rem .95rem;cursor:pointer;font:inherit;font-size:.92rem;transition:.15s}
+  .opts button:hover{border-color:var(--sakura)}
+  .opts button.ok{background:#e8f5ec;border-color:var(--ok);color:var(--ok)}
+  .opts button.no{background:#fce8ee;border-color:var(--sakura);color:var(--no)}
+  .fb{font-size:.9rem;color:var(--muted);min-height:1.2em;margin-top:.15rem}
+  .fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+  footer{margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--rule);font-size:.9rem;color:var(--muted)}
+  footer a{font-weight:600}
+  .src{font-size:.82rem;color:var(--muted)}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:2rem 0}
+  @media print{body{background:#fff}.wrap{box-shadow:none;margin:0;max-width:none}.reveal .ans{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">🌸 Typed Japanese · Lesson 2</div>
+  <h1><span class="jp">する</span> through every form</h1>
+  <p class="sub">The most-used verb in Japanese, seen whole. It's irregular — so the type system stores it in a hand-written table, which you'll now read directly.</p>
+
+  <blockquote class="big">
+    Big idea this time: the library gives you a <b>base</b>, and you add a small <b>tail</b>
+    (ます・ない・る・ば) to finish the everyday word. <span class="jp">し</span> ＋ <span class="jp">ます</span> ＝ <span class="jp">します</span>.
+  </blockquote>
+
+  <p class="lead">Remember from <a href="0001-where-typescript-meets-japanese.html">Lesson 1</a>: <span class="jp">する</span> is one of only
+  <strong>two irregular verbs</strong>. So <code>ConjugateVerb&lt;する, F&gt;</code> doesn't compute a rule —
+  it just looks the answer up in a table someone wrote by hand. Here is that exact table.<a href="#s1" class="src">¹</a></p>
+
+
+  <h2><span class="n">1</span> Everyday forms</h2>
+  <p>The five you'll hit first. The middle column is <em>literally what the type returns</em>; the next is
+  what you actually say.</p>
+
+  <div class="tablecard">
+  <table class="conj">
+    <thead><tr><th>Form</th><th>Type returns</th><th>You say</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td class="form">辞書形<span class="en">dictionary</span></td><td><span class="lib">"する"</span></td><td class="full">する<span class="romaji">suru</span></td><td class="mean">does / to do</td></tr>
+      <tr><td class="form">ます形<span class="en">polite</span></td><td><span class="lib">"し"</span></td><td class="full">します<span class="romaji">shimasu</span></td><td class="mean">does (polite)</td></tr>
+      <tr><td class="form">て形<span class="en">te-form</span></td><td><span class="lib">"して"</span></td><td class="full">して<span class="romaji">shite</span></td><td class="mean">doing; and do; (＋ください) please do</td></tr>
+      <tr><td class="form">た形<span class="en">past</span></td><td><span class="lib">"した"</span></td><td class="full">した<span class="romaji">shita</span></td><td class="mean">did</td></tr>
+      <tr><td class="form">ない形<span class="en">negative</span></td><td><span class="lib">"し"</span></td><td class="full">しない<span class="romaji">shinai</span></td><td class="mean">does not</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <aside class="note">Notice <span class="jp">ます形</span> and <span class="jp">ない形</span> both return the same base <span class="jp">し</span> — the
+  difference is only the tail you attach (<span class="jp">ます</span> vs <span class="jp">ない</span>). Meanwhile <span class="jp">て形</span> and
+  <span class="jp">た形</span> come back already finished.</aside>
+
+
+  <h2><span class="n">2</span> Wider forms</h2>
+  <p>The other seven. These unlock "can / is done / make do / let's / do it! / if".</p>
+
+  <div class="tablecard">
+  <table class="conj">
+    <thead><tr><th>Form</th><th>Type returns</th><th>You say</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td class="form">可能形<span class="en">potential</span></td><td><span class="lib">"でき"</span></td><td class="full">できる<span class="romaji">dekiru</span></td><td class="mean">can do</td></tr>
+      <tr><td class="form">受身形<span class="en">passive</span></td><td><span class="lib">"され"</span></td><td class="full">される<span class="romaji">sareru</span></td><td class="mean">is done</td></tr>
+      <tr><td class="form">使役形<span class="en">causative</span></td><td><span class="lib">"させ"</span></td><td class="full">させる<span class="romaji">saseru</span></td><td class="mean">make / let do</td></tr>
+      <tr><td class="form">意向形<span class="en">volitional</span></td><td><span class="lib">"しよう"</span></td><td class="full">しよう<span class="romaji">shiyō</span></td><td class="mean">let's do / shall do</td></tr>
+      <tr><td class="form">命令形<span class="en">imperative</span></td><td><span class="lib">"しろ"</span></td><td class="full">しろ<span class="romaji">shiro</span></td><td class="mean">do it! (formal: せよ)</td></tr>
+      <tr><td class="form">条件形 / 仮定形<span class="en">conditional</span></td><td><span class="lib">"すれ"</span></td><td class="full">すれば<span class="romaji">sureba</span></td><td class="mean">if (one) does</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <aside class="note"><span class="jp">可能形</span> is special: する's "can do" is the separate word <span class="jp">できる</span> (not しれる). The library
+  knows this — it returns <span class="jp">でき</span>. Also <span class="jp">条件形</span> and <span class="jp">仮定形</span> share one base, <span class="jp">すれ</span>;
+  add <span class="jp">ば</span> for the everyday "if".</aside>
+
+
+  <h2><span class="n">3</span> Base ＋ tail = the word</h2>
+  <p>This is the pattern that ties the whole table together. The type gives the left side; you add the right.</p>
+  <div class="formula">
+    <span class="base">し</span> ＋ <span class="tail">ます</span> &nbsp;→&nbsp; <b class="res">します</b> &nbsp; <span class="src">(polite)</span><br>
+    <span class="base">し</span> ＋ <span class="tail">ない</span> &nbsp;→&nbsp; <b class="res">しない</b> &nbsp; <span class="src">(negative)</span><br>
+    <span class="base">でき</span> ＋ <span class="tail">る</span> &nbsp;→&nbsp; <b class="res">できる</b> &nbsp; <span class="src">(potential)</span><br>
+    <span class="base">させ</span> ＋ <span class="tail">る</span> &nbsp;→&nbsp; <b class="res">させる</b> &nbsp; <span class="src">(causative)</span><br>
+    <span class="base">すれ</span> ＋ <span class="tail">ば</span> &nbsp;→&nbsp; <b class="res">すれば</b> &nbsp; <span class="src">(conditional)</span>
+  </div>
+  <p>And in the type system, that "add a tail" step is just another template literal — exactly the
+  <code>`${Base}${Tail}`</code> tool from Lesson 1:</p>
+<pre><span class="tok-key">type</span> <span class="tok-type">する</span> = <span class="tok-type">IrregularVerb</span> &amp; { dictionary: <span class="tok-str">"する"</span> };
+
+<span class="tok-key">type</span> <span class="tok-type">Base</span>   = <span class="tok-type">ConjugateVerb</span>&lt;<span class="tok-type">する</span>, <span class="tok-str">"ます形"</span>&gt;;  <span class="tok-com">// "し"</span>
+<span class="tok-key">type</span> <span class="tok-type">Polite</span> = <span class="tok-str">`${Base}ます`</span>;                <span class="tok-com">// "します"  ✓ you just conjugated by hand</span></pre>
+
+
+  <div class="win">
+    <h3>🎉 Why this verb is worth the effort</h3>
+    <p style="margin-bottom:.3rem"><span class="jp">する</span> is the busiest verb in Japanese: stick it onto a noun and you get a new verb, for free.</p>
+    <p style="margin:.2rem 0 0"><span class="jp">勉強</span> (study) ＋ <span class="jp">する</span> → <span class="jp">勉強する</span> <em>benkyō suru</em>, "to study". &nbsp;
+    <span class="jp">料理</span> (cooking) ＋ <span class="jp">する</span> → <span class="jp">料理する</span> <em>ryōri suru</em>, "to cook".<a href="#s2" class="src">²</a><br>
+    Learn する's table once, and <em>all</em> of those conjugate the same way.</p>
+  </div>
+
+
+  <h2><span class="n">✓</span> Lock it in</h2>
+  <p>Recall, don't re-read. (Question 1 reaches back to Lesson 1 on purpose — mixing topics makes memory stronger.)</p>
+
+  <div class="q">
+    <div class="stem">1. する belongs to which verb group?</div>
+    <div class="opts">
+      <button data-correct="1" data-why="One of only two — する and 来る.">irregular</button>
+      <button>godan</button>
+      <button>ichidan</button>
+      <button>na-verb</button>
+    </div>
+    <div class="fb"></div>
+  </div>
+  <div class="q">
+    <div class="stem">2. What does <code>ConjugateVerb&lt;する, "た形"&gt;</code> return?</div>
+    <div class="opts">
+      <button data-correct="1" data-why="Past form — straight from the table.">"した"</button>
+      <button>"しる"</button>
+      <button>"すた"</button>
+      <button>"される"</button>
+    </div>
+    <div class="fb"></div>
+  </div>
+  <div class="q">
+    <div class="stem">3. The polite base is し. Which tail makes the everyday polite form?</div>
+    <div class="opts">
+      <button data-correct="1" data-why="し ＋ ます → します.">ます</button>
+      <button>ない</button>
+      <button>れば</button>
+      <button>たい</button>
+    </div>
+    <div class="fb"></div>
+  </div>
+
+  <div class="reveal">
+    <button type="button">▶ Stretch: predict 来る's past form (た形), then check</button>
+    <div class="ans">The other irregular verb. <code>ConjugateVerb&lt;来る, "た形"&gt;</code> returns <span class="jp">来た</span>
+    (<em>kita</em>), "came". You can read 来る's whole row right next to する's in
+    <a href="../../src/verb-types.d.ts">src/verb-types.d.ts</a>. Want a full 来る lesson? Just ask.</div>
+  </div>
+
+
+  <hr class="soft">
+
+  <h3>📖 Source &amp; reference</h3>
+  <p>Keep the one-page <a href="../reference/suru-conjugation-card.html">する conjugation card ↗</a> handy for review.
+  The values here are taken verbatim from the repo's
+  <a href="../../src/verb-types.d.ts">verb table</a>, and the grammar is backed by
+  <a href="https://www.tofugu.com/japanese-grammar/verb-conjugation-groups/">Tofugu</a>.</p>
+
+  <h3>💬 Ask your teacher</h3>
+  <p>Good next steps: <em>"now do 来る,"</em> &nbsp; <em>"open the playground and let me conjugate a verb myself,"</em> &nbsp;
+  or <em>"how does the type system look up this table?"</em> (that's the <code>infer</code> / mapped-types lesson).</p>
+
+  <footer>
+    <strong>Where this sits:</strong>
+    <a href="0001-where-typescript-meets-japanese.html">← Lesson 1</a> ·
+    <a href="../reference/glossary.html">Glossary ↗</a> ·
+    <a href="../reference/suru-conjugation-card.html">する card ↗</a> ·
+    <a href="../../src/verb-types.d.ts">verb-types.d.ts ↗</a>
+    <div class="src" style="margin-top:1rem">
+      <div id="s1">¹ Values verbatim from <a href="../../src/verb-types.d.ts">src/verb-types.d.ts</a> (<code>IrregularConjugationMap.する</code>), compiler-checked by the repo's tests.</div>
+      <div id="s2">² する's productivity (勉強する etc.) — <a href="https://www.tofugu.com/japanese-grammar/verb-conjugation-groups/">Tofugu: Verb Conjugation Groups</a>.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.opts').forEach(function(g){
+    g.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      var correct = b.dataset.correct === '1';
+      g.querySelectorAll('button').forEach(function(x){ x.classList.remove('ok','no'); });
+      b.classList.add(correct ? 'ok' : 'no');
+      var fb = g.parentElement.querySelector('.fb');
+      fb.textContent = correct ? ('✓ ' + (b.dataset.why || 'Correct.')) : '✗ Not quite — recall, then try again.';
+      fb.className = 'fb ' + (correct ? 'ok' : 'no');
+    });
+  });
+  document.querySelectorAll('.reveal > button').forEach(function(btn){
+    btn.addEventListener('click', function(){ btn.parentElement.classList.toggle('open'); });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary · Typed Japanese</title>
+<style>
+  :root{
+    --paper:#fffdf9; --washi:#f6efe4; --ink:#2b2622; --muted:#7a6f64;
+    --sakura:#c8607f; --sakura-soft:#f3d9e1; --rule:#e7ddcd; --code-bg:#fbf4ea;
+    --tok-type:#8a5a2b; --tok-str:#3f7d56;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--washi);color:var(--ink);font-size:18px;line-height:1.7;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;}
+  .wrap{max-width:48rem;margin:0 auto;padding:3rem 1.4rem 5rem;background:var(--paper);box-shadow:0 0 0 1px var(--rule)}
+  @media(min-width:900px){.wrap{margin:2.4rem auto;border-radius:3px}}
+  .kicker{font:600 .78rem/1.4 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sakura)}
+  h1{font-size:1.9rem;margin:.2rem 0 .1rem;font-weight:600}
+  .sub{color:var(--muted);font-style:italic;margin:.2rem 0 1.4rem}
+  h2{font-size:1.2rem;margin:2.2rem 0 .4rem;padding-top:1rem;border-top:1px solid var(--rule);font-weight:600}
+  h2 .pin{color:var(--sakura)}
+  table{border-collapse:collapse;width:100%;font-size:.94rem;margin:.4rem 0}
+  th,td{text-align:left;vertical-align:top;padding:.5rem .6rem;border-bottom:1px solid var(--rule)}
+  th{color:var(--muted);font-weight:600;white-space:nowrap;width:12rem}
+  code{font-family:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+    background:var(--code-bg);padding:.06em .35em;border-radius:3px;font-size:.84em}
+  .jp{font-weight:600}
+  .tok-type{color:var(--tok-type)} .tok-str{color:var(--tok-str)}
+  a{color:var(--sakura);text-underline-offset:2px}
+  footer{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.86rem;color:var(--muted)}
+  @media print{body{background:#fff}.wrap{box-shadow:none;margin:0;max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">🌸 Typed Japanese · Reference</div>
+  <h1>Glossary</h1>
+  <p class="sub">The shared vocabulary for these lessons. Both worlds — TypeScript and Japanese — meet here.
+  Skim it; return to it. This is the canon: lessons will use these exact terms.</p>
+
+  <h2><span class="pin">TS</span> &nbsp;TypeScript — the type machinery</h2>
+  <table>
+    <tr><th>Type</th><td>A description of the *shape* of a value, checked by the compiler before the program runs. In this project, types are the whole show — there is no runtime code.</td></tr>
+    <tr><th>Literal type</th><td>A type that is one exact value. <code><span class="tok-str">"話す"</span></code> is a type that only the string <code>"話す"</code> satisfies. This is how Japanese words become types.</td></tr>
+    <tr><th>Union type</th><td>"One of these." <code><span class="tok-str">"う"</span> | <span class="tok-str">"く"</span> | <span class="tok-str">"す"</span></code> — used to list the legal godan endings.</td></tr>
+    <tr><th>Generic / type&nbsp;parameter</th><td>A type that takes inputs, like a function takes arguments. <code>ConjugateVerb&lt;V, F&gt;</code> — <code>V</code> and <code>F</code> are the inputs.</td></tr>
+    <tr><th>Constraint (<code>extends</code>, in <code>&lt;&gt;</code>)</th><td>Limits what an input may be. <code>F extends ConjugationForm</code> means "F must be one of the legal forms."</td></tr>
+    <tr><th>Conditional type (<code>extends ? :</code>)</th><td>Type-level <code>if / else</code>. <code>T extends U ? X : Y</code> = "if T fits U, then X, else Y." This is how the rules branch.</td></tr>
+    <tr><th>Template literal type</th><td>String-building in types: <code>`${A}${B}`</code> glues type-strings together. This is how a stem + an ending becomes a finished word.</td></tr>
+    <tr><th>Mapped type / lookup</th><td>An object-shaped type used as a table. <code>Map[ending][form]</code> looks up the right conjugation piece.</td></tr>
+    <tr><th><code>infer</code></th><td>Pattern-matching inside a conditional type — pulls a piece *out* of a string-type (e.g. the part of "walk" before an ending). Covered in a later lesson.</td></tr>
+    <tr><th>Type-level function</th><td>Informal name for a generic that maps inputs to an output type. Conjugation is exactly this.</td></tr>
+  </table>
+
+  <h2><span class="pin">日</span> &nbsp;Japanese — the grammar</h2>
+  <table>
+    <tr><th>Stem (語幹)</th><td>The unchanging front part of a verb. In <span class="jp">食べる</span> the stem is <span class="jp">食べ</span>.</td></tr>
+    <tr><th>Ending</th><td>The final kana that changes during conjugation. In <span class="jp">話す</span> the ending is <span class="jp">す</span>.</td></tr>
+    <tr><th>Godan verb (五段動詞)</th><td>"Five-row" verb (a.k.a. Group 1 / u-verb). Ends in う,く,ぐ,す,つ,ぬ,ぶ,む,る. The ending shifts across the あいうえお vowel rows. Most verbs are these.</td></tr>
+    <tr><th>Ichidan verb (一段動詞)</th><td>"One-row" verb (a.k.a. Group 2 / ru-verb). Always ends in る; you just drop る and add the form. Simplest to conjugate.</td></tr>
+    <tr><th>Irregular verb (不規則)</th><td>Only two: <span class="jp">する</span> (to do) and <span class="jp">来る／くる</span> (to come). Memorised, not derived.</td></tr>
+    <tr><th>Conjugation form (活用形)</th><td>One way a verb can be inflected — tense, politeness, mood. This project supports 12 (see below).</td></tr>
+    <tr><th>Particle</th><td>A small grammatical marker attached to words (よ, か, の, なら …). Adds role or nuance.</td></tr>
+  </table>
+
+  <h2><span class="pin">形</span> &nbsp;The conjugation forms (活用形)</h2>
+  <table>
+    <tr><th>辞書形</th><td>Dictionary (plain) form — the base, e.g. 話す.</td></tr>
+    <tr><th>ます形</th><td>Polite form — 話し(ます).</td></tr>
+    <tr><th>て形</th><td>Te-form — connective "and / then", 話して.</td></tr>
+    <tr><th>た形</th><td>Past form — 話した.</td></tr>
+    <tr><th>ない形</th><td>Negative form — 話さ(ない).</td></tr>
+    <tr><th>可能形</th><td>Potential — "can do", 話せ(る).</td></tr>
+    <tr><th>受身形</th><td>Passive — "is done".</td></tr>
+    <tr><th>使役形</th><td>Causative — "make/let do".</td></tr>
+    <tr><th>意向形</th><td>Volitional — "let's / shall", 話そ(う).</td></tr>
+    <tr><th>命令形</th><td>Imperative — command, 話せ.</td></tr>
+    <tr><th>条件形 / 仮定形</th><td>Conditional / hypothetical — "if".</td></tr>
+  </table>
+
+  <h2><span class="pin">{}</span> &nbsp;Project types you'll meet</h2>
+  <table>
+    <tr><th><code>GodanVerb</code></th><td>Type for a godan verb: <code>{ stem; ending }</code>.</td></tr>
+    <tr><th><code>IchidanVerb</code></th><td>Type for an ichidan verb: <code>{ stem; ending:<span class="tok-str">"る"</span> }</code>.</td></tr>
+    <tr><th><code>IrregularVerb</code></th><td>Type for する / 来る: <code>{ dictionary }</code>.</td></tr>
+    <tr><th><code>ConjugateVerb&lt;V,F&gt;</code></th><td>The type-level function: verb <code>V</code> in form <code>F</code> → the finished word as a literal type.</td></tr>
+  </table>
+
+  <footer>
+    🌸 Typed Japanese learning workspace · Glossary v1 — grows as we go.<br>
+    Sources: <a href="../../src/verb-types.d.ts">src/verb-types.d.ts</a> ·
+    <a href="https://www.tofugu.com/japanese-grammar/verb-conjugation-groups/">Tofugu: Verb Conjugation Groups</a> ·
+    <a href="https://www.typescriptlang.org/docs/handbook/2/types-from-types.html">TS Handbook</a>.
+  </footer>
+</div>
+</body>
+</html>

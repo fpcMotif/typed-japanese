@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Concepts from "./components/Concepts";
 import Tutorial from "./components/Tutorial";
 import Playground from "./components/Playground";
 import Glossary from "./components/Glossary";
@@ -7,18 +8,27 @@ import { useLang } from "./context/lang";
 import { useTheme } from "./context/theme";
 import styles from "./App.module.css";
 
-type Tab = "tutorial" | "glossary" | "playground";
+type Tab = "concepts" | "tutorial" | "glossary" | "playground";
 
 export default function App() {
   const { lang, setLang, t } = useLang();
   const { theme, toggleTheme } = useTheme();
-  const [tab, setTab] = useState<Tab>("tutorial");
+  const [tab, setTab] = useState<Tab>("concepts");
+  // A glossary "used in" link requesting a jump to a specific example.
   const [jump, setJump] = useState<{ chapterId: string; anchor: string } | null>(
     null
   );
+  // A Foundations article can deep-link into a Course chapter; this carries the
+  // requested chapter id across the tab switch into <Tutorial>.
+  const [focusChapter, setFocusChapter] = useState<string | null>(null);
 
   const navigateToExample = (chapterId: string, anchor: string) => {
     setJump({ chapterId, anchor });
+    setTab("tutorial");
+  };
+
+  const openChapter = (id: string) => {
+    setFocusChapter(id);
     setTab("tutorial");
   };
 
@@ -93,6 +103,12 @@ export default function App() {
 
       <nav className={styles.tabs}>
         <button
+          className={`${styles.tab} ${tab === "concepts" ? styles.tabActive : ""}`}
+          onClick={() => setTab("concepts")}
+        >
+          🏛️ {t("Foundations", "原理")}
+        </button>
+        <button
           className={`${styles.tab} ${tab === "tutorial" ? styles.tabActive : ""}`}
           onClick={() => setTab("tutorial")}
         >
@@ -113,8 +129,14 @@ export default function App() {
       </nav>
 
       <main className={styles.main}>
+        {tab === "concepts" && <Concepts onOpenChapter={openChapter} />}
         {tab === "tutorial" && (
-          <Tutorial jump={jump} onJumpHandled={() => setJump(null)} />
+          <Tutorial
+            jump={jump}
+            onJumpHandled={() => setJump(null)}
+            focusChapter={focusChapter}
+            onChapterFocused={() => setFocusChapter(null)}
+          />
         )}
         {tab === "glossary" && <Glossary onNavigate={navigateToExample} />}
         {tab === "playground" && <Playground />}

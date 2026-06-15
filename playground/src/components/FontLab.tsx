@@ -68,7 +68,7 @@ const PRESETS: Preset[] = [
   {
     id: "lxgw",
     name: "霞鹜文楷 · LXGW WenKai",
-    note: "楷体，CN+JP 一体，最像课本",
+    note: "当前默认 · 楷体，CN+JP 一体",
     ui: '"LXGW WenKai Screen", "Noto Serif SC", serif',
     jp: '"LXGW WenKai Screen", "Noto Serif JP", serif',
     heading: '"LXGW WenKai Screen", serif',
@@ -76,7 +76,7 @@ const PRESETS: Preset[] = [
   {
     id: "klee",
     name: "Klee One · 教科書体",
-    note: "当前默认 · 教科书手写感",
+    note: "日本教科书手写感",
     ui: '"LXGW WenKai Screen", "Klee One", "Noto Serif SC", serif',
     jp: '"Klee One", "LXGW WenKai Screen", serif',
     heading: '"Klee One", "LXGW WenKai Screen", serif',
@@ -97,7 +97,7 @@ const PRESETS: Preset[] = [
 // they never weigh on normal page load. Google Fonts subsets CJK by
 // unicode-range, so only the glyphs in view get downloaded.
 const FONT_LINKS = [
-  "https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Zen+Old+Mincho:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap",
+  "https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400;600;700&family=Zen+Old+Mincho:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap",
 ];
 
 const STORAGE_KEY = "fontlab-preset";
@@ -109,35 +109,41 @@ function applyPreset(p: Preset) {
   root.style.setProperty("--font-heading", p.heading);
 }
 
-// The live default (see theme.css) is the textbook stack — i.e. the "klee"
-// preset. With no stored override that is what the page already renders.
-const DEFAULT_ID = "klee";
+// The live default (see theme.css) is the LXGW WenKai stack — i.e. the
+// "lxgw" preset. With no stored override that is what the page renders, and
+// its webfont is loaded eagerly in index.html.
+const DEFAULT_ID = "lxgw";
+
+// Pull the extra preview fonts (everything except the eagerly-loaded
+// default). Idempotent — the querySelector guard dedupes.
+function injectFonts() {
+  FONT_LINKS.forEach((href) => {
+    if (document.querySelector(`link[href="${href}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  });
+}
 
 export default function FontLab() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>(DEFAULT_ID);
-  const [fontsInjected, setFontsInjected] = useState(false);
 
-  // Lazily inject the extra preview fonts the first time the panel opens, so
-  // visitors who never touch the switcher pay nothing for them.
+  // Inject the preview fonts the first time the panel opens, so visitors who
+  // never touch the switcher pay nothing for them.
   useEffect(() => {
-    if (!open || fontsInjected) return;
-    FONT_LINKS.forEach((href) => {
-      if (document.querySelector(`link[href="${href}"]`)) return;
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      document.head.appendChild(link);
-    });
-    setFontsInjected(true);
-  }, [open, fontsInjected]);
+    if (open) injectFonts();
+  }, [open]);
 
-  // Restore last choice.
+  // Restore last choice — and load its font too, since the selection is
+  // applied before the panel is ever opened.
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return;
     const p = PRESETS.find((x) => x.id === saved);
     if (p) {
+      if (p.id !== DEFAULT_ID) injectFonts();
       applyPreset(p);
       setActive(p.id);
     }
@@ -163,13 +169,11 @@ export default function FontLab() {
         <div className={styles.panel}>
           <div className={styles.head}>
             <strong>切换字体</strong>
+            <span className={styles.devTag}>DEV</span>
             <button className={styles.close} onClick={() => setOpen(false)}>
               ×
             </button>
           </div>
-          <p className={styles.hint}>
-            点击切换正文 / 日语 / 标题字体，效果即时生效，选择会被记住。
-          </p>
           <div className={styles.list}>
             {PRESETS.map((p) => {
               const isActive = active === p.id;

@@ -1,0 +1,319 @@
+.layout {
+  display: grid;
+  grid-template-columns: 268px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ---- sidebar: article list ---- */
+.sidebar {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebarTitle {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  padding: 4px 8px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.articleLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--ink-700);
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.articleLink:hover {
+  background: var(--surface-2);
+}
+
+.articleActive {
+  background: var(--sakura-100);
+  border-color: var(--border-strong);
+  color: var(--sakura-600);
+}
+
+.articleIcon {
+  font-size: 1.3rem;
+  flex: none;
+}
+
+.articleLinkText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.articleLinkTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.articleLinkRead {
+  font-size: 0.72rem;
+  color: var(--ink-300);
+}
+
+/* ---- article content ---- */
+.content {
+  min-width: 0;
+  padding-bottom: 48px;
+}
+
+.articleHead {
+  margin-bottom: 8px;
+}
+
+.readChip {
+  margin-bottom: 10px;
+}
+
+.articleTitle {
+  margin: 4px 0 8px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.articleTitleIcon {
+  font-size: 1.7rem;
+}
+
+.articleTagline {
+  margin: 0 0 18px;
+  color: var(--sakura-600);
+  font-size: 1.02rem;
+  font-weight: 600;
+  max-width: 64ch;
+}
+
+.intro {
+  max-width: 72ch;
+  padding: 16px 20px;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.intro .para:first-child {
+  margin-top: 0;
+}
+
+.intro .para:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- sections / principles ---- */
+.section {
+  margin: 30px 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.sectionHead {
+  margin: 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.principleBadge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: var(--sakura-500);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.sectionHeading {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  line-height: 1.3;
+}
+
+.para {
+  margin: 10px 0;
+  line-height: 1.78;
+  color: var(--ink-700);
+  max-width: 72ch;
+}
+
+.para strong {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+/* ---- define callout ---- */
+.define {
+  max-width: 72ch;
+  margin: 14px 0;
+  padding: 14px 18px;
+  background: var(--code-bg);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid var(--sakura-400);
+  border-radius: var(--radius-sm);
+}
+
+.defineHead {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 6px;
+}
+
+.defineTerm {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink-900);
+}
+
+.defineReading {
+  font-size: 0.92rem;
+  color: var(--ink-500);
+}
+
+.defineRomaji {
+  font-size: 0.86rem;
+  font-style: italic;
+  color: var(--ink-300);
+}
+
+.defineBody {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--ink-700);
+  font-size: 0.95rem;
+}
+
+/* ---- example line ---- */
+.example {
+  max-width: 72ch;
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+
+.exampleJp {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.exampleReading {
+  font-size: 0.9rem;
+  color: var(--ink-500);
+}
+
+.exampleGloss {
+  flex-basis: 100%;
+  font-size: 0.92rem;
+  color: var(--ink-500);
+  line-height: 1.55;
+}
+
+/* ---- chapter deep-links ---- */
+.chapters {
+  max-width: 72ch;
+  margin: 16px 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chaptersLabel {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+
+.chapterChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chapterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink-700);
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.12s;
+}
+
+.chapterChip:hover {
+  background: var(--sakura-100);
+  border-color: var(--sakura-400);
+  color: var(--sakura-600);
+  transform: translateY(-1px);
+}
+
+.chapterChipEmoji {
+  font-size: 0.95rem;
+}
+
+.chapterChipArrow {
+  color: var(--ink-300);
+  font-weight: 700;
+}
+
+.chapterChip:hover .chapterChipArrow {
+  color: var(--sakura-500);
+}
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+  }
+}

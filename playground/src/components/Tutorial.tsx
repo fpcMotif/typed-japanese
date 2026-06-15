@@ -42,9 +42,17 @@ type Props = {
   /** A glossary "used in" link requesting a jump to an example. */
   jump: { chapterId: string; anchor: string } | null;
   onJumpHandled: () => void;
+  /** When set (e.g. from a Foundations deep-link), jump to this chapter id. */
+  focusChapter?: string | null;
+  onChapterFocused?: () => void;
 };
 
-export default function Tutorial({ jump, onJumpHandled }: Props) {
+export default function Tutorial({
+  jump,
+  onJumpHandled,
+  focusChapter = null,
+  onChapterFocused,
+}: Props) {
   const { lang, t } = useLang();
   const [query, setQuery] = useState("");
   const [activeId, setActiveId] = useState<string>(
@@ -79,6 +87,14 @@ export default function Tutorial({ jump, onJumpHandled }: Props) {
     );
     return () => window.clearTimeout(timer);
   });
+
+  // Honour a deep-link from another tab: select the requested chapter once.
+  useEffect(() => {
+    if (focusChapter && CHAPTERS.some((c) => c.id === focusChapter)) {
+      setActiveId(focusChapter);
+      onChapterFocused?.();
+    }
+  }, [focusChapter, onChapterFocused]);
 
   const byLevel = useMemo(() => {
     const q = query.trim().toLowerCase();

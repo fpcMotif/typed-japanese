@@ -44,6 +44,16 @@
   border-bottom: 1px solid var(--border);
 }
 
+.devTag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--on-accent);
+  background: var(--sakura-400);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
 .close {
   margin-left: auto;
   border: none;
@@ -57,14 +67,6 @@
 
 .close:hover {
   color: var(--ink-900);
-}
-
-.hint {
-  margin: 0;
-  padding: 10px 14px;
-  font-size: 0.76rem;
-  color: var(--ink-500);
-  border-bottom: 1px solid var(--border);
 }
 
 .list {

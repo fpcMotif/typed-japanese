@@ -737,4 +737,5 @@ function main(): void {
 // for tests when loaded as a module.
 if (import.meta.main) main();
 
-export { structuralAudit, verify };
+export { structuralAudit, verify, buildPrompt, callModel, parseResult };
+export type { ModelResult, CheckResult };

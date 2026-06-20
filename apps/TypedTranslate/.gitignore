@@ -1,0 +1,19 @@
+# Swift Package Manager build output
+.build/
+.swiftpm/
+
+# Xcode / xcodebuild artifacts
+*.xcresult
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# bun / node debris (the bridge runs from the repo's own node_modules,
+# but keep stray installs out of the app folder)
+node_modules/
+bun.lockb
+npm-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store

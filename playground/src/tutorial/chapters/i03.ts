@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "おとうとはくすりをのませられた",
           en: "My little brother was made to take the medicine.",
           zh: "弟弟被迫吃了药。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 弟 = ProperNoun<"弟">;
-type 薬 = ProperNoun<"薬">;
+type 弟 = CommonNoun<"弟">;
+type 薬 = CommonNoun<"薬">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // 弟 + は + 薬を + [飲む causative stem 飲ま] + せられた
@@ -40,10 +40,10 @@ type 弟は薬を飲ませられた = \`\${PhraseWithParticle<弟, "は">}\${Phr
           reading: "まいにちじゅくにいかせられます",
           en: "I am made to go to cram school every day.",
           zh: "我每天都被逼着去补习班。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 毎日 = ProperNoun<"毎日">;
-type 塾 = ProperNoun<"塾">;
+type 毎日 = Adverb<"毎日">;
+type 塾 = CommonNoun<"塾">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 毎日 + 塾に + [行く causative stem 行か] + せられます
@@ -66,10 +66,10 @@ type 毎日塾に行かせられます = \`\${毎日}\${PhraseWithParticle<塾, 
           reading: "わたしはやさいをたべさせられた",
           en: "I was made to eat the vegetables.",
           zh: "我被逼着把蔬菜吃了。",
-          code: `import type { ProperNoun, IchidanVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IchidanVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 野菜 = ProperNoun<"野菜">;
+type 私 = Pronoun<"私">;
+type 野菜 = CommonNoun<"野菜">;
 type 食べる = IchidanVerb & { stem: "食べ"; ending: "る" };
 
 // 私 + は + 野菜を + [食べ stem] + させられた
@@ -81,11 +81,11 @@ type 私は野菜を食べさせられた = \`\${PhraseWithParticle<私, "は">}
           reading: "わたしはぶちょうにざんぎょうさせられた",
           en: "I was made to work overtime by the department head.",
           zh: "我被部长逼着加了班。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 部長 = ProperNoun<"部長">;
-type 残業 = ProperNoun<"残業">;
+type 私 = Pronoun<"私">;
+type 部長 = CommonNoun<"部長">;
+type 残業 = CommonNoun<"残業">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 私は + 部長に + 残業 + [する causative させ] + られた
@@ -108,10 +108,10 @@ type 私は部長に残業させられた = \`\${PhraseWithParticle<私, "は">}
           reading: "わたしはうたをうたわされた",
           en: "I was made to sing a song.",
           zh: "我被逼着唱了首歌。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 歌 = ProperNoun<"歌">;
+type 私 = Pronoun<"私">;
+type 歌 = CommonNoun<"歌">;
 type 歌う = GodanVerb & { stem: "歌"; ending: "う" };
 
 // 私は + 歌を + [歌う causative stem 歌わ] + された (contraction of 歌わせられた)
@@ -123,9 +123,9 @@ type 私は歌を歌わされた = \`\${PhraseWithParticle<私, "は">}\${Phrase
           reading: "いちじかんもまたされた",
           en: "I was kept waiting for a whole hour.",
           zh: "我被迫等了整整一个小时。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 一時間 = ProperNoun<"一時間">;
+type 一時間 = CommonNoun<"一時間">;
 type 待つ = GodanVerb & { stem: "待"; ending: "つ" };
 
 // 一時間も + [待つ causative stem 待た] + された
@@ -148,11 +148,11 @@ type 一時間も待たされた = \`\${PhraseWithParticle<一時間, "も">}\${
           reading: "こどもはまいにちべんきょうさせられる",
           en: "Children are made to study every day.",
           zh: "孩子们每天都被逼着学习。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 子供 = ProperNoun<"子供">;
-type 毎日 = ProperNoun<"毎日">;
-type 勉強 = ProperNoun<"勉強">;
+type 子供 = CommonNoun<"子供">;
+type 毎日 = Adverb<"毎日">;
+type 勉強 = CommonNoun<"勉強">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 子供は + 毎日 + 勉強 + [する causative させ] + られる
@@ -164,9 +164,9 @@ type 子供は毎日勉強させられる = \`\${PhraseWithParticle<子供, "は
           reading: "わたしはわらわされた",
           en: "I couldn't help being made to laugh.",
           zh: "我被逗得忍不住笑了。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type 笑う = GodanVerb & { stem: "笑"; ending: "う" };
 
 // 私は + [笑う causative stem 笑わ] + された (spontaneous reaction)

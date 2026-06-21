@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "そのもんだいをめぐってぎろんした",
           en: "We debated over that issue.",
           zh: "围绕那个问题进行了讨论。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 問題 = ProperNoun<"問題">;
-type 議論 = ProperNoun<"議論">;
+type 問題 = CommonNoun<"問題">;
+type 議論 = CommonNoun<"議論">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // その + 問題 + をめぐって + 議論 + した (た形 of する)
@@ -40,10 +40,10 @@ type その問題をめぐって議論した = \`その\${問題}をめぐって
           reading: "よさんをめぐってたいりつする",
           en: "They are in conflict over the budget.",
           zh: "围绕预算针锋相对。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 予算 = ProperNoun<"予算">;
-type 対立 = ProperNoun<"対立">;
+type 予算 = CommonNoun<"予算">;
+type 対立 = CommonNoun<"対立">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 予算 + をめぐって + 対立 + する (辞書形)
@@ -66,10 +66,10 @@ type 予算をめぐって対立する = \`\${予算}をめぐって\${対立}\$
           reading: "かいかいにあたってあいさつする",
           en: "I will say a few words on the occasion of the opening.",
           zh: "在开会之际致辞。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 開会 = ProperNoun<"開会">;
-type 挨拶 = ProperNoun<"挨拶">;
+type 開会 = CommonNoun<"開会">;
+type 挨拶 = CommonNoun<"挨拶">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 開会 + にあたって + 挨拶 + する (辞書形)
@@ -81,10 +81,10 @@ type 開会にあたって挨拶する = \`\${開会}にあたって\${挨拶}\$
           reading: "しんねんにあたってけついした",
           en: "On the occasion of the new year, I made a resolution.",
           zh: "在新年之际下定了决心。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 新年 = ProperNoun<"新年">;
-type 決意 = ProperNoun<"決意">;
+type 新年 = CommonNoun<"新年">;
+type 決意 = CommonNoun<"決意">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 新年 + にあたって + 決意 + した (た形 of する)
@@ -107,15 +107,14 @@ type 新年にあたって決意した = \`\${新年}にあたって\${決意}\$
           reading: "そつぎょうにさいしてしゃしんをとった",
           en: "We took a photo upon graduation.",
           zh: "值此毕业之际拍了照片。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 卒業 = ProperNoun<"卒業">;
-type に際して = ProperNoun<"に際して">;
-type 写真 = ProperNoun<"写真">;
+type 卒業 = CommonNoun<"卒業">;
+type 写真 = CommonNoun<"写真">;
 type 撮る = GodanVerb & { stem: "撮"; ending: "る" };
 
 // 卒業 + に際して + 写真 を + 撮った (た形)
-type 卒業に際して写真を撮った = \`\${卒業}\${に際して}\${PhraseWithParticle<写真, "を">}\${ConjugateVerb<撮る, "Ta">}\`;
+type 卒業に際して写真を撮った = \`\${卒業}に際して\${PhraseWithParticle<写真, "を">}\${ConjugateVerb<撮る, "Ta">}\`;
 `,
         },
         {
@@ -123,15 +122,14 @@ type 卒業に際して写真を撮った = \`\${卒業}\${に際して}\${Phras
           reading: "けいやくにさいしてせつめいする",
           en: "I will explain at the time of signing the contract.",
           zh: "签约之际会作说明。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 契約 = ProperNoun<"契約">;
-type に際して = ProperNoun<"に際して">;
-type 説明 = ProperNoun<"説明">;
+type 契約 = CommonNoun<"契約">;
+type 説明 = CommonNoun<"説明">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 契約 + に際して + 説明 + する (辞書形)
-type 契約に際して説明する = \`\${契約}\${に際して}\${説明}\${ConjugateVerb<する, "Dictionary">}\`;
+type 契約に際して説明する = \`\${契約}に際して\${説明}\${ConjugateVerb<する, "Dictionary">}\`;
 `,
         },
       ],

@@ -28,7 +28,7 @@ const entries: VocabEntry[] = [
   { word: "消す", reading: "けす", romaji: "kesu", pos: "verb-godan", en: "to erase; to turn off", zh: "消除；关掉" },
   { word: "笑う", reading: "わらう", romaji: "warau", pos: "verb-godan", en: "to laugh; to smile", zh: "笑" },
   { word: "証拠", reading: "しょうこ", romaji: "shōko", pos: "noun", en: "evidence; proof", zh: "证据" },
-  { word: "上手", reading: "じょうず", romaji: "jōzu", pos: "noun", en: "skillful; good at", zh: "擅长；高明" },
+  { word: "上手", reading: "じょうず", romaji: "jōzu", pos: "na-adjective", en: "skillful; good at", zh: "擅长；高明" },
   { word: "冗談", reading: "じょうだん", romaji: "jōdan", pos: "noun", en: "joke", zh: "玩笑" },
   { word: "食べる", reading: "たべる", romaji: "taberu", pos: "verb-ichidan", en: "to eat", zh: "吃" },
 ];

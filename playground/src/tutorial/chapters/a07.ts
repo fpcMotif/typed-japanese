@@ -25,14 +25,14 @@ const chapter: Chapter = {
           reading: "かれはなにもしらないかのようだ",
           en: "He acts as if he knows nothing.",
           zh: "他一副什么都不知道的样子。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 何も = ProperNoun<"何も">;
+type 彼 = Pronoun<"彼">;
+type 何 = Pronoun<"何">;
 type 知る = GodanVerb & { stem: "知"; ending: "る" };
 
-// 彼は + 何も + 知ら(ない形) + ない + かのようだ
-type 彼は何も知らないかのようだ = \`\${PhraseWithParticle<彼, "は">}\${何も}\${ConjugateVerb<知る, "Nai">}ないかのようだ\`;
+// 彼は + 何 + も + 知ら(ない形) + ない + かのようだ
+type 彼は何も知らないかのようだ = \`\${PhraseWithParticle<彼, "は">}\${何}も\${ConjugateVerb<知る, "Nai">}ないかのようだ\`;
 `,
         },
         {
@@ -40,9 +40,9 @@ type 彼は何も知らないかのようだ = \`\${PhraseWithParticle<彼, "は
           reading: "ゆめをみているかのようだ",
           en: "It is as if I were dreaming.",
           zh: "简直就像在做梦一样。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 夢 = ProperNoun<"夢">;
+type 夢 = CommonNoun<"夢">;
 type 見る = IchidanVerb & { stem: "見"; ending: "る" };
 
 // 夢を + 見て(て形) + いる + かのようだ
@@ -54,13 +54,13 @@ type 夢を見ているかのようだ = \`\${PhraseWithParticle<夢, "を">}\${
           reading: "かのじょはまるでてんしであるかのようだ",
           en: "She is just as if she were an angel.",
           zh: "她简直宛如天使一般。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, Pronoun, Copula, PhraseWithParticle } from "typed-japanese";
 
 // A noun takes である before かのようだ; まるで reinforces the comparison.
-type 彼女 = ProperNoun<"彼女">;
-type まるで = ProperNoun<"まるで">;
-type 天使 = ProperNoun<"天使">;
-type である = ProperNoun<"である">;
+type 彼女 = Pronoun<"彼女">;
+type まるで = Adverb<"まるで">;
+type 天使 = CommonNoun<"天使">;
+type である = Copula<"Written">;
 
 // 彼女は + まるで + 天使 + である + かのようだ
 type 彼女はまるで天使であるかのようだ = \`\${PhraseWithParticle<彼女, "は">}\${まるで}\${天使}\${である}かのようだ\`;
@@ -96,9 +96,9 @@ type 春が来たかのように暖かい = \`春が\${ConjugateVerb<来る, "Ta
           reading: "ゆきがふっているかのようにしろい",
           en: "It is white, as if snow were falling.",
           zh: "白得仿佛正在下雪一样。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 雪 = ProperNoun<"雪">;
+type 雪 = CommonNoun<"雪">;
 type 降る = GodanVerb & { stem: "降"; ending: "る" };
 type 白い = IAdjective & { stem: "白"; ending: "い" };
 
@@ -122,10 +122,10 @@ type 雪が降っているかのように白い = \`\${PhraseWithParticle<雪, "
           reading: "はやくいけとばかりにかれをみた",
           en: "He looked at me as if to say, “Go, quickly.”",
           zh: "他看着我,仿佛在说「快走」似的。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, IchidanVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adverb, Pronoun, GodanVerb, ConjugateVerb, IchidanVerb, PhraseWithParticle } from "typed-japanese";
 
-type 早く = ProperNoun<"早く">;
-type 彼 = ProperNoun<"彼">;
+type 早く = Adverb<"早く">;
+type 彼 = Pronoun<"彼">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 type 見る = IchidanVerb & { stem: "見"; ending: "る" };
 
@@ -152,14 +152,14 @@ type 待っていたとばかりに笑った = \`\${ConjugateVerb<待つ, "Te">}
           reading: "なにもきいていないとばかりにあるいた",
           en: "She walked on as if to say she had heard nothing.",
           zh: "她径自走着,仿佛在说什么都没听见似的。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 何も = ProperNoun<"何も">;
+type 何 = Pronoun<"何">;
 type 聞く = GodanVerb & { stem: "聞"; ending: "く" };
 type 歩く = GodanVerb & { stem: "歩"; ending: "く" };
 
-// 何も + 聞いて(て形) + いない + とばかりに + 歩いた(た形)
-type 何も聞いていないとばかりに歩いた = \`\${何も}\${ConjugateVerb<聞く, "Te">}いないとばかりに\${ConjugateVerb<歩く, "Ta">}\`;
+// 何 + も + 聞いて(て形) + いない + とばかりに + 歩いた(た形)
+type 何も聞いていないとばかりに歩いた = \`\${何}も\${ConjugateVerb<聞く, "Te">}いないとばかりに\${ConjugateVerb<歩く, "Ta">}\`;
 `,
         },
       ],

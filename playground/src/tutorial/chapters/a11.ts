@@ -25,16 +25,16 @@ const chapter: Chapter = {
           reading: "えきにつきしだいれんらくする",
           en: "I will contact you as soon as I arrive at the station.",
           zh: "一到车站就联系你。",
-          code: `import type { ProperNoun, GodanVerb, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 駅 = ProperNoun<"駅">;
+type 駅 = CommonNoun<"駅">;
 type 着く = GodanVerb & { stem: "着"; ending: "く" };
-type 次第 = ProperNoun<"次第">;
-type 連絡 = ProperNoun<"連絡">;
+type 次第 = CommonNoun<"次第">;
+type 連絡 = CommonNoun<"連絡">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 駅 に + 着き (ます形 stem of 着く) + 次第 + 連絡 + する (辞書形)
-type 駅に着き次第連絡する = \`\${PhraseWithParticle<駅, "に">}\${ConjugateVerb<着く, "Masu">}\${次第}\${連絡}\${ConjugateVerb<する, "Dictionary">}\`;
+type 駅に着き次第連絡する = \`\${PhraseWithParticle<駅, "に">}\${ConjugateVerb<着く, "MasuStem">}\${次第}\${連絡}\${ConjugateVerb<する, "Dictionary">}\`;
 `,
         },
         {
@@ -42,10 +42,10 @@ type 駅に着き次第連絡する = \`\${PhraseWithParticle<駅, "に">}\${Con
           reading: "けっかしだいできめる",
           en: "We will decide depending on the result.",
           zh: "视结果而定。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb } from "typed-japanese";
 
-type 結果 = ProperNoun<"結果">;
-type 次第 = ProperNoun<"次第">;
+type 結果 = CommonNoun<"結果">;
+type 次第 = CommonNoun<"次第">;
 type 決める = IchidanVerb & { stem: "決め"; ending: "る" };
 
 // 結果 + 次第 + で + 決める (辞書形)
@@ -68,16 +68,16 @@ type 結果次第で決める = \`\${結果}\${次第}で\${ConjugateVerb<決め
           reading: "しょるいをみたうえではんだんする",
           en: "I will judge after looking at the documents.",
           zh: "看过文件之后再做判断。",
-          code: `import type { ProperNoun, IchidanVerb, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 書類 = ProperNoun<"書類">;
+type 書類 = CommonNoun<"書類">;
 type 見る = IchidanVerb & { stem: "見"; ending: "る" };
-type 上で = ProperNoun<"上で">;
-type 判断 = ProperNoun<"判断">;
+type 上 = CommonNoun<"上">;
+type 判断 = CommonNoun<"判断">;
 type する = IrregularVerb & { dictionary: "する" };
 
-// 書類 を + 見た (た形) + 上で (fixed) + 判断 + する (辞書形)
-type 書類を見た上で判断する = \`\${PhraseWithParticle<書類, "を">}\${ConjugateVerb<見る, "Ta">}\${上で}\${判断}\${ConjugateVerb<する, "Dictionary">}\`;
+// 書類 を + 見た (た形) + 上 (noun) + で (particle) + 判断 + する (辞書形)
+type 書類を見た上で判断する = \`\${PhraseWithParticle<書類, "を">}\${ConjugateVerb<見る, "Ta">}\${上}で\${判断}\${ConjugateVerb<する, "Dictionary">}\`;
 `,
         },
         {
@@ -85,14 +85,14 @@ type 書類を見た上で判断する = \`\${PhraseWithParticle<書類, "を">}
           reading: "きそくのうえでもんだいない",
           en: "There is no problem in terms of the rules.",
           zh: "在规则方面没有问题。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 規則 = ProperNoun<"規則">;
-type 上で = ProperNoun<"上で">;
-type 問題 = ProperNoun<"問題">;
+type 規則 = CommonNoun<"規則">;
+type 上 = CommonNoun<"上">;
+type 問題 = CommonNoun<"問題">;
 
-// 規則 の + 上で (fixed) + 問題 + ない (literal)
-type 規則の上で問題ない = \`\${PhraseWithParticle<規則, "の">}\${上で}\${問題}ない\`;
+// 規則 の + 上 (noun) + で (particle) + 問題 + ない (literal)
+type 規則の上で問題ない = \`\${PhraseWithParticle<規則, "の">}\${上}で\${問題}ない\`;
 `,
         },
       ],
@@ -111,11 +111,11 @@ type 規則の上で問題ない = \`\${PhraseWithParticle<規則, "の">}\${上
           reading: "わたしがしるかぎりただしい",
           en: "As far as I know, it is correct.",
           zh: "就我所知是正确的。",
-          code: `import type { ProperNoun, GodanVerb, IAdjective, ConjugateVerb, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, CommonNoun, GodanVerb, IAdjective, ConjugateVerb, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type 知る = GodanVerb & { stem: "知"; ending: "る" };
-type 限り = ProperNoun<"限り">;
+type 限り = CommonNoun<"限り">;
 type 正しい = IAdjective & { stem: "正し"; ending: "い" };
 
 // 私 が + 知る (辞書形) + 限り + 正しい (基本形)
@@ -127,11 +127,11 @@ type 私が知る限り正しい = \`\${PhraseWithParticle<私, "が">}\${Conjug
           reading: "できるかぎりどりょくする",
           en: "I will make every possible effort.",
           zh: "尽最大努力。",
-          code: `import type { ProperNoun, IchidanVerb, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
 type できる = IchidanVerb & { stem: "でき"; ending: "る" };
-type 限り = ProperNoun<"限り">;
-type 努力 = ProperNoun<"努力">;
+type 限り = CommonNoun<"限り">;
+type 努力 = CommonNoun<"努力">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // できる (辞書形) + 限り + 努力 + する (辞書形)
@@ -154,11 +154,11 @@ type できる限り努力する = \`\${ConjugateVerb<できる, "Dictionary">}\
           reading: "このまちはしずかなはんめんふべんだ",
           en: "This town is quiet, but on the other hand inconvenient.",
           zh: "这个小镇虽然安静,另一方面却不方便。",
-          code: `import type { ProperNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 町 = ProperNoun<"町">;
+type 町 = CommonNoun<"町">;
 type 静か = NaAdjective & { stem: "静か" };
-type 反面 = ProperNoun<"反面">;
+type 反面 = CommonNoun<"反面">;
 type 不便 = NaAdjective & { stem: "不便" };
 
 // この + 町 は + 静かな (na-adj 基本形 → 静かな) + 反面 + 不便 + だ (literal copula)
@@ -170,11 +170,11 @@ type この町は静かな反面不便だ = \`この\${PhraseWithParticle<町, "
           reading: "このしごとはたのしいはんめんきびしい",
           en: "This job is fun, but on the other hand demanding.",
           zh: "这份工作有趣,另一方面也很严格。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 仕事 = ProperNoun<"仕事">;
+type 仕事 = CommonNoun<"仕事">;
 type 楽しい = IAdjective & { stem: "楽し"; ending: "い" };
-type 反面 = ProperNoun<"反面">;
+type 反面 = CommonNoun<"反面">;
 type 厳しい = IAdjective & { stem: "厳し"; ending: "い" };
 
 // この + 仕事 は + 楽しい (基本形) + 反面 + 厳しい (基本形)

@@ -25,9 +25,9 @@ const chapter: Chapter = {
           reading: "こどもはあそぶものだ",
           en: "Children just naturally play (that's what children do).",
           zh: "小孩子就是爱玩的。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 子供 = ProperNoun<"子供">;
+type 子供 = CommonNoun<"子供">;
 type 遊ぶ = GodanVerb & { stem: "遊"; ending: "ぶ" };
 
 // 子供 + は + 遊ぶ(辞書形) + ものだ
@@ -39,10 +39,10 @@ type 子供は遊ぶものだ = \`\${PhraseWithParticle<子供, "は">}\${Conjug
           reading: "じかんははやくすぎるものだ",
           en: "Time naturally passes quickly.",
           zh: "时间总是过得很快的。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 時間 = ProperNoun<"時間">;
-type 早く = ProperNoun<"早く">;
+type 時間 = CommonNoun<"時間">;
+type 早く = Adverb<"早く">;
 type 過ぎる = IchidanVerb & { stem: "過ぎ"; ending: "る" };
 
 // 時間 + は + 早く + 過ぎる(辞書形) + ものだ
@@ -65,9 +65,9 @@ type 時間は早く過ぎるものだ = \`\${PhraseWithParticle<時間, "は">}
           reading: "むかしはよくおよいだものだ",
           en: "Back then I used to swim a lot.",
           zh: "以前我常常去游泳。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 昔 = ProperNoun<"昔">;
+type 昔 = CommonNoun<"昔">;
 type 泳ぐ = GodanVerb & { stem: "泳"; ending: "ぐ" };
 
 // 昔 + は + よく + 泳いだ(た形) + ものだ
@@ -79,13 +79,14 @@ type 昔はよく泳いだものだ = \`\${PhraseWithParticle<昔, "は">}よく
           reading: "こどものころはよくあそんだものだ",
           en: "When I was a child I used to play a lot.",
           zh: "小时候我常常玩耍。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 子供の頃 = ProperNoun<"子供の頃">;
+type 子供 = CommonNoun<"子供">;
+type 頃 = CommonNoun<"頃">;
 type 遊ぶ = GodanVerb & { stem: "遊"; ending: "ぶ" };
 
-// 子供の頃 + は + よく + 遊んだ(た形) + ものだ
-type 子供の頃はよく遊んだものだ = \`\${PhraseWithParticle<子供の頃, "は">}よく\${ConjugateVerb<遊ぶ, "Ta">}ものだ\`;
+// 子供 + の + 頃 + は + よく + 遊んだ(た形) + ものだ
+type 子供の頃はよく遊んだものだ = \`\${子供}の\${PhraseWithParticle<頃, "は">}よく\${ConjugateVerb<遊ぶ, "Ta">}ものだ\`;
 `,
         },
       ],
@@ -104,10 +105,10 @@ type 子供の頃はよく遊んだものだ = \`\${PhraseWithParticle<子供の
           reading: "まいにちれんしゅうすることだ",
           en: "The thing to do is to practise every day.",
           zh: "你要做的就是每天练习。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 毎日 = ProperNoun<"毎日">;
-type 練習 = ProperNoun<"練習">;
+type 毎日 = Adverb<"毎日">;
+type 練習 = CommonNoun<"練習">;
 type 練習する = IrregularVerb & { dictionary: "する" };
 
 // 毎日 + 練習 + する(辞書形) + ことだ
@@ -119,9 +120,9 @@ type 毎日練習することだ = \`\${毎日}\${練習}\${ConjugateVerb<練習
           reading: "まずいしゃにきくことだ",
           en: "First, you should ask a doctor.",
           zh: "首先,你应该去问医生。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 医者 = ProperNoun<"医者">;
+type 医者 = CommonNoun<"医者">;
 type 聞く = GodanVerb & { stem: "聞"; ending: "く" };
 
 // まず + 医者 + に + 聞く(辞書形) + ことだ
@@ -157,9 +158,9 @@ type 素晴らしいことだ = \`\${ConjugateAdjective<素晴らしい, "Basic"
           reading: "ほんとうにしあわせなことだ",
           en: "It really is a happy thing!",
           zh: "真是一件幸福的事啊!",
-          code: `import type { ProperNoun, NaAdjective, ConjugateAdjective } from "typed-japanese";
+          code: `import type { Adverb, NaAdjective, ConjugateAdjective } from "typed-japanese";
 
-type 本当に = ProperNoun<"本当に">;
+type 本当に = Adverb<"本当に">;
 type 幸せ = NaAdjective & { stem: "幸せ" };
 
 // 本当に + 幸せ(基本形=幸せな) + ことだ

@@ -2,7 +2,7 @@ import type { VocabEntry } from "../types";
 
 const entries: VocabEntry[] = [
   { word: "思う", reading: "おもう", romaji: "omou", pos: "verb-godan", en: "to think; to feel", zh: "想；认为" },
-  { word: "次第", reading: "しだい", romaji: "shidai", pos: "expression", en: "depending on; as soon as", zh: "取决于；一……就" },
+  { word: "次第", reading: "しだい", romaji: "shidai", pos: "noun", en: "depending on; as soon as", zh: "取决于；一……就" },
   { word: "塾", reading: "じゅく", romaji: "juku", pos: "noun", en: "cram school", zh: "补习班" },
   { word: "少々", reading: "しょうしょう", romaji: "shōshō", pos: "adverb", en: "a little; a moment", zh: "稍微；少许" },
   { word: "招待", reading: "しょうたい", romaji: "shōtai", pos: "noun", en: "invitation", zh: "邀请" },
@@ -19,8 +19,8 @@ const entries: VocabEntry[] = [
   { word: "電話", reading: "でんわ", romaji: "denwa", pos: "noun", en: "telephone", zh: "电话" },
   { word: "道理で", reading: "どうりで", romaji: "dōri de", pos: "expression", en: "no wonder; that's why", zh: "怪不得；难怪" },
   { word: "背", reading: "せ", romaji: "se", pos: "noun", en: "height; back", zh: "身高；背" },
-  { word: "抜き", reading: "ぬき", romaji: "nuki", pos: "expression", en: "without; omitting", zh: "去掉；不加" },
-  { word: "反面", reading: "はんめん", romaji: "hanmen", pos: "expression", en: "on the other hand", zh: "另一方面" },
+  { word: "抜き", reading: "ぬき", romaji: "nuki", pos: "noun", en: "without; omitting", zh: "去掉；不加" },
+  { word: "反面", reading: "はんめん", romaji: "hanmen", pos: "noun", en: "on the other hand", zh: "另一方面" },
   { word: "勉強", reading: "べんきょう", romaji: "benkyō", pos: "noun", en: "study", zh: "学习" },
   { word: "本当に", reading: "ほんとうに", romaji: "hontō ni", pos: "adverb", en: "really; truly", zh: "真的；确实" },
   { word: "毎日", reading: "まいにち", romaji: "mainichi", pos: "adverb", en: "every day", zh: "每天" },

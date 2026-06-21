@@ -25,14 +25,14 @@ const chapter: Chapter = {
           reading: "せんせいはほんをおよみになります",
           en: "The teacher reads a book. (respectful)",
           zh: "老师在读书。(尊敬)",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 先生 = ProperNoun<"先生">;
-type 本 = ProperNoun<"本">;
+type 先生 = CommonNoun<"先生">;
+type 本 = CommonNoun<"本">;
 type 読む = GodanVerb & { stem: "読"; ending: "む" };
 
 // 読む ます形 → "読み";  お + 読み + になります
-type 先生は本をお読みになります = \`\${PhraseWithParticle<先生, "は">}\${PhraseWithParticle<本, "を">}お\${ConjugateVerb<読む, "Masu">}になります\`;
+type 先生は本をお読みになります = \`\${PhraseWithParticle<先生, "は">}\${PhraseWithParticle<本, "を">}お\${ConjugateVerb<読む, "MasuStem">}になります\`;
 `,
         },
         {
@@ -40,13 +40,13 @@ type 先生は本をお読みになります = \`\${PhraseWithParticle<先生, "
           reading: "しゃちょうはもうおかえりになりました",
           en: "The company president has already gone home. (respectful)",
           zh: "社长已经回去了。(尊敬)",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 社長 = ProperNoun<"社長">;
+type 社長 = CommonNoun<"社長">;
 type 帰る = GodanVerb & { stem: "帰"; ending: "る" };
 
 // 帰る ます形 → "帰り";  お + 帰り + になりました
-type 社長はもうお帰りになりました = \`\${PhraseWithParticle<社長, "は">}もうお\${ConjugateVerb<帰る, "Masu">}になりました\`;
+type 社長はもうお帰りになりました = \`\${PhraseWithParticle<社長, "は">}もうお\${ConjugateVerb<帰る, "MasuStem">}になりました\`;
 `,
         },
       ],
@@ -65,10 +65,10 @@ type 社長はもうお帰りになりました = \`\${PhraseWithParticle<社長
           reading: "ぶちょうはしんぶんをよまれます",
           en: "The department head reads the newspaper. (respectful)",
           zh: "部长在看报纸。(尊敬)",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 部長 = ProperNoun<"部長">;
-type 新聞 = ProperNoun<"新聞">;
+type 部長 = CommonNoun<"部長">;
+type 新聞 = CommonNoun<"新聞">;
 type 読む = GodanVerb & { stem: "読"; ending: "む" };
 
 // 読む 受身形 → "読ま";  読ま + れます
@@ -80,9 +80,9 @@ type 部長は新聞を読まれます = \`\${PhraseWithParticle<部長, "は">}
           reading: "せんせいはいつかかれましたか",
           en: "When did the teacher write it? (respectful)",
           zh: "老师是什么时候写的?(尊敬)",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 先生 = ProperNoun<"先生">;
+type 先生 = CommonNoun<"先生">;
 type 書く = GodanVerb & { stem: "書"; ending: "く" };
 
 // 書く 受身形 → "書か";  書か + れましたか
@@ -105,10 +105,10 @@ type 先生はいつ書かれましたか = \`\${PhraseWithParticle<先生, "は
           reading: "せんせいはきょうしつにいらっしゃいます",
           en: "The teacher is in the classroom. (respectful)",
           zh: "老师在教室里。(尊敬)",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 先生 = ProperNoun<"先生">;
-type 教室 = ProperNoun<"教室">;
+type 先生 = CommonNoun<"先生">;
+type 教室 = CommonNoun<"教室">;
 
 // いらっしゃいます is the irregular honorific polite form of いる/来る/行く
 type 先生は教室にいらっしゃいます = \`\${PhraseWithParticle<先生, "は">}\${PhraseWithParticle<教室, "に">}いらっしゃいます\`;
@@ -119,10 +119,10 @@ type 先生は教室にいらっしゃいます = \`\${PhraseWithParticle<先生
           reading: "しゃちょうはなんとおっしゃいましたか",
           en: "What did the president say? (respectful)",
           zh: "社长说了什么?(尊敬)",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 社長 = ProperNoun<"社長">;
-type 何 = ProperNoun<"何">;
+type 社長 = CommonNoun<"社長">;
+type 何 = Pronoun<"何">;
 
 // おっしゃいました is the irregular honorific past polite form of 言う
 type 社長は何とおっしゃいましたか = \`\${PhraseWithParticle<社長, "は">}\${PhraseWithParticle<何, "と">}おっしゃいましたか\`;

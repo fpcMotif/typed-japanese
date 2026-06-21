@@ -25,9 +25,9 @@ const chapter: Chapter = {
           reading: "ここでしゃしんをとってもいいです",
           en: "You may take photos here.",
           zh: "这里可以拍照。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 写真 = ProperNoun<"写真">;
+type 写真 = CommonNoun<"写真">;
 type 撮る = GodanVerb & { stem: "撮"; ending: "る" };
 
 // ここで + 写真を + 撮って (te-form) + もいいです
@@ -39,9 +39,9 @@ type ここで写真を撮ってもいいです = \`ここで\${写真}を\${Con
           reading: "このほんをかりてもいいですか",
           en: "May I borrow this book?",
           zh: "我可以借这本书吗?",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb } from "typed-japanese";
 
-type 本 = ProperNoun<"本">;
+type 本 = CommonNoun<"本">;
 type 借りる = IchidanVerb & { stem: "借り"; ending: "る" };
 
 // この + 本を + 借りて (te-form) + もいいですか
@@ -77,9 +77,9 @@ type ここで休んでもいいです = \`ここで\${ConjugateVerb<休む, "Te
           reading: "ここでタバコをすってはいけません",
           en: "You must not smoke here.",
           zh: "这里不可以吸烟。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type タバコ = ProperNoun<"タバコ">;
+type タバコ = CommonNoun<"タバコ">;
 type 吸う = GodanVerb & { stem: "吸"; ending: "う" };
 
 // ここで + タバコを + 吸って (te-form) + はいけません
@@ -104,9 +104,9 @@ type ここに入ってはいけません = \`ここに\${ConjugateVerb<入る, 
           reading: "ここでしゃしんをとってはいけません",
           en: "You must not take photos here.",
           zh: "这里不可以拍照。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 写真 = ProperNoun<"写真">;
+type 写真 = CommonNoun<"写真">;
 type 撮る = GodanVerb & { stem: "撮"; ending: "る" };
 
 // ここで + 写真を + 撮って (te-form) + はいけません
@@ -129,9 +129,9 @@ type ここで写真を撮ってはいけません = \`ここで\${写真}を\${
           reading: "ここででんわをつかってもいいですか",
           en: "May I use the phone here?",
           zh: "这里可以打电话吗?",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 電話 = ProperNoun<"電話">;
+type 電話 = CommonNoun<"電話">;
 type 使う = GodanVerb & { stem: "使"; ending: "う" };
 
 // ここで + 電話を + 使って (te-form) + もいいですか
@@ -143,9 +143,9 @@ type ここで電話を使ってもいいですか = \`ここで\${電話}を\${
           reading: "いいえ、ここででんわをつかってはいけません",
           en: "No, you must not use the phone here.",
           zh: "不,这里不可以打电话。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 電話 = ProperNoun<"電話">;
+type 電話 = CommonNoun<"電話">;
 type 使う = GodanVerb & { stem: "使"; ending: "う" };
 
 // いいえ、 + ここで + 電話を + 使って (te-form) + はいけません

@@ -4,9 +4,10 @@ import js from '@eslint/js';
 
 export default [
   {
-    // playground/ is a standalone Vite app with its own tsconfig and typecheck;
-    // it is not part of this package's lint/compile project.
-    ignores: ['node_modules/**', 'dist/**', 'playground/**']
+    // playground/ is a standalone Vite app and apps/ is the TypedTranslate macOS
+    // app (bun bridge scripts) — both have their own tsconfig/runtime and are not
+    // part of this package's lint/compile project.
+    ignores: ['node_modules/**', 'dist/**', 'playground/**', 'apps/**']
   },
   js.configs.recommended,
   {

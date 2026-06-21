@@ -46,6 +46,8 @@ export type GrammarCategory =
   | "form"
   | "demonstrative"
   | "interrogative"
+  | "adnominal"
+  | "numeral"
   | "literal"
   | "other";
 
@@ -88,6 +90,8 @@ const COMPOSITIONAL = new Set([
   "AdjectivalPhrase",
 ]);
 
+// Mirror of playground/src/analysis/parse.ts CATEGORY_BY_NAME (this is a
+// VOCAB-free port). Canonical wrapper list: src/noun-types.d.ts + adverb-types.d.ts.
 const CATEGORY_BY_NAME: Record<string, GrammarCategory> = {
   ConditionalPhrase: "phrase",
   ConnectedPhrases: "phrase",
@@ -110,13 +114,22 @@ const CATEGORY_BY_NAME: Record<string, GrammarCategory> = {
   IAdjective: "adjective",
   NaAdjective: "adjective",
   Adjective: "adjective",
+  CommonNoun: "noun",
   ProperNoun: "noun",
+  Pronoun: "noun",
+  Adverb: "adverb",
+  Adnominal: "adnominal",
   VerbPart: "verb",
   AdjectivePart: "adjective",
   NounPart: "noun",
+  PronounPart: "noun",
+  ProperNounPart: "noun",
   TechnicalTermPart: "technical",
   WhitespacePart: "whitespace",
   AdverbPart: "adverb",
+  AdnominalPart: "adnominal",
+  NumeralPart: "numeral",
+  CounterPart: "numeral",
   ParticlePart: "particle",
   CopulaPart: "copula",
   SuffixPart: "suffix",
@@ -162,12 +175,12 @@ function classifyLiteral(value: string): GrammarCategory {
 }
 
 const PART_TYPES = new Set([
-  "VerbPart", "AdjectivePart", "NounPart", "TechnicalTermPart", "WhitespacePart",
-  "AdverbPart", "ParticlePart", "CopulaPart", "SuffixPart", "IntensifierPart",
+  "VerbPart", "AdjectivePart", "NounPart", "PronounPart", "ProperNounPart", "TechnicalTermPart", "WhitespacePart",
+  "AdverbPart", "AdnominalPart", "NumeralPart", "CounterPart", "ParticlePart", "CopulaPart", "SuffixPart", "IntensifierPart",
   "ContractedPart", "NestedPhrasePart", "PunctuationPart",
 ]);
 const SCALAR_PART_TYPES = new Set([
-  "NounPart", "TechnicalTermPart", "WhitespacePart", "AdverbPart", "ParticlePart",
+  "NounPart", "PronounPart", "ProperNounPart", "TechnicalTermPart", "WhitespacePart", "AdverbPart", "AdnominalPart", "NumeralPart", "CounterPart", "ParticlePart",
   "CopulaPart", "SuffixPart", "IntensifierPart", "ContractedPart",
   "NestedPhrasePart", "PunctuationPart",
 ]);

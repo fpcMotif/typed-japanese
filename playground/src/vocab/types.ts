@@ -6,7 +6,9 @@
  */
 export type PartOfSpeech =
   | "noun"
+  | "proper-noun"
   | "pronoun"
+  | "adnominal"
   | "verb-godan"
   | "verb-ichidan"
   | "verb-irregular"
@@ -37,7 +39,9 @@ export interface VocabEntry {
 
 export const POS_LABEL: Record<PartOfSpeech, { en: string; zh: string }> = {
   noun: { en: "noun", zh: "名词" },
+  "proper-noun": { en: "proper noun", zh: "专有名词" },
   pronoun: { en: "pronoun", zh: "代词" },
+  adnominal: { en: "adnominal", zh: "连体词" },
   "verb-godan": { en: "godan verb", zh: "五段动词" },
   "verb-ichidan": { en: "ichidan verb", zh: "一段动词" },
   "verb-irregular": { en: "irregular verb", zh: "不规则动词" },

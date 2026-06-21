@@ -21,6 +21,8 @@ export const CATEGORY_META: Record<
   form: { jp: "活用形", en: "Form", varName: "--cat-form" },
   demonstrative: { jp: "指示詞", en: "Demonstrative", varName: "--cat-demonstrative" },
   interrogative: { jp: "疑問詞", en: "Interrogative", varName: "--cat-interrogative" },
+  adnominal: { jp: "連体詞", en: "Adnominal", varName: "--cat-adnominal" },
+  numeral: { jp: "数詞", en: "Numeral", varName: "--cat-numeral" },
   literal: { jp: "リテラル", en: "Literal", varName: "--cat-literal" },
   other: { jp: "型", en: "Type", varName: "--cat-other" },
 };

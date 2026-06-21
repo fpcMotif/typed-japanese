@@ -58,10 +58,27 @@ function objMembers(typeLiteral) {
 }
 
 function walk(node, sf) {
-  // ProperNoun<"X">
-  if (ts.isTypeReferenceNode(node) && node.typeName.getText() === "ProperNoun" && node.typeArguments?.[0]) {
+  // Noun subclasses + adverb/adnominal wrappers: <Ctor><"X">.
+  // Wrapper→POS mirror of src/vocab/extract.ts (AST vs regex). Canonical wrapper
+  // list: src/noun-types.d.ts + src/adverb-types.d.ts.
+  const WRAPPER_POS = {
+    CommonNoun: "noun",
+    ProperNoun: "proper-noun",
+    Pronoun: "pronoun",
+    Adverb: "adverb",
+    Adnominal: "adnominal",
+    NumeralPart: "number",
+  };
+  if (ts.isTypeReferenceNode(node) && node.typeArguments?.[0]) {
+    const wpos = WRAPPER_POS[node.typeName.getText()];
     const a = node.typeArguments[0];
-    if (ts.isLiteralTypeNode(a) && ts.isStringLiteral(a.literal)) addWord(a.literal.text, "noun");
+    if (wpos && ts.isLiteralTypeNode(a) && ts.isStringLiteral(a.literal)) addWord(a.literal.text, wpos);
+  }
+  // CounterPart<"三", "つ"> → counter word 三つ (two string args joined)
+  if (ts.isTypeReferenceNode(node) && node.typeName.getText() === "CounterPart" && node.typeArguments?.length === 2) {
+    const [a, b] = node.typeArguments;
+    if (ts.isLiteralTypeNode(a) && ts.isStringLiteral(a.literal) && ts.isLiteralTypeNode(b) && ts.isStringLiteral(b.literal))
+      addWord(a.literal.text + b.literal.text, "counter");
   }
   // Verb / adjective intersections: <Ctor> & { ... }
   if (ts.isIntersectionTypeNode(node)) {

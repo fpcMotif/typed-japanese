@@ -21,7 +21,8 @@ export type AdjectiveConjugationForm =
   | "Polite" // Polite form
   | "Past" // Past form
   | "Negative" // Negative form
-  | "Te"; // Connective form
+  | "Te" // Connective form
+  | "Adverbial"; // 連用形 — adverbial (i-adj: く, na-adj: に), e.g. 早く / 上手に
 
 // I-adjective conjugation mapping
 type IAdjectiveConjugationMap = {
@@ -31,6 +32,7 @@ type IAdjectiveConjugationMap = {
     Past: "かった";
     Negative: "くない";
     Te: "くて";
+    Adverbial: "く";
   };
 };
 
@@ -41,6 +43,7 @@ type IrregularAdjectiveMap = {
     Negative: "よくない";
     Te: "よくて";
     Polite: "いいです";
+    Adverbial: "よく";
   };
 };
 
@@ -88,6 +91,8 @@ export type ConjugateAdjective<
     ? ConjugateCopula<A["stem"], "Negative">
     : F extends "Te"
     ? ConjugateCopula<A["stem"], "Te">
+    : F extends "Adverbial"
+    ? `${A["stem"]}に`
     : never
   : never;
 

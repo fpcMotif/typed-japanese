@@ -51,6 +51,8 @@ enum Theme {
         case .form:          return Color(red: 0.80, green: 0.35, blue: 0.55)
         case .demonstrative: return Color(red: 0.40, green: 0.50, blue: 0.90)
         case .interrogative: return Color(red: 0.85, green: 0.30, blue: 0.45)
+        case .adnominal:     return Color(red: 0.29, green: 0.48, blue: 0.54)
+        case .numeral:       return Color(red: 0.69, green: 0.48, blue: 0.18)
         case .literal:       return Color(red: 0.35, green: 0.70, blue: 0.65)
         case .other:         return Color.secondary
         }

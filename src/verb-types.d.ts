@@ -26,10 +26,16 @@ export type Verb = GodanVerb | IchidanVerb | IrregularVerb | SuruVerb;
 // Conjugation forms
 export type ConjugationForm =
   | "Dictionary" // Dictionary form
-  | "Masu" // Polite form
+  | "MasuStem" // 連用形 — the bare polite/ます stem (話し, 食べ, し), a mount point for ます/たい/ましょう/…
+  | "Masu" // Polite non-past — full ます surface (話します)
+  | "MasuPast" // Polite past (話しました)
+  | "Masen" // Polite negative (話しません)
+  | "MasenDeshita" // Polite negative past (話しませんでした)
   | "Te" // Te form
   | "Ta" // Past form
   | "Nai" // Negative form
+  | "Nakute" // Negative te-form (行かなくて, 食べなくて) — for 〜なくて(も)/〜なくては
+
   | "Potential" // Potential form
   | "Passive" // Passive form
   | "Causative" // Causative form
@@ -41,118 +47,118 @@ export type ConjugationForm =
 // Godan verb conjugation map - maps endings to their various conjugated forms
 type GodanConjugationMap = {
   う: {
-    Masu: "い";
+    MasuStem: "い";
     Te: "って";
     Ta: "った";
     Nai: "わ";
     Potential: "え";
     Passive: "わ";
     Causative: "わ";
-    Volitional: "お";
+    Volitional: "おう";
     Imperative: "え";
     Conditional: "え";
     Hypothetical: "え";
   };
   く: {
-    Masu: "き";
+    MasuStem: "き";
     Te: "いて";
     Ta: "いた";
     Nai: "か";
     Potential: "け";
     Passive: "か";
     Causative: "か";
-    Volitional: "こ";
+    Volitional: "こう";
     Imperative: "け";
     Conditional: "け";
     Hypothetical: "け";
   };
   ぐ: {
-    Masu: "ぎ";
+    MasuStem: "ぎ";
     Te: "いで";
     Ta: "いだ";
     Nai: "が";
     Potential: "げ";
     Passive: "が";
     Causative: "が";
-    Volitional: "ご";
+    Volitional: "ごう";
     Imperative: "げ";
     Conditional: "げ";
     Hypothetical: "げ";
   };
   す: {
-    Masu: "し";
+    MasuStem: "し";
     Te: "して";
     Ta: "した";
     Nai: "さ";
     Potential: "せ";
     Passive: "さ";
     Causative: "さ";
-    Volitional: "そ";
+    Volitional: "そう";
     Imperative: "せ";
     Conditional: "せ";
     Hypothetical: "せ";
   };
   つ: {
-    Masu: "ち";
+    MasuStem: "ち";
     Te: "って";
     Ta: "った";
     Nai: "た";
     Potential: "て";
     Passive: "た";
     Causative: "た";
-    Volitional: "と";
+    Volitional: "とう";
     Imperative: "て";
     Conditional: "て";
     Hypothetical: "て";
   };
   ぬ: {
-    Masu: "に";
+    MasuStem: "に";
     Te: "んで";
     Ta: "んだ";
     Nai: "な";
     Potential: "ね";
     Passive: "な";
     Causative: "な";
-    Volitional: "の";
+    Volitional: "のう";
     Imperative: "ね";
     Conditional: "ね";
     Hypothetical: "ね";
   };
   ぶ: {
-    Masu: "び";
+    MasuStem: "び";
     Te: "んで";
     Ta: "んだ";
     Nai: "ば";
     Potential: "べ";
     Passive: "ば";
     Causative: "ば";
-    Volitional: "ぼ";
+    Volitional: "ぼう";
     Imperative: "べ";
     Conditional: "べ";
     Hypothetical: "べ";
   };
   む: {
-    Masu: "み";
+    MasuStem: "み";
     Te: "んで";
     Ta: "んだ";
     Nai: "ま";
     Potential: "め";
     Passive: "ま";
     Causative: "ま";
-    Volitional: "も";
+    Volitional: "もう";
     Imperative: "め";
     Conditional: "め";
     Hypothetical: "め";
   };
   る: {
-    Masu: "り";
+    MasuStem: "り";
     Te: "って";
     Ta: "った";
     Nai: "ら";
     Potential: "れ";
     Passive: "ら";
     Causative: "ら";
-    Volitional: "ろ";
+    Volitional: "ろう";
     Imperative: "れ";
     Conditional: "れ";
     Hypothetical: "れ";
@@ -163,7 +169,7 @@ type GodanConjugationMap = {
 type IrregularConjugationMap = {
   する: {
     Dictionary: "する";
-    Masu: "し";
+    MasuStem: "し";
     Te: "して";
     Ta: "した";
     Nai: "し";
@@ -177,7 +183,7 @@ type IrregularConjugationMap = {
   };
   来る: {
     Dictionary: "来る";
-    Masu: "来";
+    MasuStem: "来";
     Te: "来て";
     Ta: "来た";
     Nai: "来";
@@ -191,7 +197,7 @@ type IrregularConjugationMap = {
   };
   くる: {
     Dictionary: "くる";
-    Masu: "き";
+    MasuStem: "き";
     Te: "きて";
     Ta: "きた";
     Nai: "こ";
@@ -225,19 +231,44 @@ type GetIrregularConjugation<
     : never
   : never;
 
-// Main conjugation type
+// 連用形 (masu-stem) for any verb — the mount point for the polite paradigm and
+// for renyokei-attaching auxiliaries (ます, ました, たい, ながら, ましょう…).
+type GetMasuStem<V extends Verb> = V extends GodanVerb
+  ? `${V["stem"]}${GetGodanConjugation<V["ending"], "MasuStem">}`
+  : V extends IchidanVerb
+  ? `${V["stem"]}`
+  : V extends IrregularVerb
+  ? GetIrregularConjugation<V, "MasuStem">
+  : V extends SuruVerb
+  ? `${V["noun"]}${GetIrregularConjugation<{ type: "irregular"; dictionary: "する" }, "MasuStem">}`
+  : never;
+
+// Main conjugation type. The polite paradigm (MasuStem/Masu/MasuPast/Masen/
+// MasenDeshita) is resolved uniformly from the 連用形 stem so EVERY verb class
+// yields the full surface (話します, not just 話し); per-class branches below
+// handle the remaining forms.
 export type ConjugateVerb<
   V extends Verb,
   F extends ConjugationForm
-> = V extends GodanVerb
+> = F extends "MasuStem"
+  ? GetMasuStem<V>
+  : F extends "Masu"
+  ? `${GetMasuStem<V>}ます`
+  : F extends "MasuPast"
+  ? `${GetMasuStem<V>}ました`
+  : F extends "Masen"
+  ? `${GetMasuStem<V>}ません`
+  : F extends "MasenDeshita"
+  ? `${GetMasuStem<V>}ませんでした`
+  : F extends "Nakute"
+  ? `${ConjugateVerb<V, "Nai">}なくて`
+  : V extends GodanVerb
   ? F extends "Dictionary"
     ? `${V["stem"]}${V["ending"]}`
     : `${V["stem"]}${GetGodanConjugation<V["ending"], F>}`
   : V extends IchidanVerb
   ? F extends "Dictionary"
     ? `${V["stem"]}${V["ending"]}`
-    : F extends "Masu"
-    ? `${V["stem"]}`
     : F extends "Te"
     ? `${V["stem"]}て`
     : F extends "Ta"
@@ -266,7 +297,9 @@ type する = IrregularVerb & { dictionary: "する" };
 type 勉強する = SuruVerb<"勉強">;
 
 // Type-level conjugation tests
-type 話すMasu = ConjugateVerb<話す, "Masu">; // Evaluates to "話し"
+type 話すMasu = ConjugateVerb<話す, "Masu">; // Evaluates to "話します"
+type 話すMasuStem = ConjugateVerb<話す, "MasuStem">; // Evaluates to "話し"
+type 食べるMasuPast = ConjugateVerb<食べる, "MasuPast">; // Evaluates to "食べました"
 type 食べるTe = ConjugateVerb<食べる, "Te">; // Evaluates to "食べて"
 type 勉強した = ConjugateVerb<勉強する, "Ta">; // Evaluates to "勉強した"
 type するImperative = ConjugateVerb<する, "Imperative">; // Evaluates to "しろ"

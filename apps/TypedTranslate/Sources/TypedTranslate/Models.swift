@@ -149,6 +149,8 @@ enum GrammarCategory: String, CaseIterable {
     case form
     case demonstrative
     case interrogative
+    case adnominal
+    case numeral
     case literal
     case other
 
@@ -170,6 +172,8 @@ enum GrammarCategory: String, CaseIterable {
         case .form: return "form"
         case .demonstrative: return "dem"
         case .interrogative: return "int"
+        case .adnominal: return "adn"
+        case .numeral: return "num"
         case .literal: return "lit"
         case .other: return "·"
         }

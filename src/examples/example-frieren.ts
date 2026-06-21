@@ -1,10 +1,10 @@
-import type { ProperNoun } from "../noun-types";
+import type { CommonNoun, ProperNoun } from "../noun-types";
 import type { GodanVerb, ConjugateVerb } from "../verb-types";
 import type { PhraseWithParticle, ConnectedPhrases, InterrogativePhrase } from "../phrase-types";
 import type { WhyInterrogative } from "../adverb-types";
 
-// Define proper nouns
-type 日本語 = ProperNoun<"日本語">;
+// Define nouns: 日本語 is a common noun (language), TypeScript a proper noun (product).
+type 日本語 = CommonNoun<"日本語">;
 type TypeScript = ProperNoun<"TypeScript">;
 
 // Define verbs

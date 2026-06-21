@@ -193,18 +193,17 @@ function HardEvalSection() {
             <tbody>
               {shown.items.map((it) => {
                 const clickable = !!it.code;
-                const active = sel?.id === it.id;
                 return (
                   <tr
                     key={it.id}
-                    className={`border-t border-border align-top ${clickable ? "cursor-pointer hover:bg-surface-2" : "opacity-60"} ${active ? "bg-surface-2" : ""}`}
-                    onClick={() => clickable && setSel(active ? null : it)}
+                    className={`border-t border-border align-top ${clickable ? "cursor-pointer hover:bg-surface-2" : "opacity-60"}`}
+                    onClick={() => clickable && setSel(it)}
                   >
                     <td className="px-5 py-2 font-jp text-ink-900 max-w-[460px]">
                       {it.jp}
                       {clickable && (
-                        <span className="ml-2 text-[0.7rem] text-sakura-600 align-middle">
-                          {active ? t("hide ▲", "收起 ▲") : t("view ▾", "查看 ▾")}
+                        <span className="ml-2 text-[0.7rem] font-semibold text-sakura-600 align-middle whitespace-nowrap">
+                          {t("view ▾", "查看 ▾")}
                         </span>
                       )}
                     </td>
@@ -231,20 +230,46 @@ function HardEvalSection() {
         </div>
       </div>
 
-      {/* codex's parse for the selected case — reuses the playground analyzer */}
+      {/* codex's parse for the selected case — modal over the list, reusing the
+          playground analyzer with the TypeScript editor collapsed by default. */}
       {sel?.code && (
-        <div className="mt-3 rounded-2xl border border-border bg-surface p-3.5">
-          <div className="flex items-baseline justify-between gap-3 mb-2 px-1">
-            <span className="font-jp text-[1rem] font-bold text-ink-900">{sel.jp}</span>
-            <span className="text-[0.78rem] whitespace-nowrap">
-              {sel.passed
-                ? <span className="text-emerald-600 font-semibold">{t("codex: resolves exactly", "codex：完全还原")}</span>
-                : <span className="text-amber-600 font-semibold">{t("codex: did not resolve — see drift below", "codex：未能还原 —— 见下方偏差")}</span>}
-            </span>
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 backdrop-blur-sm p-4 sm:p-8"
+          onClick={() => setSel(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative w-full max-w-[860px] my-auto rounded-2xl border border-border bg-surface shadow-pop"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-3 px-5 py-3.5 border-b border-border sticky top-0 bg-surface rounded-t-2xl z-10">
+              <div className="min-w-0">
+                <div className="font-jp text-[1.05rem] font-bold text-ink-900 leading-snug">{sel.jp}</div>
+                <div className="mt-1 text-[0.82rem] text-ink-500">{sel.en}</div>
+                <div className="mt-1 text-[0.78rem]">
+                  {sel.passed
+                    ? <span className="text-emerald-600 font-semibold">{t("codex resolves it exactly", "codex 完全还原")}</span>
+                    : <span className="text-amber-600 font-semibold">{t("codex did not resolve it — the structure below shows where it drifts", "codex 未能还原 —— 下方结构显示偏差所在")}</span>}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="flex-none inline-flex items-center justify-center w-8 h-8 rounded-full border border-border-strong bg-surface text-ink-500 cursor-pointer hover:text-sakura-600 hover:border-sakura-400"
+                onClick={() => setSel(null)}
+                aria-label={t("Close", "关闭")}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-3.5">
+              <Suspense fallback={<p className="tj-subtle px-1">{t("Loading the analyzer…", "正在加载解析器…")}</p>}>
+                <Analyzer key={`${shown.round}-${sel.id}`} code={sel.code} gloss={sel.en} defaultCodeCollapsed />
+              </Suspense>
+            </div>
           </div>
-          <Suspense fallback={<p className="tj-subtle px-1">{t("Loading the analyzer…", "正在加载解析器…")}</p>}>
-            <Analyzer key={`${shown.round}-${sel.id}`} code={sel.code} gloss={sel.en} />
-          </Suspense>
         </div>
       )}
     </div>

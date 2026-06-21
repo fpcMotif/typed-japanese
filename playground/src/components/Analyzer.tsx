@@ -39,6 +39,10 @@ interface Props {
   code: string;
   /** English/Chinese gloss shown beside the resolved sentence. */
   gloss?: string;
+  /** Start with the TypeScript editor collapsed (still mounted, so the structure
+   *  tree resolves) — used when the analyzer is shown read-only, e.g. the Eval
+   *  modal where the parse tree is the focus. */
+  defaultCodeCollapsed?: boolean;
 }
 
 function applyResolved(
@@ -61,8 +65,9 @@ function findNode(node: CompositionNode, id: string): CompositionNode | null {
   return null;
 }
 
-export default function Analyzer({ code, gloss }: Props) {
+export default function Analyzer({ code, gloss, defaultCodeCollapsed = false }: Props) {
   const { theme } = useTheme();
+  const [codeOpen, setCodeOpen] = useState(!defaultCodeCollapsed);
   const [aliases, setAliases] = useState<AliasSummary[]>([]);
   const [selectedAlias, setSelectedAlias] = useState<string | null>(null);
   const [tree, setTree] = useState<CompositionNode | null>(null);
@@ -312,10 +317,26 @@ export default function Analyzer({ code, gloss }: Props) {
         )}
       </section>
 
-      {/* TypeScript — code below */}
+      {/* TypeScript — code below (collapsible; the editor stays mounted even when
+          collapsed so the structure tree above keeps resolving). */}
       <section className="tj-card flex flex-col overflow-hidden p-0">
-        <div className="flex items-center justify-between gap-2.5 px-4 py-3 border-b border-border">
-          <h2 className="tj-panel-title">TypeScript</h2>
+        <button
+          type="button"
+          className="flex items-center justify-between gap-2.5 px-4 py-3 border-b border-border bg-transparent cursor-pointer text-left w-full"
+          onClick={() => setCodeOpen((v) => !v)}
+          aria-expanded={codeOpen}
+        >
+          <span className="flex items-center gap-2">
+            <svg
+              width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              className={`text-ink-300 transition-transform duration-150 ${codeOpen ? "rotate-90" : ""}`}
+              aria-hidden="true"
+            >
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+            <span className="tj-panel-title">TypeScript</span>
+          </span>
           {ready &&
             (errorCount === 0 ? (
               <span className="text-[0.74rem] font-bold px-2.5 py-[3px] rounded-full text-ok bg-ok-soft">✓ Type-checks</span>
@@ -324,29 +345,31 @@ export default function Analyzer({ code, gloss }: Props) {
                 {errorCount} error{errorCount === 1 ? "" : "s"}
               </span>
             ))}
+        </button>
+        <div style={{ height: codeOpen ? 420 : 0 }} className="overflow-hidden transition-[height] duration-200">
+          <Editor
+            className="h-full"
+            theme={theme === "dark" ? "sakura-dark" : "sakura-light"}
+            language="typescript"
+            path={MODEL_PATH}
+            defaultValue={code}
+            onMount={handleMount}
+            onChange={scheduleAnalysis}
+            loading={<div className="p-5 text-ink-500 text-[0.9rem]">Loading TypeScript…</div>}
+            options={{
+              fontSize: 13.5,
+              fontFamily: "var(--font-mono)",
+              minimap: { enabled: false },
+              wordWrap: "on",
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              tabSize: 2,
+              lineNumbersMinChars: 3,
+              padding: { top: 12, bottom: 12 },
+            }}
+          />
         </div>
-        <Editor
-          className="h-[420px]"
-          theme={theme === "dark" ? "sakura-dark" : "sakura-light"}
-          language="typescript"
-          path={MODEL_PATH}
-          defaultValue={code}
-          onMount={handleMount}
-          onChange={scheduleAnalysis}
-          loading={<div className="p-5 text-ink-500 text-[0.9rem]">Loading TypeScript…</div>}
-          options={{
-            fontSize: 13.5,
-            fontFamily: "var(--font-mono)",
-            minimap: { enabled: false },
-            wordWrap: "on",
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-            tabSize: 2,
-            lineNumbersMinChars: 3,
-            padding: { top: 12, bottom: 12 },
-          }}
-        />
-        {diagnostics.length > 0 && (
+        {codeOpen && diagnostics.length > 0 && (
           <ul className="list-none m-0 px-3 py-2 max-h-[130px] overflow-auto border-t border-border bg-surface-2">
             {diagnostics.map((d, i) => (
               <li

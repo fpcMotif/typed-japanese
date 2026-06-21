@@ -121,16 +121,29 @@ export default function Analyzer({ code, gloss }: Props) {
       return;
     }
 
-    const built = await buildTree(src, alias);
+    let built: CompositionNode | null = null;
+    try {
+      built = await buildTree(src, alias);
+    } catch {
+      built = null;
+    }
     if (token !== tokenRef.current) return;
     if (!built) {
       setTree(null);
       return;
     }
-    const texts = Array.from(collectTexts(built));
-    const map = await resolveValues(monaco, src, texts);
-    if (token !== tokenRef.current) return;
-    setTree(applyResolved(built, map));
+    // Show the structure immediately. Value resolution runs through Monaco's TS
+    // worker, which can lag or throw (especially on first load); it must never
+    // blank the diagram — it only enriches each node with its resolved string.
+    setTree(built);
+    try {
+      const texts = Array.from(collectTexts(built));
+      const map = await resolveValues(monaco, src, texts);
+      if (token !== tokenRef.current) return;
+      setTree(applyResolved(built, map));
+    } catch {
+      /* keep the unresolved structure on screen */
+    }
   }, []);
 
   const scheduleAnalysis = useCallback(() => {

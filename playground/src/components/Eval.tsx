@@ -1,5 +1,9 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { useLang } from "../context/lang";
+
+// Reuse the playground's sentence-parser UI to show how codex parsed each hard
+// case. Client-only (Monaco) — only mounted after a case is clicked.
+const Analyzer = lazy(() => import("./Analyzer"));
 
 /**
  * Eval view — renders the committed parsing-accuracy benchmark results as-is.
@@ -52,6 +56,7 @@ interface HardItem {
   passed: boolean;
   attempts: number;
   resolved: string | null;
+  code: string | null;
   error: string | null;
 }
 interface HardRound {
@@ -117,8 +122,10 @@ function HardEvalSection() {
   const [open, setOpen] = useState<number>(
     HARD_ROUNDS.length ? HARD_ROUNDS[HARD_ROUNDS.length - 1]!.round : 0
   );
+  const [sel, setSel] = useState<HardItem | null>(null);
   if (!HARD_ROUNDS.length) return null;
   const latest = HARD_ROUNDS[HARD_ROUNDS.length - 1]!;
+  const shown = HARD_ROUNDS.find((r) => r.round === open) ?? latest;
 
   return (
     <div className="mb-9">
@@ -152,7 +159,7 @@ function HardEvalSection() {
                   <tr
                     key={r.round}
                     className={`border-t border-border cursor-pointer ${r.round === open ? "bg-surface-2" : ""}`}
-                    onClick={() => setOpen(r.round)}
+                    onClick={() => { setOpen(r.round); setSel(null); }}
                   >
                     <td className="px-5 py-2.5 font-semibold text-ink-700 tabular-nums">{String(r.round).padStart(3, "0")}</td>
                     <td className="px-3 py-2.5"><ConformanceBar value={r.passRate} /></td>
@@ -166,10 +173,13 @@ function HardEvalSection() {
         </div>
       </div>
 
-      {/* latest round per-case */}
+      {/* per-case for the selected round — click any case to see codex's parse */}
       <div className="rounded-2xl border border-border bg-surface overflow-hidden">
         <div className="px-5 py-3 border-b border-border text-[0.82rem] text-ink-400">
-          {t(`Round ${String(latest.round).padStart(3, "0")} — every hard case`, `第 ${String(latest.round).padStart(3, "0")} 轮 —— 全部难句`)}
+          {t(
+            `Round ${String(shown.round).padStart(3, "0")} — every hard case · click one to see how codex parsed it`,
+            `第 ${String(shown.round).padStart(3, "0")} 轮 —— 全部难句 · 点击任一句查看 codex 的解析`
+          )}
         </div>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-[0.86rem]">
@@ -181,30 +191,62 @@ function HardEvalSection() {
               </tr>
             </thead>
             <tbody>
-              {latest.items.map((it) => (
-                <tr key={it.id} className="border-t border-border align-top">
-                  <td className="px-5 py-2 font-jp text-ink-900 max-w-[460px]">{it.jp}</td>
-                  <td className="px-3 py-2 text-ink-400 whitespace-nowrap">
-                    {t(CAT_LABEL[it.category]?.en ?? it.category, CAT_LABEL[it.category]?.zh ?? it.category)}
-                    {it.difficulty === "very-hard" && <span className="ml-1 text-[0.7rem] text-sakura-600">★</span>}
-                  </td>
-                  <td className="px-3 py-2 text-right whitespace-nowrap">
-                    {it.passed ? (
-                      <span className="text-[0.78rem] font-semibold text-emerald-600">
-                        {t(`pass · ${it.attempts}× `, `通过 · ${it.attempts}次`)}
-                      </span>
-                    ) : it.modelability === "classical-literal" ? (
-                      <span className="text-[0.78rem] font-semibold text-ink-400">{t("classical", "文语")}</span>
-                    ) : (
-                      <span className="text-[0.78rem] font-semibold text-amber-600">{t("miss", "未通过")}</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {shown.items.map((it) => {
+                const clickable = !!it.code;
+                const active = sel?.id === it.id;
+                return (
+                  <tr
+                    key={it.id}
+                    className={`border-t border-border align-top ${clickable ? "cursor-pointer hover:bg-surface-2" : "opacity-60"} ${active ? "bg-surface-2" : ""}`}
+                    onClick={() => clickable && setSel(active ? null : it)}
+                  >
+                    <td className="px-5 py-2 font-jp text-ink-900 max-w-[460px]">
+                      {it.jp}
+                      {clickable && (
+                        <span className="ml-2 text-[0.7rem] text-sakura-600 align-middle">
+                          {active ? t("hide ▲", "收起 ▲") : t("view ▾", "查看 ▾")}
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-ink-400 whitespace-nowrap">
+                      {t(CAT_LABEL[it.category]?.en ?? it.category, CAT_LABEL[it.category]?.zh ?? it.category)}
+                      {it.difficulty === "very-hard" && <span className="ml-1 text-[0.7rem] text-sakura-600">★</span>}
+                    </td>
+                    <td className="px-3 py-2 text-right whitespace-nowrap">
+                      {it.passed ? (
+                        <span className="text-[0.78rem] font-semibold text-emerald-600">
+                          {t(`pass · ${it.attempts}×`, `通过 · ${it.attempts}次`)}
+                        </span>
+                      ) : it.modelability === "classical-literal" ? (
+                        <span className="text-[0.78rem] font-semibold text-ink-400">{t("classical", "文语")}</span>
+                      ) : (
+                        <span className="text-[0.78rem] font-semibold text-amber-600">{t("miss", "未通过")}</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* codex's parse for the selected case — reuses the playground analyzer */}
+      {sel?.code && (
+        <div className="mt-3 rounded-2xl border border-border bg-surface p-3.5">
+          <div className="flex items-baseline justify-between gap-3 mb-2 px-1">
+            <span className="font-jp text-[1rem] font-bold text-ink-900">{sel.jp}</span>
+            <span className="text-[0.78rem] whitespace-nowrap">
+              {sel.passed
+                ? <span className="text-emerald-600 font-semibold">{t("codex: resolves exactly", "codex：完全还原")}</span>
+                : <span className="text-amber-600 font-semibold">{t("codex: did not resolve — see drift below", "codex：未能还原 —— 见下方偏差")}</span>}
+            </span>
+          </div>
+          <Suspense fallback={<p className="tj-subtle px-1">{t("Loading the analyzer…", "正在加载解析器…")}</p>}>
+            <Analyzer key={`${shown.round}-${sel.id}`} code={sel.code} gloss={sel.en} />
+          </Suspense>
+        </div>
+      )}
     </div>
   );
 }

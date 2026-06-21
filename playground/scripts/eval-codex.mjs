@@ -94,7 +94,10 @@ async function runCase(c) {
     passed,
     attempts,
     resolved,
-    code: passed ? code : null,
+    // Always keep codex's final snippet — for a failure this is annotate's "best
+    // attempt", so every case is viewable in the analyzer (pass shows the right
+    // parse; fail shows how codex got it wrong).
+    code,
     error: passed ? null : (r.err.split("\n").find((l) => l.includes("error")) || "did not resolve").slice(0, 200),
   };
 }

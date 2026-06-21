@@ -25,13 +25,13 @@ const chapter: Chapter = {
           reading: "わたしはいかざるをえない",
           en: "I have no choice but to go.",
           zh: "我不得不去。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 私 は + 行か (ない形 stem) + ざるを得ない
-type 私は行かざるを得ない = \`\${PhraseWithParticle<私, "は">}\${ConjugateVerb<行く, "Nai">}\${ProperNoun<"ざるを得ない">}\`;
+type 私は行かざるを得ない = \`\${PhraseWithParticle<私, "は">}\${ConjugateVerb<行く, "Nai">}ざるを得ない\`;
 `,
         },
         {
@@ -39,13 +39,13 @@ type 私は行かざるを得ない = \`\${PhraseWithParticle<私, "は">}\${Con
           reading: "しっぱいをみとめざるをえない",
           en: "I have no choice but to admit the failure.",
           zh: "不得不承认失败。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 失敗 = ProperNoun<"失敗">;
+type 失敗 = CommonNoun<"失敗">;
 type 認める = IchidanVerb & { stem: "認め"; ending: "る" };
 
 // 失敗 を + 認め (ない形 stem) + ざるを得ない
-type 失敗を認めざるを得ない = \`\${PhraseWithParticle<失敗, "を">}\${ConjugateVerb<認める, "Nai">}\${ProperNoun<"ざるを得ない">}\`;
+type 失敗を認めざるを得ない = \`\${PhraseWithParticle<失敗, "を">}\${ConjugateVerb<認める, "Nai">}ざるを得ない\`;
 `,
         },
       ],
@@ -64,13 +64,13 @@ type 失敗を認めざるを得ない = \`\${PhraseWithParticle<失敗, "を">}
           reading: "わたしはがまんせざるをえない",
           en: "I have no choice but to endure it.",
           zh: "我不得不忍耐。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 我慢 = ProperNoun<"我慢">;
+type 私 = Pronoun<"私">;
+type 我慢 = CommonNoun<"我慢">;
 
 // する verb: classical base せ → 我慢 + せざるを得ない
-type 私は我慢せざるを得ない = \`\${PhraseWithParticle<私, "は">}\${我慢}\${ProperNoun<"せざるを得ない">}\`;
+type 私は我慢せざるを得ない = \`\${PhraseWithParticle<私, "は">}\${我慢}せざるを得ない\`;
 `,
         },
         {
@@ -78,13 +78,13 @@ type 私は我慢せざるを得ない = \`\${PhraseWithParticle<私, "は">}\${
           reading: "けいかくをちゅうしせざるをえない",
           en: "We have no choice but to cancel the plan.",
           zh: "不得不中止计划。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 計画 = ProperNoun<"計画">;
-type 中止 = ProperNoun<"中止">;
+type 計画 = CommonNoun<"計画">;
+type 中止 = CommonNoun<"中止">;
 
 // 計画 を + 中止 + せざるを得ない
-type 計画を中止せざるを得ない = \`\${PhraseWithParticle<計画, "を">}\${中止}\${ProperNoun<"せざるを得ない">}\`;
+type 計画を中止せざるを得ない = \`\${PhraseWithParticle<計画, "を">}\${中止}せざるを得ない\`;
 `,
         },
       ],
@@ -103,9 +103,9 @@ type 計画を中止せざるを得ない = \`\${PhraseWithParticle<計画, "を
           reading: "わたしはわらわずにはいられない",
           en: "I can't help but laugh.",
           zh: "我忍不住要笑。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type 笑う = GodanVerb & { stem: "笑"; ending: "う" };
 
 // 私 は + 笑わ (ない形 stem) + ずにはいられない
@@ -117,9 +117,9 @@ type 私は笑わずにはいられない = \`\${PhraseWithParticle<私, "は">}
           reading: "しんじつをうたがわずにはいられない",
           en: "I can't help but doubt the truth.",
           zh: "我不由得怀疑起真相来。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 真実 = ProperNoun<"真実">;
+type 真実 = CommonNoun<"真実">;
 type 疑う = GodanVerb & { stem: "疑"; ending: "う" };
 
 // 真実 を + 疑わ (ない形 stem) + ずにはいられない
@@ -142,10 +142,10 @@ type 真実を疑わずにはいられない = \`\${PhraseWithParticle<真実, "
           reading: "わたしはしんぱいせずにはいられない",
           en: "I can't help but worry.",
           zh: "我忍不住担心。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 心配 = ProperNoun<"心配">;
+type 私 = Pronoun<"私">;
+type 心配 = CommonNoun<"心配">;
 
 // する verb: classical base せ → 心配せずにはいられない (せ spelled literally)
 type 私は心配せずにはいられない = \`\${PhraseWithParticle<私, "は">}\${心配}せずにはいられない\`;
@@ -156,11 +156,11 @@ type 私は心配せずにはいられない = \`\${PhraseWithParticle<私, "は
           reading: "かれのうたにかんどうせずにはいられない",
           en: "I can't help but be moved by his song.",
           zh: "我不由得被他的歌打动。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 歌 = ProperNoun<"歌">;
-type 感動 = ProperNoun<"感動">;
+type 彼 = Pronoun<"彼">;
+type 歌 = CommonNoun<"歌">;
+type 感動 = CommonNoun<"感動">;
 
 // 彼 の + 歌 に + 感動 + せずにはいられない
 type 彼の歌に感動せずにはいられない = \`\${PhraseWithParticle<彼, "の">}\${PhraseWithParticle<歌, "に">}\${感動}せずにはいられない\`;

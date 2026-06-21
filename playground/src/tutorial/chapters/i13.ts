@@ -25,11 +25,11 @@ const chapter: Chapter = {
           reading: "わたしはともだちにほんをあげる",
           en: "I give my friend a book.",
           zh: "我给朋友一本书。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 友達 = ProperNoun<"友達">;
-type 本 = ProperNoun<"本">;
+type 私 = Pronoun<"私">;
+type 友達 = CommonNoun<"友達">;
+type 本 = CommonNoun<"本">;
 
 // 私 は + 友達 に + 本 を + あげる
 type 私は友達に本をあげる = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<友達, "に">}\${PhraseWithParticle<本, "を">}あげる\`;
@@ -40,10 +40,10 @@ type 私は友達に本をあげる = \`\${PhraseWithParticle<私, "は">}\${Phr
           reading: "ははにはなをあげます",
           en: "I give my mother flowers.",
           zh: "我送给母亲鲜花。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 母 = ProperNoun<"母">;
-type 花 = ProperNoun<"花">;
+type 母 = CommonNoun<"母">;
+type 花 = CommonNoun<"花">;
 
 // 母 に + 花 を + あげます (polite)
 type 母に花をあげます = \`\${PhraseWithParticle<母, "に">}\${PhraseWithParticle<花, "を">}あげます\`;
@@ -65,10 +65,10 @@ type 母に花をあげます = \`\${PhraseWithParticle<母, "に">}\${PhraseWit
           reading: "ともだちがほんをくれる",
           en: "My friend gives me a book.",
           zh: "朋友给我一本书。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 友達 = ProperNoun<"友達">;
-type 本 = ProperNoun<"本">;
+type 友達 = CommonNoun<"友達">;
+type 本 = CommonNoun<"本">;
 
 // 友達 が + 本 を + くれる (recipient = me, omitted)
 type 友達が本をくれる = \`\${PhraseWithParticle<友達, "が">}\${PhraseWithParticle<本, "を">}くれる\`;
@@ -79,11 +79,11 @@ type 友達が本をくれる = \`\${PhraseWithParticle<友達, "が">}\${Phrase
           reading: "せんせいがわたしにじしょをくれました",
           en: "The teacher gave me a dictionary.",
           zh: "老师给了我一本词典。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 先生 = ProperNoun<"先生">;
-type 私 = ProperNoun<"私">;
-type 辞書 = ProperNoun<"辞書">;
+type 先生 = CommonNoun<"先生">;
+type 私 = Pronoun<"私">;
+type 辞書 = CommonNoun<"辞書">;
 
 // 先生 が + 私 に + 辞書 を + くれました (polite past)
 type 先生が私に辞書をくれました = \`\${PhraseWithParticle<先生, "が">}\${PhraseWithParticle<私, "に">}\${PhraseWithParticle<辞書, "を">}くれました\`;
@@ -105,11 +105,11 @@ type 先生が私に辞書をくれました = \`\${PhraseWithParticle<先生, "
           reading: "わたしはともだちにほんをもらう",
           en: "I receive a book from my friend.",
           zh: "我从朋友那里得到一本书。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 友達 = ProperNoun<"友達">;
-type 本 = ProperNoun<"本">;
+type 私 = Pronoun<"私">;
+type 友達 = CommonNoun<"友達">;
+type 本 = CommonNoun<"本">;
 
 // 私 は + 友達 に (source) + 本 を + もらう
 type 私は友達に本をもらう = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<友達, "に">}\${PhraseWithParticle<本, "を">}もらう\`;
@@ -120,11 +120,11 @@ type 私は友達に本をもらう = \`\${PhraseWithParticle<私, "は">}\${Phr
           reading: "わたしはははにおかねをもらいました",
           en: "I received money from my mother.",
           zh: "我从母亲那里收到了钱。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 母 = ProperNoun<"母">;
-type お金 = ProperNoun<"お金">;
+type 私 = Pronoun<"私">;
+type 母 = CommonNoun<"母">;
+type お金 = CommonNoun<"お金">;
 
 // 私 は + 母 に + お金 を + もらいました (polite past)
 type 私は母にお金をもらいました = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<母, "に">}\${PhraseWithParticle<お金, "を">}もらいました\`;
@@ -146,11 +146,11 @@ type 私は母にお金をもらいました = \`\${PhraseWithParticle<私, "は
           reading: "わたしはともだちににほんごをおしえてあげる",
           en: "I teach my friend Japanese (as a favor).",
           zh: "我(帮忙)教朋友日语。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 友達 = ProperNoun<"友達">;
-type 日本語 = ProperNoun<"日本語">;
+type 私 = Pronoun<"私">;
+type 友達 = CommonNoun<"友達">;
+type 日本語 = CommonNoun<"日本語">;
 type 教える = IchidanVerb & { stem: "教え"; ending: "る" };
 
 // 私 は + 友達 に + 日本語 を + 教えて (て形) + あげる
@@ -162,9 +162,9 @@ type 私は友達に日本語を教えてあげる = \`\${PhraseWithParticle<私
           reading: "ともだちがてつだってくれる",
           en: "My friend helps me out.",
           zh: "朋友帮了我的忙。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 友達 = ProperNoun<"友達">;
+type 友達 = CommonNoun<"友達">;
 type 手伝う = GodanVerb & { stem: "手伝"; ending: "う" };
 
 // 友達 が + 手伝って (て形) + くれる
@@ -187,10 +187,10 @@ type 友達が手伝ってくれる = \`\${PhraseWithParticle<友達, "が">}\${
           reading: "わたしはともだちにてつだってもらう",
           en: "I have my friend help me.",
           zh: "我请朋友帮忙。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 友達 = ProperNoun<"友達">;
+type 私 = Pronoun<"私">;
+type 友達 = CommonNoun<"友達">;
 type 手伝う = GodanVerb & { stem: "手伝"; ending: "う" };
 
 // 私 は + 友達 に (doer) + 手伝って (て形) + もらう
@@ -202,11 +202,11 @@ type 私は友達に手伝ってもらう = \`\${PhraseWithParticle<私, "は">}
           reading: "わたしはせんせいにほんをかしてもらいました",
           en: "I had the teacher lend me a book.",
           zh: "我请老师借给我一本书。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 先生 = ProperNoun<"先生">;
-type 本 = ProperNoun<"本">;
+type 私 = Pronoun<"私">;
+type 先生 = CommonNoun<"先生">;
+type 本 = CommonNoun<"本">;
 type 貸す = GodanVerb & { stem: "貸"; ending: "す" };
 
 // 私 は + 先生 に + 本 を + 貸して (て形) + もらいました (polite past)

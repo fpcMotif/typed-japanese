@@ -33,6 +33,8 @@ export type GrammarCategory =
   | "form"
   | "demonstrative"
   | "interrogative"
+  | "adnominal"
+  | "numeral"
   | "literal"
   | "other";
 
@@ -83,6 +85,10 @@ const COMPOSITIONAL = new Set([
   "AdjectivalPhrase",
 ]);
 
+// Canonical wrapper list lives in the library (src/noun-types.d.ts +
+// src/adverb-types.d.ts). This map is mirrored by apps/TypedTranslate/bridge/tree.ts
+// (category) and by vocab/extract.ts + scripts/extract-words.mjs (POS) — add a
+// wrapper there and update all four.
 const CATEGORY_BY_NAME: Record<string, GrammarCategory> = {
   ConditionalPhrase: "phrase",
   ConnectedPhrases: "phrase",
@@ -105,13 +111,22 @@ const CATEGORY_BY_NAME: Record<string, GrammarCategory> = {
   IAdjective: "adjective",
   NaAdjective: "adjective",
   Adjective: "adjective",
+  CommonNoun: "noun",
   ProperNoun: "noun",
+  Pronoun: "noun",
+  Adverb: "adverb",
+  Adnominal: "adnominal",
   VerbPart: "verb",
   AdjectivePart: "adjective",
   NounPart: "noun",
+  PronounPart: "noun",
+  ProperNounPart: "noun",
   TechnicalTermPart: "technical",
   WhitespacePart: "whitespace",
   AdverbPart: "adverb",
+  AdnominalPart: "adnominal",
+  NumeralPart: "numeral",
+  CounterPart: "numeral",
   ParticlePart: "particle",
   CopulaPart: "copula",
   SuffixPart: "suffix",
@@ -312,9 +327,14 @@ export async function buildTree(
     "VerbPart",
     "AdjectivePart",
     "NounPart",
+    "PronounPart",
+    "ProperNounPart",
     "TechnicalTermPart",
     "WhitespacePart",
     "AdverbPart",
+    "AdnominalPart",
+    "NumeralPart",
+    "CounterPart",
     "ParticlePart",
     "CopulaPart",
     "SuffixPart",
@@ -326,9 +346,14 @@ export async function buildTree(
 
   const SCALAR_PART_TYPES = new Set([
     "NounPart",
+    "PronounPart",
+    "ProperNounPart",
     "TechnicalTermPart",
     "WhitespacePart",
     "AdverbPart",
+    "AdnominalPart",
+    "NumeralPart",
+    "CounterPart",
     "ParticlePart",
     "CopulaPart",
     "SuffixPart",

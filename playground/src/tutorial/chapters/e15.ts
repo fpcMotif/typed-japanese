@@ -25,14 +25,14 @@ const chapter: Chapter = {
           reading: "わたしはみずがのみたい",
           en: "I want to drink water.",
           zh: "我想喝水。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 水 = ProperNoun<"水">;
+type 私 = Pronoun<"私">;
+type 水 = CommonNoun<"水">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // 私 + は + 水 + が + 飲み(ます形) + たい
-type 私は水が飲みたい = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<水, "が">}\${ConjugateVerb<飲む, "Masu">}たい\`;
+type 私は水が飲みたい = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<水, "が">}\${ConjugateVerb<飲む, "MasuStem">}たい\`;
 `,
         },
         {
@@ -40,13 +40,13 @@ type 私は水が飲みたい = \`\${PhraseWithParticle<私, "は">}\${PhraseWit
           reading: "すしがたべたい",
           en: "I want to eat sushi.",
           zh: "我想吃寿司。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 寿司 = ProperNoun<"寿司">;
+type 寿司 = CommonNoun<"寿司">;
 type 食べる = IchidanVerb & { stem: "食べ"; ending: "る" };
 
 // 寿司 + が + 食べ(ます形) + たい
-type 寿司が食べたい = \`\${PhraseWithParticle<寿司, "が">}\${ConjugateVerb<食べる, "Masu">}たい\`;
+type 寿司が食べたい = \`\${PhraseWithParticle<寿司, "が">}\${ConjugateVerb<食べる, "MasuStem">}たい\`;
 `,
         },
         {
@@ -60,7 +60,7 @@ type 日本 = ProperNoun<"日本">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 日本 + へ + 行き(ます形) + たい + です (polite)
-type 日本へ行きたいです = \`\${PhraseWithParticle<日本, "へ">}\${ConjugateVerb<行く, "Masu">}たいです\`;
+type 日本へ行きたいです = \`\${PhraseWithParticle<日本, "へ">}\${ConjugateVerb<行く, "MasuStem">}たいです\`;
 `,
         },
       ],
@@ -79,10 +79,10 @@ type 日本へ行きたいです = \`\${PhraseWithParticle<日本, "へ">}\${Con
           reading: "わたしはくるまがほしい",
           en: "I want a car.",
           zh: "我想要一辆车。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 車 = ProperNoun<"車">;
+type 私 = Pronoun<"私">;
+type 車 = CommonNoun<"車">;
 
 // 私 + は + 車 + が + ほしい
 type 私は車がほしい = \`\${PhraseWithParticle<私, "は">}\${PhraseWithParticle<車, "が">}ほしい\`;
@@ -93,10 +93,10 @@ type 私は車がほしい = \`\${PhraseWithParticle<私, "は">}\${PhraseWithPa
           reading: "あたらしいかばんがほしいです",
           en: "I want a new bag.",
           zh: "我想要一个新包。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
 type 新しい = IAdjective & { stem: "新し"; ending: "い" };
-type かばん = ProperNoun<"かばん">;
+type かばん = CommonNoun<"かばん">;
 
 // 新しい(基本形) + かばん + が + ほしいです
 type 新しいかばんがほしいです = \`\${ConjugateAdjective<新しい, "Basic">}\${PhraseWithParticle<かばん, "が">}ほしいです\`;
@@ -118,13 +118,13 @@ type 新しいかばんがほしいです = \`\${ConjugateAdjective<新しい, "
           reading: "きょうははたらきたくない",
           en: "I don't want to work today.",
           zh: "今天不想工作。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 今日 = ProperNoun<"今日">;
+type 今日 = CommonNoun<"今日">;
 type 働く = GodanVerb & { stem: "働"; ending: "く" };
 
 // 今日 + は + 働き(ます形) + たくない
-type 今日は働きたくない = \`\${PhraseWithParticle<今日, "は">}\${ConjugateVerb<働く, "Masu">}たくない\`;
+type 今日は働きたくない = \`\${PhraseWithParticle<今日, "は">}\${ConjugateVerb<働く, "MasuStem">}たくない\`;
 `,
         },
         {
@@ -132,13 +132,13 @@ type 今日は働きたくない = \`\${PhraseWithParticle<今日, "は">}\${Con
           reading: "にくはたべたくないです",
           en: "I don't want to eat meat.",
           zh: "我不想吃肉。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 肉 = ProperNoun<"肉">;
+type 肉 = CommonNoun<"肉">;
 type 食べる = IchidanVerb & { stem: "食べ"; ending: "る" };
 
 // 肉 + は + 食べ(ます形) + たくないです
-type 肉は食べたくないです = \`\${PhraseWithParticle<肉, "は">}\${ConjugateVerb<食べる, "Masu">}たくないです\`;
+type 肉は食べたくないです = \`\${PhraseWithParticle<肉, "は">}\${ConjugateVerb<食べる, "MasuStem">}たくないです\`;
 `,
         },
       ],

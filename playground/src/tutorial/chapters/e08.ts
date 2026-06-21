@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "たかいやま",
           en: "a high mountain",
           zh: "高山",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective } from "typed-japanese";
 
 type 高い = IAdjective & { stem: "高"; ending: "い" };
-type 山 = ProperNoun<"山">;
+type 山 = CommonNoun<"山">;
 
 // i-adjective in 基本形 sits directly before the noun
 type 高い山 = \`\${ConjugateAdjective<高い, "Basic">}\${山}\`;
@@ -39,10 +39,10 @@ type 高い山 = \`\${ConjugateAdjective<高い, "Basic">}\${山}\`;
           reading: "しずかなへや",
           en: "a quiet room",
           zh: "安静的房间",
-          code: `import type { NaAdjective, ConjugateAdjective, ProperNoun } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective } from "typed-japanese";
 
 type 静か = NaAdjective & { stem: "静か" };
-type 部屋 = ProperNoun<"部屋">;
+type 部屋 = CommonNoun<"部屋">;
 
 // na-adjective 基本形 already carries the linking な
 type 静かな部屋 = \`\${ConjugateAdjective<静か, "Basic">}\${部屋}\`;
@@ -53,10 +53,10 @@ type 静かな部屋 = \`\${ConjugateAdjective<静か, "Basic">}\${部屋}\`;
           reading: "きれいなはなです",
           en: "It is a pretty flower.",
           zh: "是漂亮的花。",
-          code: `import type { NaAdjective, ConjugateAdjective, ProperNoun, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective, ConjugateCopula } from "typed-japanese";
 
 type きれい = NaAdjective & { stem: "きれい" };
-type 花 = ProperNoun<"花">;
+type 花 = CommonNoun<"花">;
 
 // 静かな部屋 pattern, then close with です
 type きれいな花です = \`\${ConjugateAdjective<きれい, "Basic">}\${ConjugateCopula<花, "Polite">}\`;
@@ -78,9 +78,9 @@ type きれいな花です = \`\${ConjugateAdjective<きれい, "Basic">}\${Conj
           reading: "きょうはあついです",
           en: "Today is hot.",
           zh: "今天很热。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 今日 = ProperNoun<"今日">;
+type 今日 = CommonNoun<"今日">;
 type 暑い = IAdjective & { stem: "暑"; ending: "い" };
 
 // 丁寧形 of an i-adjective = stem + いです
@@ -92,9 +92,9 @@ type 今日は暑いです = \`\${PhraseWithParticle<今日, "は">}\${Conjugate
           reading: "ちちはげんきです",
           en: "My father is well.",
           zh: "我父亲很健康。",
-          code: `import type { NaAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 父 = ProperNoun<"父">;
+type 父 = CommonNoun<"父">;
 type 元気 = NaAdjective & { stem: "元気" };
 
 // 丁寧形 of a na-adjective = stem + です (no な)
@@ -117,13 +117,14 @@ type 父は元気です = \`\${PhraseWithParticle<父, "は">}\${ConjugateAdject
           reading: "このほんはたかくない",
           en: "This book is not expensive.",
           zh: "这本书不贵。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type この本 = ProperNoun<"この本">;
+type この = Adnominal<"この">;
+type 本 = CommonNoun<"本">;
 type 高い = IAdjective & { stem: "高"; ending: "い" };
 
 // 否定形 of an i-adjective = stem + くない
-type この本は高くない = \`\${PhraseWithParticle<この本, "は">}\${ConjugateAdjective<高い, "Negative">}\`;
+type この本は高くない = \`\${PhraseWithParticle<\`\${この}\${本}\`, "は">}\${ConjugateAdjective<高い, "Negative">}\`;
 `,
         },
         {
@@ -131,13 +132,14 @@ type この本は高くない = \`\${PhraseWithParticle<この本, "は">}\${Con
           reading: "このまちはしずかではない",
           en: "This town is not quiet.",
           zh: "这个城镇不安静。",
-          code: `import type { NaAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type この町 = ProperNoun<"この町">;
+type この = Adnominal<"この">;
+type 町 = CommonNoun<"町">;
 type 静か = NaAdjective & { stem: "静か" };
 
 // 否定形 of a na-adjective = stem + ではない
-type この町は静かではない = \`\${PhraseWithParticle<この町, "は">}\${ConjugateAdjective<静か, "Negative">}\`;
+type この町は静かではない = \`\${PhraseWithParticle<\`\${この}\${町}\`, "は">}\${ConjugateAdjective<静か, "Negative">}\`;
 `,
         },
       ],
@@ -156,9 +158,9 @@ type この町は静かではない = \`\${PhraseWithParticle<この町, "は">}
           reading: "きのうはさむかった",
           en: "Yesterday was cold.",
           zh: "昨天很冷。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 昨日 = ProperNoun<"昨日">;
+type 昨日 = CommonNoun<"昨日">;
 type 寒い = IAdjective & { stem: "寒"; ending: "い" };
 
 // 過去形 of an i-adjective = stem + かった
@@ -170,9 +172,9 @@ type 昨日は寒かった = \`\${PhraseWithParticle<昨日, "は">}\${Conjugate
           reading: "りょこうはたのしかった",
           en: "The trip was fun.",
           zh: "旅行很开心。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 旅行 = ProperNoun<"旅行">;
+type 旅行 = CommonNoun<"旅行">;
 type 楽しい = IAdjective & { stem: "楽し"; ending: "い" };
 
 type 旅行は楽しかった = \`\${PhraseWithParticle<旅行, "は">}\${ConjugateAdjective<楽しい, "Past">}\`;
@@ -183,9 +185,9 @@ type 旅行は楽しかった = \`\${PhraseWithParticle<旅行, "は">}\${Conjug
           reading: "こうえんはしずかでした",
           en: "The park was quiet.",
           zh: "公园很安静。",
-          code: `import type { NaAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 公園 = ProperNoun<"公園">;
+type 公園 = CommonNoun<"公園">;
 type 静か = NaAdjective & { stem: "静か" };
 
 // 過去形 of a na-adjective = stem + でした
@@ -208,9 +210,9 @@ type 公園は静かでした = \`\${PhraseWithParticle<公園, "は">}\${Conjug
           reading: "てんきがよかった",
           en: "The weather was good.",
           zh: "天气很好。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 天気 = ProperNoun<"天気">;
+type 天気 = CommonNoun<"天気">;
 type いい = IAdjective & { stem: "い"; ending: "い"; irregular: true };
 
 // irregular: 過去形 becomes よかった, not いかった
@@ -222,9 +224,9 @@ type 天気がよかった = \`\${PhraseWithParticle<天気, "が">}\${Conjugate
           reading: "きぶんがよくない",
           en: "I don't feel well.",
           zh: "心情/身体不太好。",
-          code: `import type { IAdjective, ConjugateAdjective, ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 気分 = ProperNoun<"気分">;
+type 気分 = CommonNoun<"気分">;
 type いい = IAdjective & { stem: "い"; ending: "い"; irregular: true };
 
 // irregular: 否定形 becomes よくない, not いくない

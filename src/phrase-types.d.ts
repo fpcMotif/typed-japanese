@@ -130,9 +130,14 @@ export type PhrasePart =
   | VerbPart
   | AdjectivePart
   | NounPart
+  | PronounPart
+  | ProperNounPart
   | TechnicalTermPart
   | WhitespacePart
   | AdverbPart
+  | AdnominalPart
+  | NumeralPart
+  | CounterPart
   | ParticlePart
   | CopulaPart
   | SuffixPart
@@ -162,9 +167,28 @@ export type AdjectivePart<
   value: ConjugateAdjective<A, F>;
 };
 
+// NounPart is the 普通名詞 (common-noun) default. For the other noun subclasses
+// use the dedicated parts so the Sentence path keeps the 代名詞 / 固有名詞
+// distinction (all value-identical — resolution is unaffected).
 export type NounPart<N extends string = string> = {
   type: "noun";
   noun: N;
+  value: N;
+};
+
+/** 代名詞 — pronoun part: これ, それ, ここ, 私, 誰. */
+export type PronounPart<N extends string = string> = {
+  type: "noun";
+  noun: N;
+  nounClass: "pronoun";
+  value: N;
+};
+
+/** 固有名詞 — proper-noun part: names of people/places/works/products. */
+export type ProperNounPart<N extends string = string> = {
+  type: "noun";
+  noun: N;
+  nounClass: "proper";
   value: N;
 };
 
@@ -184,6 +208,30 @@ export type AdverbPart<A extends string = string> = {
   type: "adverb";
   adverb: A;
   value: A;
+};
+
+export type AdnominalPart<A extends string = string> = {
+  type: "adnominal";
+  adnominal: A;
+  value: A;
+};
+
+// 数詞 — a bare numeral (三, 五, 百).
+export type NumeralPart<N extends string = string> = {
+  type: "numeral";
+  numeral: N;
+  value: N;
+};
+
+// 数詞 + 助数詞 — a counter expression (三つ, 二人, 一冊). value joins them.
+export type CounterPart<
+  Num extends string = string,
+  Counter extends string = string
+> = {
+  type: "counter";
+  numeral: Num;
+  counter: Counter;
+  value: `${Num}${Counter}`;
 };
 
 export type ParticlePart<P extends Particle = Particle> = {

@@ -17,7 +17,7 @@ const entries: VocabEntry[] = [
   { word: "薬", reading: "くすり", romaji: "kusuri", pos: "noun", en: "medicine", zh: "药" },
   { word: "優しい", reading: "やさしい", romaji: "yasashii", pos: "i-adjective", en: "kind; gentle", zh: "温柔的，亲切的" },
   { word: "友達", reading: "ともだち", romaji: "tomodachi", pos: "noun", en: "friend", zh: "朋友" },
-  { word: "有名", reading: "ゆうめい", romaji: "yūmei", pos: "noun", en: "famous", zh: "有名" },
+  { word: "有名", reading: "ゆうめい", romaji: "yūmei", pos: "na-adjective", en: "famous", zh: "有名" },
   { word: "遊ぶ", reading: "あそぶ", romaji: "asobu", pos: "verb-godan", en: "to play", zh: "玩耍" },
   { word: "予算", reading: "よさん", romaji: "yosan", pos: "noun", en: "budget", zh: "预算" },
   { word: "予約", reading: "よやく", romaji: "yoyaku", pos: "noun", en: "reservation", zh: "预约" },

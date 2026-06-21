@@ -25,14 +25,14 @@ const chapter: Chapter = {
           reading: "あしたはあめだとおもいます",
           en: "I think it will rain tomorrow.",
           zh: "我想明天会下雨。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 明日 = ProperNoun<"明日">;
-type 雨 = ProperNoun<"雨">;
+type 明日 = CommonNoun<"明日">;
+type 雨 = CommonNoun<"雨">;
 type 思う = GodanVerb & { stem: "思"; ending: "う" };
 
 // 明日 + は (topic) + 雨 + だと + 思い(ます形) + ます
-type 明日は雨だと思います = \`\${PhraseWithParticle<明日, "は">}\${ConjugateCopula<雨, "Plain">}と\${ConjugateVerb<思う, "Masu">}ます\`;
+type 明日は雨だと思います = \`\${PhraseWithParticle<明日, "は">}\${ConjugateCopula<雨, "Plain">}と\${ConjugateVerb<思う, "Masu">}\`;
 `,
         },
         {
@@ -40,14 +40,14 @@ type 明日は雨だと思います = \`\${PhraseWithParticle<明日, "は">}\${
           reading: "たなかさんはいくとおもいます",
           en: "I think Mr. Tanaka will go.",
           zh: "我想田中先生会去。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
+type 田中さん = CommonNoun<"田中さん">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 type 思う = GodanVerb & { stem: "思"; ending: "う" };
 
 // 田中さんは + 行く(辞書形) + と + 思い(ます形) + ます
-type 田中さんは行くと思います = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<行く, "Dictionary">}と\${ConjugateVerb<思う, "Masu">}ます\`;
+type 田中さんは行くと思います = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<行く, "Dictionary">}と\${ConjugateVerb<思う, "Masu">}\`;
 `,
         },
         {
@@ -55,9 +55,9 @@ type 田中さんは行くと思います = \`\${PhraseWithParticle<田中さん
           reading: "それはいいとおもう",
           en: "I think that's good.",
           zh: "我觉得那样很好。",
-          code: `import type { ProperNoun, PhraseWithParticle, IAdjective, ConjugateAdjective, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, IAdjective, ConjugateAdjective, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type それ = ProperNoun<"それ">;
+type それ = Pronoun<"それ">;
 type いい = IAdjective & { stem: "い"; ending: "い"; irregular: true };
 type 思う = GodanVerb & { stem: "思"; ending: "う" };
 
@@ -81,14 +81,14 @@ type それはいいと思う = \`\${PhraseWithParticle<それ, "は">}\${Conjug
           reading: "たなかさんはいくといいました",
           en: "Mr. Tanaka said he would go.",
           zh: "田中先生说他会去。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
+type 田中さん = CommonNoun<"田中さん">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 type 言う = GodanVerb & { stem: "言"; ending: "う" };
 
 // 田中さんは + 行く(辞書形) + と + 言い(ます形) + ました
-type 田中さんは行くと言いました = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<行く, "Dictionary">}と\${ConjugateVerb<言う, "Masu">}ました\`;
+type 田中さんは行くと言いました = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<行く, "Dictionary">}と\${ConjugateVerb<言う, "MasuPast">}\`;
 `,
         },
         {
@@ -96,14 +96,14 @@ type 田中さんは行くと言いました = \`\${PhraseWithParticle<田中さ
           reading: "かれはがくせいだといいました",
           en: "He said he was a student.",
           zh: "他说他是学生。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 学生 = ProperNoun<"学生">;
+type 彼 = Pronoun<"彼">;
+type 学生 = CommonNoun<"学生">;
 type 言う = GodanVerb & { stem: "言"; ending: "う" };
 
 // 彼は + 学生 + だと + 言い(ます形) + ました
-type 彼は学生だと言いました = \`\${PhraseWithParticle<彼, "は">}\${ConjugateCopula<学生, "Plain">}と\${ConjugateVerb<言う, "Masu">}ました\`;
+type 彼は学生だと言いました = \`\${PhraseWithParticle<彼, "は">}\${ConjugateCopula<学生, "Plain">}と\${ConjugateVerb<言う, "MasuPast">}\`;
 `,
         },
       ],
@@ -122,10 +122,10 @@ type 彼は学生だと言いました = \`\${PhraseWithParticle<彼, "は">}\${
           reading: "にほんごならたなかさんにきいてください",
           en: "If it's Japanese, please ask Mr. Tanaka.",
           zh: "日语的话,请问田中先生。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConditionalPhrase } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle, ConditionalPhrase } from "typed-japanese";
 
-type 日本語 = ProperNoun<"日本語">;
-type 田中さん = ProperNoun<"田中さん">;
+type 日本語 = CommonNoun<"日本語">;
+type 田中さん = CommonNoun<"田中さん">;
 type 聞く = GodanVerb & { stem: "聞"; ending: "く" };
 
 // 田中さんに + 聞いて(て形) + ください
@@ -140,13 +140,13 @@ type 日本語なら田中さんに聞いてください = ConditionalPhrase<日
           reading: "おさけならのみません",
           en: "If it's alcohol, I don't drink (it).",
           zh: "如果是酒的话,我不喝。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, ConditionalPhrase } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, ConditionalPhrase } from "typed-japanese";
 
-type お酒 = ProperNoun<"お酒">;
+type お酒 = CommonNoun<"お酒">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // 飲み(ます形) + ません
-type 飲みません = \`\${ConjugateVerb<飲む, "Masu">}ません\`;
+type 飲みません = \`\${ConjugateVerb<飲む, "Masen">}\`;
 
 // お酒 + なら + 飲みません
 type お酒なら飲みません = ConditionalPhrase<お酒, "なら", 飲みません>;
@@ -163,7 +163,7 @@ type 東京 = ProperNoun<"東京">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 行き(ます形) + たいです
-type 行きたいです = \`\${ConjugateVerb<行く, "Masu">}たいです\`;
+type 行きたいです = \`\${ConjugateVerb<行く, "MasuStem">}たいです\`;
 
 // 東京 + なら + 行きたいです
 type 東京なら行きたいです = ConditionalPhrase<東京, "なら", 行きたいです>;

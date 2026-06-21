@@ -30,7 +30,7 @@ const chapter: Chapter = {
 type 持つ = GodanVerb & { stem: "持"; ending: "つ" };
 
 // お + 持ち (ます形) + します
-type お持ちします = \`お\${ConjugateVerb<持つ, "Masu">}します\`;
+type お持ちします = \`お\${ConjugateVerb<持つ, "MasuStem">}します\`;
 `,
         },
         {
@@ -38,13 +38,13 @@ type お持ちします = \`お\${ConjugateVerb<持つ, "Masu">}します\`;
           reading: "わたしがおおくりします",
           en: "I'll see you off / send it.",
           zh: "由我来送(您/它)。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type 送る = GodanVerb & { stem: "送"; ending: "る" };
 
 // 私 + が + お + 送り (ます形) + します
-type 私がお送りします = \`\${PhraseWithParticle<私, "が">}お\${ConjugateVerb<送る, "Masu">}します\`;
+type 私がお送りします = \`\${PhraseWithParticle<私, "が">}お\${ConjugateVerb<送る, "MasuStem">}します\`;
 `,
         },
         {
@@ -52,13 +52,14 @@ type 私がお送りします = \`\${PhraseWithParticle<私, "が">}お\${Conjug
           reading: "ここでおまちします",
           en: "I'll wait here.",
           zh: "我在这里等候。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, GodanVerb, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type ここ = ProperNoun<"ここ">;
+type ここ = Pronoun<"ここ">;
 type 待つ = GodanVerb & { stem: "待"; ending: "つ" };
+type する = IrregularVerb & { dictionary: "する" };
 
-// ここ + で + お + 待ち (ます形) + します
-type ここでお待ちします = \`\${PhraseWithParticle<ここ, "で">}お\${ConjugateVerb<待つ, "Masu">}します\`;
+// ここ + で + お + 待ち (ます形) + し (する の連用形) + ます
+type ここでお待ちします = \`\${PhraseWithParticle<ここ, "で">}お\${ConjugateVerb<待つ, "MasuStem">}\${ConjugateVerb<する, "Masu">}\`;
 `,
         },
       ],
@@ -83,7 +84,7 @@ type 田中 = ProperNoun<"田中">;
 type 申す = GodanVerb & { stem: "申"; ending: "す" };
 
 // 田中 + と + 申し (ます形) + ます
-type 田中と申します = \`\${PhraseWithParticle<田中, "と">}\${ConjugateVerb<申す, "Masu">}ます\`;
+type 田中と申します = \`\${PhraseWithParticle<田中, "と">}\${ConjugateVerb<申す, "Masu">}\`;
 `,
         },
         {
@@ -91,13 +92,13 @@ type 田中と申します = \`\${PhraseWithParticle<田中, "と">}\${Conjugate
           reading: "すぐまいります",
           en: "I'll come right away.",
           zh: "我马上就来。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Adverb, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type すぐ = ProperNoun<"すぐ">;
+type すぐ = Adverb<"すぐ">;
 type 参る = GodanVerb & { stem: "参"; ending: "る" };
 
 // すぐ + 参り (ます形) + ます
-type すぐ参ります = \`\${すぐ}\${ConjugateVerb<参る, "Masu">}ます\`;
+type すぐ参ります = \`\${すぐ}\${ConjugateVerb<参る, "Masu">}\`;
 `,
         },
         {
@@ -105,13 +106,13 @@ type すぐ参ります = \`\${すぐ}\${ConjugateVerb<参る, "Masu">}ます\`;
           reading: "わたしがいたします",
           en: "I will do it.",
           zh: "由我来做。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
+type 私 = Pronoun<"私">;
 type いたす = GodanVerb & { stem: "いた"; ending: "す" };
 
 // 私 + が + いたし (ます形) + ます
-type 私がいたします = \`\${PhraseWithParticle<私, "が">}\${ConjugateVerb<いたす, "Masu">}ます\`;
+type 私がいたします = \`\${PhraseWithParticle<私, "が">}\${ConjugateVerb<いたす, "Masu">}\`;
 `,
         },
       ],
@@ -130,10 +131,10 @@ type 私がいたします = \`\${PhraseWithParticle<私, "が">}\${ConjugateVer
           reading: "こちらはうけつけでございます",
           en: "This is the reception desk.",
           zh: "这里是接待处。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type こちら = ProperNoun<"こちら">;
-type 受付 = ProperNoun<"受付">;
+type こちら = Pronoun<"こちら">;
+type 受付 = CommonNoun<"受付">;
 
 // こちら + は + 受付 + でございます
 type こちらは受付でございます = \`\${PhraseWithParticle<こちら, "は">}\${受付}でございます\`;
@@ -144,9 +145,9 @@ type こちらは受付でございます = \`\${PhraseWithParticle<こちら, "
           reading: "えいぎょうちゅうでございます",
           en: "We are open (for business).",
           zh: "正在营业中。",
-          code: `import type { ProperNoun } from "typed-japanese";
+          code: `import type { CommonNoun } from "typed-japanese";
 
-type 営業中 = ProperNoun<"営業中">;
+type 営業中 = CommonNoun<"営業中">;
 
 // 営業中 + でございます
 type 営業中でございます = \`\${営業中}でございます\`;

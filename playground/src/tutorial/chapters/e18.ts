@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "わたしはにほんごがはなせる",
           en: "I can speak Japanese.",
           zh: "我会说日语。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 日本語 = ProperNoun<"日本語">;
+type 私 = Pronoun<"私">;
+type 日本語 = CommonNoun<"日本語">;
 type 話す = GodanVerb & { stem: "話"; ending: "す" };
 
 // 可能形 of 話す returns 話せ → append る = 話せる
@@ -40,9 +40,9 @@ type 私は日本語が話せる = \`\${PhraseWithParticle<私, "は">}\${Phrase
           reading: "おさけがのめますか",
           en: "Can you drink alcohol?",
           zh: "你能喝酒吗?",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type お酒 = ProperNoun<"お酒">;
+type お酒 = CommonNoun<"お酒">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // 飲める → polite question: 飲めますか
@@ -54,9 +54,9 @@ type お酒が飲めますか = \`\${PhraseWithParticle<お酒, "が">}\${Conjug
           reading: "あしたはいけない",
           en: "I can't go tomorrow.",
           zh: "明天我去不了。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 明日 = ProperNoun<"明日">;
+type 明日 = CommonNoun<"明日">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 行ける → negative: 行けない
@@ -79,10 +79,10 @@ type 明日は行けない = \`\${PhraseWithParticle<明日, "は">}\${Conjugate
           reading: "わたしはさしみがたべられる",
           en: "I can eat sashimi.",
           zh: "我能吃生鱼片。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 刺身 = ProperNoun<"刺身">;
+type 私 = Pronoun<"私">;
+type 刺身 = CommonNoun<"刺身">;
 type 食べる = IchidanVerb & { stem: "食べ"; ending: "る" };
 
 // 可能形 of 食べる returns 食べられ → append る = 食べられる
@@ -94,10 +94,10 @@ type 私は刺身が食べられる = \`\${PhraseWithParticle<私, "は">}\${Phr
           reading: "ここからふじさんがみられる",
           en: "You can see Mt. Fuji from here.",
           zh: "从这里能看到富士山。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type ここ = ProperNoun<"ここ">;
-type 富士山 = ProperNoun<"富士山">;
+type ここ = Pronoun<"ここ">;
+type 富士山 = CommonNoun<"富士山">;
 type 見る = IchidanVerb & { stem: "見"; ending: "る" };
 
 // 見る → 見られる
@@ -120,10 +120,10 @@ type ここから富士山が見られる = \`\${PhraseWithParticle<ここ, "か
           reading: "わたしはぴあのができる",
           en: "I can play the piano.",
           zh: "我会弹钢琴。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type ピアノ = ProperNoun<"ピアノ">;
+type 私 = Pronoun<"私">;
+type ピアノ = CommonNoun<"ピアノ">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 可能形 of する returns でき → append る = できる
@@ -135,9 +135,9 @@ type 私はピアノができる = \`\${PhraseWithParticle<私, "は">}\${Phrase
           reading: "あしたこられますか",
           en: "Can you come tomorrow?",
           zh: "你明天能来吗?",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 明日 = ProperNoun<"明日">;
+type 明日 = CommonNoun<"明日">;
 type 来る = IrregularVerb & { dictionary: "来る" };
 
 // 可能形 of 来る returns 来られ → polite question: 来られますか
@@ -160,9 +160,9 @@ type 明日来られますか = \`\${明日}\${ConjugateVerb<来る, "Potential"
           reading: "かんじがよめる",
           en: "I can read kanji.",
           zh: "我能读汉字。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 漢字 = ProperNoun<"漢字">;
+type 漢字 = CommonNoun<"漢字">;
 type 読む = GodanVerb & { stem: "読"; ending: "む" };
 
 // object marked with が + 読める
@@ -174,11 +174,11 @@ type 漢字が読める = \`\${PhraseWithParticle<漢字, "が">}\${ConjugateVer
           reading: "わたしはくるまがうんてんできる",
           en: "I can drive a car.",
           zh: "我会开车。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 車 = ProperNoun<"車">;
-type 運転 = ProperNoun<"運転">;
+type 私 = Pronoun<"私">;
+type 車 = CommonNoun<"車">;
+type 運転 = CommonNoun<"運転">;
 type 運転する = IrregularVerb & { dictionary: "する" };
 
 // 運転する → 運転できる; 運転 as a noun then できる via 可能形 + る

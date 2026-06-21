@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "pnpm typecheck && pnpm lint"
+    "test": "pnpm typecheck && pnpm lint",
+    "macos": "bun apps/TypedTranslate/run.ts",
+    "macos:test": "bun apps/TypedTranslate/smoke.ts --no-launch"
   },
   "keywords": [
     "typescript",

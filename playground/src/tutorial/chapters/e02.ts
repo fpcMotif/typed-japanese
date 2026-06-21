@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "これはほんです",
           en: "This is a book.",
           zh: "这是书。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type これ = ProperNoun<"これ">;
-type 本 = ProperNoun<"本">;
+type これ = Pronoun<"これ">;
+type 本 = CommonNoun<"本">;
 
 // これ + は (topic) + 本 + です
 type これは本です = \`\${PhraseWithParticle<これ, "は">}\${ConjugateCopula<本, "Polite">}\`;
@@ -39,11 +39,11 @@ type これは本です = \`\${PhraseWithParticle<これ, "は">}\${ConjugateCop
           reading: "それはわたしのかばんです",
           en: "That (by you) is my bag.",
           zh: "那(你那边的)是我的包。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type それ = ProperNoun<"それ">;
-type 私 = ProperNoun<"私">;
-type かばん = ProperNoun<"かばん">;
+type それ = Pronoun<"それ">;
+type 私 = Pronoun<"私">;
+type かばん = CommonNoun<"かばん">;
 
 // それ + は + 私 + の + かばん + です
 type それは私のかばんです = \`\${PhraseWithParticle<それ, "は">}\${PhraseWithParticle<私, "の">}\${ConjugateCopula<かばん, "Polite">}\`;
@@ -54,10 +54,10 @@ type それは私のかばんです = \`\${PhraseWithParticle<それ, "は">}\${
           reading: "あれはなんですか",
           en: "What is that over there?",
           zh: "那边的那个是什么?",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type あれ = ProperNoun<"あれ">;
-type 何 = ProperNoun<"何">;
+type あれ = Pronoun<"あれ">;
+type 何 = Pronoun<"何">;
 
 // あれ + は + 何 + ですか
 type あれは何ですか = \`\${PhraseWithParticle<あれ, "は">}\${ConjugateCopula<何, "Polite">}か\`;
@@ -79,9 +79,9 @@ type あれは何ですか = \`\${PhraseWithParticle<あれ, "は">}\${Conjugate
           reading: "このほんはおもしろいです",
           en: "This book is interesting.",
           zh: "这本书很有趣。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 本 = ProperNoun<"本">;
+type 本 = CommonNoun<"本">;
 type 面白い = IAdjective & { stem: "面白"; ending: "い" };
 
 // この + 本 + は + 面白い + です
@@ -93,10 +93,10 @@ type この本は面白いです = \`この\${PhraseWithParticle<本, "は">}\${
           reading: "そのひとはたなかさんです",
           en: "That person is Mr. Tanaka.",
           zh: "那个人是田中先生。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 人 = ProperNoun<"人">;
-type 田中さん = ProperNoun<"田中さん">;
+type 人 = CommonNoun<"人">;
+type 田中さん = CommonNoun<"田中さん">;
 
 // その + 人 + は + 田中さん + です
 type その人は田中さんです = \`その\${PhraseWithParticle<人, "は">}\${ConjugateCopula<田中さん, "Polite">}\`;
@@ -107,9 +107,9 @@ type その人は田中さんです = \`その\${PhraseWithParticle<人, "は">}
           reading: "あのみせはあたらしいです",
           en: "That shop over there is new.",
           zh: "那边那家店是新的。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 店 = ProperNoun<"店">;
+type 店 = CommonNoun<"店">;
 type 新しい = IAdjective & { stem: "新し"; ending: "い" };
 
 // あの + 店 + は + 新しい + です
@@ -132,11 +132,11 @@ type あの店は新しいです = \`あの\${PhraseWithParticle<店, "は">}\${
           reading: "これはわたしのかさです",
           en: "This is my umbrella.",
           zh: "这是我的伞。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type これ = ProperNoun<"これ">;
-type 私 = ProperNoun<"私">;
-type 傘 = ProperNoun<"傘">;
+type これ = Pronoun<"これ">;
+type 私 = Pronoun<"私">;
+type 傘 = CommonNoun<"傘">;
 
 // これ + は + 私 + の + 傘 + です
 type これは私の傘です = \`\${PhraseWithParticle<これ, "は">}\${PhraseWithParticle<私, "の">}\${ConjugateCopula<傘, "Polite">}\`;
@@ -147,10 +147,10 @@ type これは私の傘です = \`\${PhraseWithParticle<これ, "は">}\${Phrase
           reading: "たなかさんのくるまはあかいです",
           en: "Mr. Tanaka's car is red.",
           zh: "田中先生的车是红的。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
-type 車 = ProperNoun<"車">;
+type 田中さん = CommonNoun<"田中さん">;
+type 車 = CommonNoun<"車">;
 type 赤い = IAdjective & { stem: "赤"; ending: "い" };
 
 // 田中さん + の + 車 + は + 赤い + です
@@ -162,11 +162,11 @@ type 田中さんの車は赤いです = \`\${PhraseWithParticle<田中さん, "
           reading: "あれはにほんのくるまです",
           en: "That over there is a Japanese car.",
           zh: "那边那辆是日本(产)的车。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type あれ = ProperNoun<"あれ">;
+type あれ = Pronoun<"あれ">;
 type 日本 = ProperNoun<"日本">;
-type 車 = ProperNoun<"車">;
+type 車 = CommonNoun<"車">;
 
 // あれ + は + 日本 + の + 車 + です
 type あれは日本の車です = \`\${PhraseWithParticle<あれ, "は">}\${PhraseWithParticle<日本, "の">}\${ConjugateCopula<車, "Polite">}\`;

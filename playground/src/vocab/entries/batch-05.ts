@@ -27,7 +27,7 @@ const entries: VocabEntry[] = [
   { word: "姉", reading: "あね", romaji: "ane", pos: "noun", en: "older sister", zh: "姐姐" },
   { word: "子供", reading: "こども", romaji: "kodomo", pos: "noun", en: "child", zh: "孩子" },
   { word: "子供の頃", reading: "こどものころ", romaji: "kodomo no koro", pos: "noun", en: "childhood", zh: "小时候" },
-  { word: "私", reading: "わたし", romaji: "watashi", pos: "noun", en: "I, me", zh: "我" },
+  { word: "私", reading: "わたし", romaji: "watashi", pos: "pronoun", en: "I, me", zh: "我" },
   { word: "私の趣味", reading: "わたしのしゅみ", romaji: "watashi no shumi", pos: "noun", en: "my hobby", zh: "我的爱好" },
   { word: "資料", reading: "しりょう", romaji: "shiryō", pos: "noun", en: "materials, documents", zh: "资料" },
   { word: "持つ", reading: "もつ", romaji: "motsu", pos: "verb-godan", en: "to hold, to have", zh: "拿、持有" },

@@ -8,14 +8,13 @@ const entries: VocabEntry[] = [
   { word: "7時30分", reading: "しちじさんじゅっぷん", romaji: "shichiji sanjuppun", pos: "noun", en: "7:30", zh: "7点30分" },
   { word: "9時", reading: "くじ", romaji: "kuji", pos: "noun", en: "9 o'clock", zh: "9点" },
   { word: "あきらめる", reading: "あきらめる", romaji: "akirameru", pos: "verb-ichidan", en: "to give up", zh: "放弃" },
-  { word: "あなた", reading: "あなた", romaji: "anata", pos: "noun", en: "you", zh: "你" },
+  { word: "あなた", reading: "あなた", romaji: "anata", pos: "pronoun", en: "you", zh: "你" },
   { word: "あの店", reading: "あのみせ", romaji: "ano mise", pos: "noun", en: "that shop", zh: "那家店" },
   { word: "ある", reading: "ある", romaji: "aru", pos: "verb-godan", en: "to be (inanimate); to exist", zh: "有；在（无生命）" },
   { word: "いい", reading: "いい", romaji: "ii", pos: "i-adjective", en: "good", zh: "好" },
   { word: "いたす", reading: "いたす", romaji: "itasu", pos: "verb-godan", en: "to do (humble)", zh: "做（自谦语）" },
   { word: "いる", reading: "いる", romaji: "iru", pos: "verb-ichidan", en: "to be (animate); to exist", zh: "有；在（有生命）" },
   { word: "おいしい", reading: "おいしい", romaji: "oishii", pos: "i-adjective", en: "delicious", zh: "好吃" },
-  { word: "おっしゃいました", reading: "おっしゃいました", romaji: "osshaimashita", pos: "noun", en: "said (honorific, past)", zh: "说了（敬语）" },
   { word: "おもしろい", reading: "おもしろい", romaji: "omoshiroi", pos: "i-adjective", en: "interesting", zh: "有趣" },
   { word: "お願い", reading: "おねがい", romaji: "onegai", pos: "noun", en: "request; please", zh: "请求；拜托" },
   { word: "お金", reading: "おかね", romaji: "okane", pos: "noun", en: "money", zh: "钱" },
@@ -30,7 +29,7 @@ const entries: VocabEntry[] = [
   { word: "クラス", reading: "クラス", romaji: "kurasu", pos: "noun", en: "class", zh: "班级" },
   { word: "コート", reading: "コート", romaji: "kōto", pos: "noun", en: "coat", zh: "外套" },
   { word: "コーヒー", reading: "コーヒー", romaji: "kōhī", pos: "noun", en: "coffee", zh: "咖啡" },
-  { word: "こちら", reading: "こちら", romaji: "kochira", pos: "noun", en: "this way; this person", zh: "这边；这位" },
+  { word: "こちら", reading: "こちら", romaji: "kochira", pos: "pronoun", en: "this way; this person", zh: "这边；这位" },
 ];
 
 export default entries;

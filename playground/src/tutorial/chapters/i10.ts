@@ -25,9 +25,9 @@ const chapter: Chapter = {
           reading: "かれはくるはずです",
           en: "He should be coming (I expect him to).",
           zh: "他应该会来。",
-          code: `import type { ProperNoun, PhraseWithParticle, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
+type 彼 = Pronoun<"彼">;
 type 来る = IrregularVerb & { dictionary: "来る" };
 
 // 彼 + は + 来る (辞書形) + はずです
@@ -39,13 +39,14 @@ type 彼は来るはずです = \`\${PhraseWithParticle<彼, "は">}\${Conjugate
           reading: "このほんはたかいはずだ",
           en: "This book is bound to be expensive.",
           zh: "这本书估计很贵。",
-          code: `import type { ProperNoun, PhraseWithParticle, IAdjective, ConjugateAdjective } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, PhraseWithParticle, IAdjective, ConjugateAdjective } from "typed-japanese";
 
-type この本 = ProperNoun<"この本">;
+type この = Adnominal<"この">;
+type 本 = CommonNoun<"本">;
 type 高い = IAdjective & { stem: "高"; ending: "い" };
 
-// この本 + は + 高い (基本形) + はずだ
-type この本は高いはずだ = \`\${PhraseWithParticle<この本, "は">}\${ConjugateAdjective<高い, "Basic">}はずだ\`;
+// この + 本 + は + 高い (基本形) + はずだ
+type この本は高いはずだ = \`\${PhraseWithParticle<\`\${この}\${本}\`, "は">}\${ConjugateAdjective<高い, "Basic">}はずだ\`;
 `,
         },
         {
@@ -53,10 +54,10 @@ type この本は高いはずだ = \`\${PhraseWithParticle<この本, "は">}\${
           reading: "かのじょはがくせいのはずです",
           en: "She is supposed to be a student.",
           zh: "她应该是学生。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼女 = ProperNoun<"彼女">;
-type 学生 = ProperNoun<"学生">;
+type 彼女 = Pronoun<"彼女">;
+type 学生 = CommonNoun<"学生">;
 
 // 彼女 + は + 学生 + の + はずです (noun links with の)
 type 彼女は学生のはずです = \`\${PhraseWithParticle<彼女, "は">}\${PhraseWithParticle<学生, "の">}はずです\`;
@@ -78,13 +79,14 @@ type 彼女は学生のはずです = \`\${PhraseWithParticle<彼女, "は">}\${
           reading: "ほんとうのことをいうべきだ",
           en: "You ought to tell the truth.",
           zh: "你应该说实话。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle, GodanVerb, ConjugateVerb, Copula } from "typed-japanese";
 
-type 本当のこと = ProperNoun<"本当のこと">;
+type 本当 = CommonNoun<"本当">;
+type こと = CommonNoun<"こと">;
 type 言う = GodanVerb & { stem: "言"; ending: "う" };
 
-// 本当のこと + を + 言う (辞書形) + べきだ
-type 本当のことを言うべきだ = \`\${PhraseWithParticle<本当のこと, "を">}\${ConjugateVerb<言う, "Dictionary">}べきだ\`;
+// 本当 + の + こと + を + 言う(辞書形) + べき(文語助動詞) + だ(Copula Plain)
+type 本当のことを言うべきだ = \`\${PhraseWithParticle<本当, "の">}\${PhraseWithParticle<こと, "を">}\${ConjugateVerb<言う, "Dictionary">}べき\${Copula<"Plain">}\`;
 `,
         },
         {
@@ -92,10 +94,10 @@ type 本当のことを言うべきだ = \`\${PhraseWithParticle<本当のこと
           reading: "いますぐびょういんへいくべきです",
           en: "You should go to the hospital right now.",
           zh: "你应该马上去医院。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type 今すぐ = ProperNoun<"今すぐ">;
-type 病院 = ProperNoun<"病院">;
+type 今すぐ = Adverb<"今すぐ">;
+type 病院 = CommonNoun<"病院">;
 type 行く = GodanVerb & { stem: "行"; ending: "く" };
 
 // 今すぐ + 病院 + へ + 行く (辞書形) + べきです
@@ -107,13 +109,14 @@ type 今すぐ病院へ行くべきです = \`\${今すぐ}\${PhraseWithParticle
           reading: "そんなことをいうべきではない",
           en: "You ought not to say such a thing.",
           zh: "不应该说那样的话。",
-          code: `import type { ProperNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, PhraseWithParticle, GodanVerb, ConjugateVerb } from "typed-japanese";
 
-type そんなこと = ProperNoun<"そんなこと">;
+type そんな = Adnominal<"そんな">;
+type こと = CommonNoun<"こと">;
 type 言う = GodanVerb & { stem: "言"; ending: "う" };
 
-// そんなこと + を + 言う (辞書形) + べきではない (negative)
-type そんなことを言うべきではない = \`\${PhraseWithParticle<そんなこと, "を">}\${ConjugateVerb<言う, "Dictionary">}べきではない\`;
+// そんな + こと + を + 言う (辞書形) + べきではない (negative)
+type そんなことを言うべきではない = \`\${PhraseWithParticle<\`\${そんな}\${こと}\`, "を">}\${ConjugateVerb<言う, "Dictionary">}べきではない\`;
 `,
         },
       ],
@@ -145,10 +148,10 @@ type 寒いわけだ = \`\${ConjugateAdjective<寒い, "Basic">}わけだ\`;
           reading: "まいにちべんきょうしたわけです",
           en: "So that means you studied every day.",
           zh: "这么说,你是每天都学习了。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Adverb, CommonNoun, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 毎日 = ProperNoun<"毎日">;
-type 勉強 = ProperNoun<"勉強">;
+type 毎日 = Adverb<"毎日">;
+type 勉強 = CommonNoun<"勉強">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 毎日 + 勉強 + した (た形) + わけです
@@ -160,10 +163,10 @@ type 毎日勉強したわけです = \`\${毎日}\${勉強}\${ConjugateVerb<す
           reading: "かれはにほんじんなわけだ",
           en: "So that's why — he's Japanese, after all.",
           zh: "原来如此,他是日本人嘛。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 日本人 = ProperNoun<"日本人">;
+type 彼 = Pronoun<"彼">;
+type 日本人 = CommonNoun<"日本人">;
 
 // 彼 + は + 日本人 + な + わけだ (noun + な before わけ)
 type 彼は日本人なわけだ =\`\${PhraseWithParticle<彼, "は">}\${日本人}なわけだ\`;

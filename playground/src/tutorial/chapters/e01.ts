@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "わたしはがくせいです",
           en: "I am a student.",
           zh: "我是学生。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 学生 = ProperNoun<"学生">;
+type 私 = Pronoun<"私">;
+type 学生 = CommonNoun<"学生">;
 
 // 私 + は (topic) + 学生 + です
 type 私は学生です = \`\${PhraseWithParticle<私, "は">}\${ConjugateCopula<学生, "Polite">}\`;
@@ -39,10 +39,10 @@ type 私は学生です = \`\${PhraseWithParticle<私, "は">}\${ConjugateCopula
           reading: "たなかさんはせんせいです",
           en: "Mr. Tanaka is a teacher.",
           zh: "田中先生是老师。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
-type 先生 = ProperNoun<"先生">;
+type 田中さん = CommonNoun<"田中さん">;
+type 先生 = CommonNoun<"先生">;
 
 type 田中さんは先生です = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateCopula<先生, "Polite">}\`;
 `,
@@ -63,10 +63,10 @@ type 田中さんは先生です = \`\${PhraseWithParticle<田中さん, "は">}
           reading: "わたしはいしゃではありません",
           en: "I am not a doctor.",
           zh: "我不是医生。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 医者 = ProperNoun<"医者">;
+type 私 = Pronoun<"私">;
+type 医者 = CommonNoun<"医者">;
 
 type 私は医者ではありません = \`\${PhraseWithParticle<私, "は">}\${ConjugateCopula<医者, "PoliteNegative">}\`;
 `,
@@ -87,10 +87,10 @@ type 私は医者ではありません = \`\${PhraseWithParticle<私, "は">}\${
           reading: "あなたはがくせいですか",
           en: "Are you a student?",
           zh: "你是学生吗?",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type あなた = ProperNoun<"あなた">;
-type 学生 = ProperNoun<"学生">;
+type あなた = Pronoun<"あなた">;
+type 学生 = CommonNoun<"学生">;
 
 type あなたは学生ですか = \`\${PhraseWithParticle<あなた, "は">}\${ConjugateCopula<学生, "Polite">}か\`;
 `,

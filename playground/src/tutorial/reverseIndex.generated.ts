@@ -113,7 +113,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "あなたは学生ですか"
     }
   ],
-  "あの店": [
+  "あの": [
     {
       "chapterId": "a05",
       "chapterTitleEn": "Assertion suffixes",
@@ -296,17 +296,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜そうだ(样态)——「看起来……」",
       "anchor": "ex-i09-i09-1-0",
       "jp": "このケーキはおいしそうです"
-    }
-  ],
-  "おっしゃいました": [
-    {
-      "chapterId": "a01",
-      "chapterTitleEn": "Advanced & business keigo",
-      "chapterTitleZh": "高级与商务敬语",
-      "pointTitleEn": "二重敬語 — don't stack honorifics twice",
-      "pointTitleZh": "二重敬語 ——不要把敬语叠加两次",
-      "anchor": "ex-a01-a01-1-0",
-      "jp": "先生がおっしゃいました"
     }
   ],
   "おもしろい": [
@@ -513,6 +502,17 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "クラスの中で田中さんがいちばん背が高いです"
     }
   ],
+  "ケーキ": [
+    {
+      "chapterId": "i09",
+      "chapterTitleEn": "Appearance & hearsay",
+      "chapterTitleZh": "样态与传闻",
+      "pointTitleEn": "〜そうだ (appearance) — “it looks like…”",
+      "pointTitleZh": "〜そうだ(样态)——「看起来……」",
+      "anchor": "ex-i09-i09-1-0",
+      "jp": "このケーキはおいしそうです"
+    }
+  ],
   "コート": [
     {
       "chapterId": "i15",
@@ -638,29 +638,27 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "こちらは受付でございます"
     }
   ],
-  "このケーキ": [
+  "こと": [
     {
-      "chapterId": "i09",
-      "chapterTitleEn": "Appearance & hearsay",
-      "chapterTitleZh": "样态与传闻",
-      "pointTitleEn": "〜そうだ (appearance) — “it looks like…”",
-      "pointTitleZh": "〜そうだ(样态)——「看起来……」",
-      "anchor": "ex-i09-i09-1-0",
-      "jp": "このケーキはおいしそうです"
+      "chapterId": "i10",
+      "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
+      "chapterTitleZh": "〜はず／〜べき／〜わけ",
+      "pointTitleEn": "〜べきだ — “ought to / should”",
+      "pointTitleZh": "〜べきだ ——「应该、理应」",
+      "anchor": "ex-i10-i10-2-0",
+      "jp": "本当のことを言うべきだ"
+    },
+    {
+      "chapterId": "i10",
+      "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
+      "chapterTitleZh": "〜はず／〜べき／〜わけ",
+      "pointTitleEn": "〜べきだ — “ought to / should”",
+      "pointTitleZh": "〜べきだ ——「应该、理应」",
+      "anchor": "ex-i10-i10-2-2",
+      "jp": "そんなことを言うべきではない"
     }
   ],
-  "この町": [
-    {
-      "chapterId": "e08",
-      "chapterTitleEn": "Adjectives: い & な",
-      "chapterTitleZh": "形容词：い与な",
-      "pointTitleEn": "Negative: 〜くない / 〜ではない",
-      "pointTitleZh": "否定：〜くない / 〜ではない",
-      "anchor": "ex-e08-e08-3-1",
-      "jp": "この町は静かではない"
-    }
-  ],
-  "この店": [
+  "この": [
     {
       "chapterId": "a03",
       "chapterTitleEn": "The 〜わけ family",
@@ -669,9 +667,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜わけではない ——「并不是说……、未必」",
       "anchor": "ex-a03-a03-2-2",
       "jp": "この店が高いわけではない"
-    }
-  ],
-  "この本": [
+    },
     {
       "chapterId": "e04",
       "chapterTitleEn": "Numbers, time & counters",
@@ -689,6 +685,24 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "否定：〜くない / 〜ではない",
       "anchor": "ex-e08-e08-3-0",
       "jp": "この本は高くない"
+    },
+    {
+      "chapterId": "e08",
+      "chapterTitleEn": "Adjectives: い & な",
+      "chapterTitleZh": "形容词：い与な",
+      "pointTitleEn": "Negative: 〜くない / 〜ではない",
+      "pointTitleZh": "否定：〜くない / 〜ではない",
+      "anchor": "ex-e08-e08-3-1",
+      "jp": "この町は静かではない"
+    },
+    {
+      "chapterId": "i09",
+      "chapterTitleEn": "Appearance & hearsay",
+      "chapterTitleZh": "样态与传闻",
+      "pointTitleEn": "〜そうだ (appearance) — “it looks like…”",
+      "pointTitleZh": "〜そうだ(样态)——「看起来……」",
+      "anchor": "ex-i09-i09-1-0",
+      "jp": "このケーキはおいしそうです"
     },
     {
       "chapterId": "i10",
@@ -801,26 +815,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "简体句尾",
       "anchor": "ex-e13-e13-5-1",
       "jp": "もうご飯を食べたね"
-    }
-  ],
-  "ざるを得ない": [
-    {
-      "chapterId": "a04",
-      "chapterTitleEn": "〜ざるを得ない / 〜ずにはいられない",
-      "chapterTitleZh": "〜ざるを得ない／〜ずにはいられない",
-      "pointTitleEn": "〜ざるを得ない — have no choice but to",
-      "pointTitleZh": "〜ざるを得ない ——「不得不」",
-      "anchor": "ex-a04-a04-1-0",
-      "jp": "私は行かざるを得ない"
-    },
-    {
-      "chapterId": "a04",
-      "chapterTitleEn": "〜ざるを得ない / 〜ずにはいられない",
-      "chapterTitleZh": "〜ざるを得ない／〜ずにはいられない",
-      "pointTitleEn": "〜ざるを得ない — have no choice but to",
-      "pointTitleZh": "〜ざるを得ない ——「不得不」",
-      "anchor": "ex-a04-a04-1-1",
-      "jp": "失敗を認めざるを得ない"
     }
   ],
   "すぐ": [
@@ -1187,26 +1181,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "音楽を聞きながら勉強します"
     }
   ],
-  "せざるを得ない": [
-    {
-      "chapterId": "a04",
-      "chapterTitleEn": "〜ざるを得ない / 〜ずにはいられない",
-      "chapterTitleZh": "〜ざるを得ない／〜ずにはいられない",
-      "pointTitleEn": "Irregular forms: する → せざるを得ない",
-      "pointTitleZh": "不规则形:する → せざるを得ない",
-      "anchor": "ex-a04-a04-2-0",
-      "jp": "私は我慢せざるを得ない"
-    },
-    {
-      "chapterId": "a04",
-      "chapterTitleEn": "〜ざるを得ない / 〜ずにはいられない",
-      "chapterTitleZh": "〜ざるを得ない／〜ずにはいられない",
-      "pointTitleEn": "Irregular forms: する → せざるを得ない",
-      "pointTitleZh": "不规则形:する → せざるを得ない",
-      "anchor": "ex-a04-a04-2-1",
-      "jp": "計画を中止せざるを得ない"
-    }
-  ],
   "それ": [
     {
       "chapterId": "a05",
@@ -1236,7 +1210,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "それはいいと思う"
     }
   ],
-  "そんなこと": [
+  "そんな": [
     {
       "chapterId": "i10",
       "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
@@ -1267,17 +1241,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜まま ——「保持原状/就那样」",
       "anchor": "ex-i11-i11-2-1",
       "jp": "電気をつけたまま寝ました"
-    }
-  ],
-  "である": [
-    {
-      "chapterId": "a07",
-      "chapterTitleEn": "〜かのようだ / 〜とばかりに",
-      "chapterTitleZh": "〜かのようだ／〜とばかりに",
-      "pointTitleEn": "〜かのようだ — “as if / as though”",
-      "pointTitleZh": "〜かのようだ ——「仿佛、好像」",
-      "anchor": "ex-a07-a07-1-2",
-      "jp": "彼女はまるで天使であるかのようだ"
     }
   ],
   "できる": [
@@ -1358,26 +1321,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜ような ——「像……一样的」",
       "anchor": "ex-i08-i08-2-1",
       "jp": "田中さんのような先生になりたいです"
-    }
-  ],
-  "に際して": [
-    {
-      "chapterId": "a06",
-      "chapterTitleEn": "〜をめぐって / 〜にあたって / 〜に際して",
-      "chapterTitleZh": "〜をめぐって／〜にあたって／〜に際して",
-      "pointTitleEn": "〜に際して — at the time of",
-      "pointTitleZh": "〜に際して ——「值此……之时」",
-      "anchor": "ex-a06-a06-3-0",
-      "jp": "卒業に際して写真を撮った"
-    },
-    {
-      "chapterId": "a06",
-      "chapterTitleEn": "〜をめぐって / 〜にあたって / 〜に際して",
-      "chapterTitleZh": "〜をめぐって／〜にあたって／〜に際して",
-      "pointTitleEn": "〜に際して — at the time of",
-      "pointTitleZh": "〜に際して ——「值此……之时」",
-      "anchor": "ex-a06-a06-3-1",
-      "jp": "契約に際して説明する"
     }
   ],
   "バス": [
@@ -2188,6 +2131,24 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
   ],
   "何": [
     {
+      "chapterId": "a07",
+      "chapterTitleEn": "〜かのようだ / 〜とばかりに",
+      "chapterTitleZh": "〜かのようだ／〜とばかりに",
+      "pointTitleEn": "〜かのようだ — “as if / as though”",
+      "pointTitleZh": "〜かのようだ ——「仿佛、好像」",
+      "anchor": "ex-a07-a07-1-0",
+      "jp": "彼は何も知らないかのようだ"
+    },
+    {
+      "chapterId": "a07",
+      "chapterTitleEn": "〜かのようだ / 〜とばかりに",
+      "chapterTitleZh": "〜かのようだ／〜とばかりに",
+      "pointTitleEn": "〜とばかりに — “as if to say …”",
+      "pointTitleZh": "〜とばかりに ——「仿佛在说……似的」",
+      "anchor": "ex-a07-a07-3-2",
+      "jp": "何も聞いていないとばかりに歩いた"
+    },
+    {
       "chapterId": "a08",
       "chapterTitleEn": "〜ことなく / 〜抜きで — without doing; leaving out",
       "chapterTitleZh": "〜ことなく／〜抜きで ——「不…而…」「省去…」",
@@ -2240,26 +2201,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "疑问词 〜ても ——「无论……」",
       "anchor": "ex-i07-i07-2-1",
       "jp": "何を飲んでも眠れません"
-    }
-  ],
-  "何も": [
-    {
-      "chapterId": "a07",
-      "chapterTitleEn": "〜かのようだ / 〜とばかりに",
-      "chapterTitleZh": "〜かのようだ／〜とばかりに",
-      "pointTitleEn": "〜かのようだ — “as if / as though”",
-      "pointTitleZh": "〜かのようだ ——「仿佛、好像」",
-      "anchor": "ex-a07-a07-1-0",
-      "jp": "彼は何も知らないかのようだ"
-    },
-    {
-      "chapterId": "a07",
-      "chapterTitleEn": "〜かのようだ / 〜とばかりに",
-      "chapterTitleZh": "〜かのようだ／〜とばかりに",
-      "pointTitleEn": "〜とばかりに — “as if to say …”",
-      "pointTitleZh": "〜とばかりに ——「仿佛在说……似的」",
-      "anchor": "ex-a07-a07-3-2",
-      "jp": "何も聞いていないとばかりに歩いた"
     }
   ],
   "家": [
@@ -2818,7 +2759,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "本を読むとき、眼鏡をかけます"
     }
   ],
-  "机の上": [
+  "机": [
     {
       "chapterId": "e03",
       "chapterTitleEn": "Existence: あります / います, location に",
@@ -3885,6 +3826,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "高ければ高いほどいい"
     },
     {
+      "chapterId": "i07",
+      "chapterTitleEn": "〜ても / 〜のに",
+      "chapterTitleZh": "〜ても／〜のに",
+      "pointTitleEn": "Verb 〜ても — “even if / even though”",
+      "pointTitleZh": "动词 〜ても ——「即使／就算」",
+      "anchor": "ex-i07-i07-1-1",
+      "jp": "高くても買います"
+    },
+    {
       "chapterId": "i10",
       "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
       "chapterTitleZh": "〜はず／〜べき／〜わけ",
@@ -3912,17 +3862,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "高いですが買います"
     }
   ],
-  "高くて": [
-    {
-      "chapterId": "i07",
-      "chapterTitleEn": "〜ても / 〜のに",
-      "chapterTitleZh": "〜ても／〜のに",
-      "pointTitleEn": "Verb 〜ても — “even if / even though”",
-      "pointTitleZh": "动词 〜ても ——「即使／就算」",
-      "anchor": "ex-i07-i07-1-1",
-      "jp": "高くても買います"
-    }
-  ],
   "国内": [
     {
       "chapterId": "a10",
@@ -3932,6 +3871,17 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜のみならず ——「不仅……而且」(书面)",
       "anchor": "ex-a10-a10-3-1",
       "jp": "国内のみならず海外でも有名だ"
+    }
+  ],
+  "頃": [
+    {
+      "chapterId": "a02",
+      "chapterTitleEn": "〜ものだ / 〜ことだ",
+      "chapterTitleZh": "〜ものだ／〜ことだ",
+      "pointTitleEn": "〜たものだ — nostalgia (“I used to…”)",
+      "pointTitleZh": "〜たものだ ——怀旧(「过去常常……」)",
+      "anchor": "ex-a02-a02-2-1",
+      "jp": "子供の頃はよく遊んだものだ"
     }
   ],
   "今": [
@@ -4249,6 +4199,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "子供は遊ぶものだ"
     },
     {
+      "chapterId": "a02",
+      "chapterTitleEn": "〜ものだ / 〜ことだ",
+      "chapterTitleZh": "〜ものだ／〜ことだ",
+      "pointTitleEn": "〜たものだ — nostalgia (“I used to…”)",
+      "pointTitleZh": "〜たものだ ——怀旧(「过去常常……」)",
+      "anchor": "ex-a02-a02-2-1",
+      "jp": "子供の頃はよく遊んだものだ"
+    },
+    {
       "chapterId": "a05",
       "chapterTitleEn": "Assertion suffixes",
       "chapterTitleZh": "断定后缀",
@@ -4310,17 +4269,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜とき ——「……的时候」",
       "anchor": "ex-i15-i15-3-1",
       "jp": "子供のとき、よく泣きました"
-    }
-  ],
-  "子供の頃": [
-    {
-      "chapterId": "a02",
-      "chapterTitleEn": "〜ものだ / 〜ことだ",
-      "chapterTitleZh": "〜ものだ／〜ことだ",
-      "pointTitleEn": "〜たものだ — nostalgia (“I used to…”)",
-      "pointTitleZh": "〜たものだ ——怀旧(「过去常常……」)",
-      "anchor": "ex-a02-a02-2-1",
-      "jp": "子供の頃はよく遊んだものだ"
     }
   ],
   "思う": [
@@ -4820,9 +4768,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜てもらう ——「请 / 让某人为自己做某事」",
       "anchor": "ex-i13-i13-5-1",
       "jp": "私は先生に本を貸してもらいました"
-    }
-  ],
-  "私の趣味": [
+    },
     {
       "chapterId": "i15",
       "chapterTitleEn": "Nominalization の・こと, 〜とき",
@@ -5095,6 +5041,17 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜てもらう ——「请 / 让某人为自己做某事」",
       "anchor": "ex-i13-i13-5-0",
       "jp": "私は友達に手伝ってもらう"
+    }
+  ],
+  "趣味": [
+    {
+      "chapterId": "i15",
+      "chapterTitleEn": "Nominalization の・こと, 〜とき",
+      "chapterTitleZh": "名词化の・こと与〜とき",
+      "pointTitleEn": "こと as a nominalizer",
+      "pointTitleZh": "名词化标记 こと",
+      "anchor": "ex-i15-i15-2-1",
+      "jp": "私の趣味は本を読むことです"
     }
   ],
   "受付": [
@@ -5403,7 +5360,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "これは証拠にほかなりません"
     }
   ],
-  "上で": [
+  "上": [
     {
       "chapterId": "a11",
       "chapterTitleEn": "〜次第 / 〜上で / 〜限り / 〜反面",
@@ -5421,6 +5378,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜上で ——「在……之后／在……方面」",
       "anchor": "ex-a11-a11-2-1",
       "jp": "規則の上で問題ない"
+    },
+    {
+      "chapterId": "e03",
+      "chapterTitleEn": "Existence: あります / います, location に",
+      "chapterTitleZh": "存在句：あります／います，场所に",
+      "pointTitleEn": "Place に Thing があります — “At PLACE there is THING”",
+      "pointTitleZh": "场所 に 事物 があります ——「某地有某物」",
+      "anchor": "ex-e03-e03-3-1",
+      "jp": "机の上に猫がいます"
     }
   ],
   "上手": [
@@ -5443,17 +5409,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜抜きで ——「省去…」「不要…」",
       "anchor": "ex-a08-a08-3-1",
       "jp": "冗談抜きで話そう"
-    }
-  ],
-  "食べさせ": [
-    {
-      "chapterId": "i02",
-      "chapterTitleEn": "Causative 使役",
-      "chapterTitleZh": "使役态",
-      "pointTitleEn": "Polite causative: 〜せます / 〜させます",
-      "pointTitleZh": "礼貌体使役:〜せます / 〜させます",
-      "anchor": "ex-i02-i02-4-0",
-      "jp": "母は私に野菜を食べさせます"
     }
   ],
   "食べる": [
@@ -6584,6 +6539,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "形容词的过去时",
       "anchor": "ex-e07-e07-4-1",
       "jp": "町は静かでした"
+    },
+    {
+      "chapterId": "e08",
+      "chapterTitleEn": "Adjectives: い & な",
+      "chapterTitleZh": "形容词：い与な",
+      "pointTitleEn": "Negative: 〜くない / 〜ではない",
+      "pointTitleZh": "否定：〜くない / 〜ではない",
+      "anchor": "ex-e08-e08-3-1",
+      "jp": "この町は静かではない"
     }
   ],
   "弟": [
@@ -6659,6 +6623,24 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
   ],
   "店": [
     {
+      "chapterId": "a03",
+      "chapterTitleEn": "The 〜わけ family",
+      "chapterTitleZh": "〜わけ系列",
+      "pointTitleEn": "〜わけではない — “it's not that / not necessarily”",
+      "pointTitleZh": "〜わけではない ——「并不是说……、未必」",
+      "anchor": "ex-a03-a03-2-2",
+      "jp": "この店が高いわけではない"
+    },
+    {
+      "chapterId": "a05",
+      "chapterTitleEn": "Assertion suffixes",
+      "chapterTitleZh": "断定后缀",
+      "pointTitleEn": "〜にちがいない — must be, surely",
+      "pointTitleZh": "〜にちがいない ——一定是、肯定是",
+      "anchor": "ex-a05-a05-3-2",
+      "jp": "あの店は高いにちがいありません"
+    },
+    {
       "chapterId": "e02",
       "chapterTitleEn": "Demonstratives & の",
       "chapterTitleZh": "指示词与の",
@@ -6675,6 +6657,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "から〜まで ——「从……到……」",
       "anchor": "ex-e04-e04-4-1",
       "jp": "店は9時から5時までです"
+    },
+    {
+      "chapterId": "i09",
+      "chapterTitleEn": "Appearance & hearsay",
+      "chapterTitleZh": "样态与传闻",
+      "pointTitleEn": "〜らしい — “it seems / apparently”",
+      "pointTitleZh": "〜らしい ——「似乎、好像」",
+      "anchor": "ex-i09-i09-3-1",
+      "jp": "あの店は安いらしいです"
     }
   ],
   "田中": [
@@ -6992,7 +6983,7 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "日曜日なのに働きます"
     }
   ],
-  "道理で": [
+  "道理": [
     {
       "chapterId": "a03",
       "chapterTitleEn": "The 〜わけ family",
@@ -8313,6 +8304,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "ここに本があります"
     },
     {
+      "chapterId": "e04",
+      "chapterTitleEn": "Numbers, time & counters",
+      "chapterTitleZh": "数字、时间与量词",
+      "pointTitleEn": "Prices: 〜円 (yen)",
+      "pointTitleZh": "价格:〜円(日元)",
+      "anchor": "ex-e04-e04-1-1",
+      "jp": "この本は1500円です"
+    },
+    {
       "chapterId": "e05",
       "chapterTitleEn": "Verbs: ます-form & を",
       "chapterTitleZh": "动词ます形与宾语を",
@@ -8320,6 +8320,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "宾语助词 を",
       "anchor": "ex-e05-e05-2-0",
       "jp": "本を読みます"
+    },
+    {
+      "chapterId": "e08",
+      "chapterTitleEn": "Adjectives: い & な",
+      "chapterTitleZh": "形容词：い与な",
+      "pointTitleEn": "Negative: 〜くない / 〜ではない",
+      "pointTitleZh": "否定：〜くない / 〜ではない",
+      "anchor": "ex-e08-e08-3-0",
+      "jp": "この本は高くない"
     },
     {
       "chapterId": "e10",
@@ -8394,6 +8403,15 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "先生は本をお読みになります"
     },
     {
+      "chapterId": "i10",
+      "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
+      "chapterTitleZh": "〜はず／〜べき／〜わけ",
+      "pointTitleEn": "〜はずだ — “should / is expected to”",
+      "pointTitleZh": "〜はずだ ——「按理应当、估计」",
+      "anchor": "ex-i10-i10-1-1",
+      "jp": "この本は高いはずだ"
+    },
+    {
       "chapterId": "i13",
       "chapterTitleEn": "Giving & receiving 授受",
       "chapterTitleZh": "授受表达",
@@ -8448,6 +8466,17 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "jp": "本を読むとき、眼鏡をかけます"
     }
   ],
+  "本当": [
+    {
+      "chapterId": "i10",
+      "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
+      "chapterTitleZh": "〜はず／〜べき／〜わけ",
+      "pointTitleEn": "〜べきだ — “ought to / should”",
+      "pointTitleZh": "〜べきだ ——「应该、理应」",
+      "anchor": "ex-i10-i10-2-0",
+      "jp": "本当のことを言うべきだ"
+    }
+  ],
   "本当に": [
     {
       "chapterId": "a02",
@@ -8457,17 +8486,6 @@ export const REVERSE_INDEX: Record<string, ExampleRef[]> = {
       "pointTitleZh": "〜ことだ ——形容词后的感叹",
       "anchor": "ex-a02-a02-4-1",
       "jp": "本当に幸せなことだ"
-    }
-  ],
-  "本当のこと": [
-    {
-      "chapterId": "i10",
-      "chapterTitleEn": "〜はず / 〜べき / 〜わけ",
-      "chapterTitleZh": "〜はず／〜べき／〜わけ",
-      "pointTitleEn": "〜べきだ — “ought to / should”",
-      "pointTitleZh": "〜べきだ ——「应该、理应」",
-      "anchor": "ex-i10-i10-2-0",
-      "jp": "本当のことを言うべきだ"
     }
   ],
   "毎日": [

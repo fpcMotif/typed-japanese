@@ -31,7 +31,7 @@ type くる = IrregularVerb & { dictionary: "くる" };
 // Examples of conjugation for Godan verbs
 // 話す (to speak)
 type 話すDictionary = ConjugateVerb<話す, "Dictionary">; // 話す
-type 話すMasu = ConjugateVerb<話す, "Masu">; // 話し
+type 話すMasu = ConjugateVerb<話す, "Masu">; // 話します
 type 話すTe = ConjugateVerb<話す, "Te">; // 話して
 type 話すTa = ConjugateVerb<話す, "Ta">; // 話した
 type 話すNai = ConjugateVerb<話す, "Nai">; // 話さ
@@ -39,14 +39,14 @@ type 話すPotential = ConjugateVerb<話す, "Potential">; // 話せ
 type 話すImperative = ConjugateVerb<話す, "Imperative">; // 話せ
 
 // 買う (to buy)
-type 買うMasu = ConjugateVerb<買う, "Masu">; // 買い
+type 買うMasu = ConjugateVerb<買う, "Masu">; // 買います
 type 買うTe = ConjugateVerb<買う, "Te">; // 買って
 type 買うTa = ConjugateVerb<買う, "Ta">; // 買った
-type 買うVolitional = ConjugateVerb<買う, "Volitional">; // 買お
+type 買うVolitional = ConjugateVerb<買う, "Volitional">; // 買おう
 // Examples of conjugation for Ichidan verbs
 // 食べる (to eat)
 type 食べるDictionary = ConjugateVerb<食べる, "Dictionary">; // 食べる
-type 食べるMasu = ConjugateVerb<食べる, "Masu">; // 食べ
+type 食べるMasu = ConjugateVerb<食べる, "Masu">; // 食べます
 type 食べるTe = ConjugateVerb<食べる, "Te">; // 食べて
 type 食べるTa = ConjugateVerb<食べる, "Ta">; // 食べた
 type 食べるNai = ConjugateVerb<食べる, "Nai">; // 食べ
@@ -56,7 +56,7 @@ type 食べるImperative = ConjugateVerb<食べる, "Imperative">; // 食べろ
 // Examples of conjugation for Irregular verbs
 // する (to do)
 type するDictionary = ConjugateVerb<する, "Dictionary">; // する
-type するMasu = ConjugateVerb<する, "Masu">; // し
+type するMasu = ConjugateVerb<する, "Masu">; // します
 type するTe = ConjugateVerb<する, "Te">; // して
 type するTa = ConjugateVerb<する, "Ta">; // した
 type するNai = ConjugateVerb<する, "Nai">; // し
@@ -64,18 +64,18 @@ type するPotential = ConjugateVerb<する, "Potential">; // でき
 type するImperative = ConjugateVerb<する, "Imperative">; // しろ
 
 // 来る (to come)
-type 来るMasu = ConjugateVerb<来る, "Masu">; // 来
+type 来るMasu = ConjugateVerb<来る, "Masu">; // 来ます
 type 来るTe = ConjugateVerb<来る, "Te">; // 来て
 type 来るImperative = ConjugateVerb<来る, "Imperative">; // 来い
 
 // Type checking
 // These should work
-const verifyHanasu: 話すMasu = "話し";
+const verifyHanasu: 話すMasu = "話します";
 const verifyTaberu: 食べるTe = "食べて";
 const verifySuru: するImperative = "しろ";
 
 // @ts-expect-error
-const wrongHanasu: 話すMasu = "話す"; // Type error: '話す' is not assignable to type '話し'
+const wrongHanasu: 話すMasu = "話す"; // Type error: '話す' is not assignable to type '話します'
 // @ts-expect-error
 const wrongTaberu: 食べるTe = "食べた"; // Type error: '食べた' is not assignable to type '食べて'
 // @ts-expect-error

@@ -21,8 +21,21 @@ export function extractWords(code: string): ExtractedWord[] {
     }
   };
 
-  // ProperNoun<"X">
-  for (const m of code.matchAll(/ProperNoun<\s*"([^"]+)"\s*>/g)) push(m[1]!, "noun");
+  // Wrapper→POS mirror of scripts/extract-words.mjs WRAPPER_POS (regex vs AST).
+  // Canonical wrapper list: src/noun-types.d.ts + src/adverb-types.d.ts.
+  // Noun subclasses: CommonNoun / ProperNoun / Pronoun<"X">
+  for (const m of code.matchAll(/CommonNoun<\s*"([^"]+)"\s*>/g)) push(m[1]!, "noun");
+  for (const m of code.matchAll(/ProperNoun<\s*"([^"]+)"\s*>/g)) push(m[1]!, "proper-noun");
+  for (const m of code.matchAll(/Pronoun<\s*"([^"]+)"\s*>/g)) push(m[1]!, "pronoun");
+  // Adverb / Adnominal<"X">
+  for (const m of code.matchAll(/(?<![A-Za-z])Adverb<\s*"([^"]+)"\s*>/g)) push(m[1]!, "adverb");
+  for (const m of code.matchAll(/Adnominal<\s*"([^"]+)"\s*>/g)) push(m[1]!, "adnominal");
+  // Noun-subclass parts in the Sentence path
+  for (const m of code.matchAll(/PronounPart<\s*"([^"]+)"\s*>/g)) push(m[1]!, "pronoun");
+  for (const m of code.matchAll(/ProperNounPart<\s*"([^"]+)"\s*>/g)) push(m[1]!, "proper-noun");
+  // Numerals / counters: NumeralPart<"三"> ; CounterPart<"三", "つ"> → word 三つ
+  for (const m of code.matchAll(/NumeralPart<\s*"([^"]+)"\s*>/g)) push(m[1]!, "number");
+  for (const m of code.matchAll(/CounterPart<\s*"([^"]+)"\s*,\s*"([^"]+)"\s*>/g)) push(m[1]! + m[2]!, "counter");
 
   // GodanVerb & { stem: "X"; ending: "Y" }
   for (const m of code.matchAll(

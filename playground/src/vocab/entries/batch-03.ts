@@ -13,7 +13,7 @@ const entries: VocabEntry[] = [
   { word: "歌う", reading: "うたう", romaji: "utau", pos: "verb-godan", en: "to sing", zh: "唱歌" },
   { word: "花", reading: "はな", romaji: "hana", pos: "noun", en: "flower", zh: "花" },
   { word: "過ぎる", reading: "すぎる", romaji: "sugiru", pos: "verb-ichidan", en: "to pass, to exceed", zh: "经过；超过" },
-  { word: "我々", reading: "われわれ", romaji: "wareware", pos: "noun", en: "we, us", zh: "我们" },
+  { word: "我々", reading: "われわれ", romaji: "wareware", pos: "pronoun", en: "we, us", zh: "我们" },
   { word: "我慢", reading: "がまん", romaji: "gaman", pos: "noun", en: "patience, endurance", zh: "忍耐" },
   { word: "会う", reading: "あう", romaji: "au", pos: "verb-godan", en: "to meet", zh: "见面" },
   { word: "会議", reading: "かいぎ", romaji: "kaigi", pos: "noun", en: "meeting, conference", zh: "会议" },

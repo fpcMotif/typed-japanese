@@ -25,14 +25,14 @@ const chapter: Chapter = {
           reading: "わたしはコーヒーをのみました",
           en: "I drank coffee.",
           zh: "我喝了咖啡。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type コーヒー = ProperNoun<"コーヒー">;
+type 私 = Pronoun<"私">;
+type コーヒー = CommonNoun<"コーヒー">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // 私 + は + コーヒー + を + 飲み(ます形) + ました
-type 私はコーヒーを飲みました = \`\${PhraseWithParticle<私, "は">}\${コーヒー}を\${ConjugateVerb<飲む, "Masu">}ました\`;
+type 私はコーヒーを飲みました = \`\${PhraseWithParticle<私, "は">}\${コーヒー}を\${ConjugateVerb<飲む, "MasuPast">}\`;
 `,
         },
         {
@@ -40,13 +40,13 @@ type 私はコーヒーを飲みました = \`\${PhraseWithParticle<私, "は">}
           reading: "わたしはパンをたべました",
           en: "I ate bread.",
           zh: "我吃了面包。",
-          code: `import type { ProperNoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IchidanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type パン = ProperNoun<"パン">;
+type 私 = Pronoun<"私">;
+type パン = CommonNoun<"パン">;
 type 食べる = IchidanVerb & { stem: "食べ"; ending: "る" };
 
-type 私はパンを食べました = \`\${PhraseWithParticle<私, "は">}\${パン}を\${ConjugateVerb<食べる, "Masu">}ました\`;
+type 私はパンを食べました = \`\${PhraseWithParticle<私, "は">}\${パン}を\${ConjugateVerb<食べる, "MasuPast">}\`;
 `,
         },
         {
@@ -54,12 +54,12 @@ type 私はパンを食べました = \`\${PhraseWithParticle<私, "は">}\${パ
           reading: "たなかさんはきました",
           en: "Mr. Tanaka came.",
           zh: "田中先生来了。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
+type 田中さん = CommonNoun<"田中さん">;
 type 来る = IrregularVerb & { dictionary: "来る" };
 
-type 田中さんは来ました = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<来る, "Masu">}ました\`;
+type 田中さんは来ました = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateVerb<来る, "MasuPast">}\`;
 `,
         },
       ],
@@ -78,14 +78,14 @@ type 田中さんは来ました = \`\${PhraseWithParticle<田中さん, "は">}
           reading: "わたしはおさけをのみませんでした",
           en: "I didn't drink alcohol.",
           zh: "我没喝酒。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type お酒 = ProperNoun<"お酒">;
+type 私 = Pronoun<"私">;
+type お酒 = CommonNoun<"お酒">;
 type 飲む = GodanVerb & { stem: "飲"; ending: "む" };
 
 // ます形(飲み) + ませんでした
-type 私はお酒を飲みませんでした = \`\${PhraseWithParticle<私, "は">}\${お酒}を\${ConjugateVerb<飲む, "Masu">}ませんでした\`;
+type 私はお酒を飲みませんでした = \`\${PhraseWithParticle<私, "は">}\${お酒}を\${ConjugateVerb<飲む, "MasenDeshita">}\`;
 `,
         },
         {
@@ -93,14 +93,14 @@ type 私はお酒を飲みませんでした = \`\${PhraseWithParticle<私, "は
           reading: "わたしはべんきょうしませんでした",
           en: "I didn't study.",
           zh: "我没学习。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 勉強 = ProperNoun<"勉強">;
+type 私 = Pronoun<"私">;
+type 勉強 = CommonNoun<"勉強">;
 type する = IrregularVerb & { dictionary: "する" };
 
 // 勉強 + し(ます形 of する) + ませんでした
-type 私は勉強しませんでした = \`\${PhraseWithParticle<私, "は">}\${勉強}\${ConjugateVerb<する, "Masu">}ませんでした\`;
+type 私は勉強しませんでした = \`\${PhraseWithParticle<私, "は">}\${勉強}\${ConjugateVerb<する, "MasenDeshita">}\`;
 `,
         },
       ],
@@ -119,10 +119,10 @@ type 私は勉強しませんでした = \`\${PhraseWithParticle<私, "は">}\${
           reading: "たなかさんはがくせいでした",
           en: "Mr. Tanaka was a student.",
           zh: "田中先生曾是学生。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
-type 学生 = ProperNoun<"学生">;
+type 田中さん = CommonNoun<"田中さん">;
+type 学生 = CommonNoun<"学生">;
 
 // です の過去形 → でした
 type 田中さんは学生でした = \`\${PhraseWithParticle<田中さん, "は">}\${ConjugateCopula<学生, "PolitePast">}\`;
@@ -133,10 +133,10 @@ type 田中さんは学生でした = \`\${PhraseWithParticle<田中さん, "は
           reading: "わたしはいしゃではありませんでした",
           en: "I was not a doctor.",
           zh: "我曾经不是医生。",
-          code: `import type { ProperNoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle, ConjugateCopula } from "typed-japanese";
 
-type 私 = ProperNoun<"私">;
-type 医者 = ProperNoun<"医者">;
+type 私 = Pronoun<"私">;
+type 医者 = CommonNoun<"医者">;
 
 type 私は医者ではありませんでした = \`\${PhraseWithParticle<私, "は">}\${ConjugateCopula<医者, "PoliteNegativePast">}\`;
 `,
@@ -157,9 +157,9 @@ type 私は医者ではありませんでした = \`\${PhraseWithParticle<私, "
           reading: "えいがはおもしろかったです",
           en: "The movie was interesting.",
           zh: "电影很有趣。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 映画 = ProperNoun<"映画">;
+type 映画 = CommonNoun<"映画">;
 type おもしろい = IAdjective & { stem: "おもしろ"; ending: "い" };
 
 // 過去形 → おもしろかった、丁寧に → +です
@@ -171,9 +171,9 @@ type 映画はおもしろかったです = \`\${PhraseWithParticle<映画, "は
           reading: "まちはしずかでした",
           en: "The town was quiet.",
           zh: "小镇曾经很安静。",
-          code: `import type { ProperNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, NaAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 町 = ProperNoun<"町">;
+type 町 = CommonNoun<"町">;
 type 静か = NaAdjective & { stem: "静か" };
 
 // na-adjective の過去形 → 静かでした

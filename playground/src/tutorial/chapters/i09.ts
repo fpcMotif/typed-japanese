@@ -25,13 +25,14 @@ const chapter: Chapter = {
           reading: "このケーキはおいしそうです",
           en: "This cake looks delicious.",
           zh: "这块蛋糕看起来很好吃。",
-          code: `import type { ProperNoun, IAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, IAdjective, PhraseWithParticle } from "typed-japanese";
 
-type このケーキ = ProperNoun<"このケーキ">;
+type この = Adnominal<"この">;
+type ケーキ = CommonNoun<"ケーキ">;
 type おいしい = IAdjective & { stem: "おいし"; ending: "い" };
 
 // i-adjective: drop い (= stem) + そうです
-type このケーキはおいしそうです = \`\${PhraseWithParticle<このケーキ, "は">}\${おいしい["stem"]}そうです\`;
+type このケーキはおいしそうです = \`\${PhraseWithParticle<\`\${この}\${ケーキ}\`, "は">}\${おいしい["stem"]}そうです\`;
 `,
         },
         {
@@ -39,13 +40,13 @@ type このケーキはおいしそうです = \`\${PhraseWithParticle<このケ
           reading: "あめがふりそうです",
           en: "It looks like it's going to rain.",
           zh: "看起来要下雨了。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 雨 = ProperNoun<"雨">;
+type 雨 = CommonNoun<"雨">;
 type 降る = GodanVerb & { stem: "降"; ending: "る" };
 
 // verb: ます-stem (降り) + そうです
-type 雨が降りそうです = \`\${PhraseWithParticle<雨, "が">}\${ConjugateVerb<降る, "Masu">}そうです\`;
+type 雨が降りそうです = \`\${PhraseWithParticle<雨, "が">}\${ConjugateVerb<降る, "MasuStem">}そうです\`;
 `,
         },
         {
@@ -53,9 +54,9 @@ type 雨が降りそうです = \`\${PhraseWithParticle<雨, "が">}\${Conjugate
           reading: "かれはげんきそうです",
           en: "He looks well / in good spirits.",
           zh: "他看起来很有精神。",
-          code: `import type { ProperNoun, NaAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Pronoun, NaAdjective, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
+type 彼 = Pronoun<"彼">;
 type 元気 = NaAdjective & { stem: "元気" };
 
 // na-adjective: stem + そうです
@@ -78,10 +79,10 @@ type 彼は元気そうです = \`\${PhraseWithParticle<彼, "は">}\${元気["s
           reading: "あしたはあめがふるそうです",
           en: "I hear it's going to rain tomorrow.",
           zh: "听说明天会下雨。",
-          code: `import type { ProperNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, GodanVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 明日 = ProperNoun<"明日">;
-type 雨 = ProperNoun<"雨">;
+type 明日 = CommonNoun<"明日">;
+type 雨 = CommonNoun<"雨">;
 type 降る = GodanVerb & { stem: "降"; ending: "る" };
 
 // plain (dictionary) form 降る + そうです
@@ -93,10 +94,10 @@ type 明日は雨が降るそうです = \`\${PhraseWithParticle<明日, "は">}
           reading: "たなかさんはらいしゅうくるそうです",
           en: "I hear Mr. Tanaka is coming next week.",
           zh: "听说田中先生下周来。",
-          code: `import type { ProperNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, IrregularVerb, ConjugateVerb, PhraseWithParticle } from "typed-japanese";
 
-type 田中さん = ProperNoun<"田中さん">;
-type 来週 = ProperNoun<"来週">;
+type 田中さん = CommonNoun<"田中さん">;
+type 来週 = CommonNoun<"来週">;
 type 来る = IrregularVerb & { dictionary: "来る" };
 
 // plain form 来る + そうです
@@ -119,10 +120,10 @@ type 田中さんは来週来るそうです = \`\${PhraseWithParticle<田中さ
           reading: "かれはがくせいらしいです",
           en: "He seems to be a student.",
           zh: "他好像是学生。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 学生 = ProperNoun<"学生">;
+type 彼 = Pronoun<"彼">;
+type 学生 = CommonNoun<"学生">;
 
 // noun + らしいです (no だ)
 type 彼は学生らしいです = \`\${PhraseWithParticle<彼, "は">}\${学生}らしいです\`;
@@ -133,13 +134,14 @@ type 彼は学生らしいです = \`\${PhraseWithParticle<彼, "は">}\${学生
           reading: "あのみせはやすいらしいです",
           en: "Apparently that shop is cheap.",
           zh: "听说那家店很便宜。",
-          code: `import type { ProperNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
+          code: `import type { Adnominal, CommonNoun, IAdjective, ConjugateAdjective, PhraseWithParticle } from "typed-japanese";
 
-type あの店 = ProperNoun<"あの店">;
+type あの = Adnominal<"あの">;
+type 店 = CommonNoun<"店">;
 type 安い = IAdjective & { stem: "安"; ending: "い" };
 
 // i-adjective plain form 安い + らしいです
-type あの店は安いらしいです = \`\${PhraseWithParticle<あの店, "は">}\${ConjugateAdjective<安い, "Basic">}らしいです\`;
+type あの店は安いらしいです = \`\${PhraseWithParticle<\`\${あの}\${店}\`, "は">}\${ConjugateAdjective<安い, "Basic">}らしいです\`;
 `,
         },
       ],
@@ -158,10 +160,10 @@ type あの店は安いらしいです = \`\${PhraseWithParticle<あの店, "は
           reading: "かれはこどもみたいです",
           en: "He's like a child.",
           zh: "他像个小孩。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 子供 = ProperNoun<"子供">;
+type 彼 = Pronoun<"彼">;
+type 子供 = CommonNoun<"子供">;
 
 // noun + みたいです (resemblance)
 type 彼は子供みたいです = \`\${PhraseWithParticle<彼, "は">}\${子供}みたいです\`;
@@ -172,10 +174,10 @@ type 彼は子供みたいです = \`\${PhraseWithParticle<彼, "は">}\${子供
           reading: "そとはあめみたいです",
           en: "It looks like it's raining outside.",
           zh: "外面好像在下雨。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 外 = ProperNoun<"外">;
-type 雨 = ProperNoun<"雨">;
+type 外 = CommonNoun<"外">;
+type 雨 = CommonNoun<"雨">;
 
 // noun + みたいです (conjecture)
 type 外は雨みたいです = \`\${PhraseWithParticle<外, "は">}\${雨}みたいです\`;

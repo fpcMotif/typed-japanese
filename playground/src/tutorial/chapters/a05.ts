@@ -25,10 +25,10 @@ const chapter: Chapter = {
           reading: "それはいいわけにすぎない",
           en: "That is merely an excuse.",
           zh: "那不过是借口而已。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type それ = ProperNoun<"それ">;
-type 言い訳 = ProperNoun<"言い訳">;
+type それ = Pronoun<"それ">;
+type 言い訳 = CommonNoun<"言い訳">;
 
 // それ + は (topic) + 言い訳 + にすぎない
 type それは言い訳にすぎない = \`\${PhraseWithParticle<それ, "は">}\${言い訳}にすぎない\`;
@@ -39,10 +39,10 @@ type それは言い訳にすぎない = \`\${PhraseWithParticle<それ, "は">}
           reading: "かれはこどもにすぎません",
           en: "He is nothing more than a child.",
           zh: "他不过是个孩子罢了。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
-type 子供 = ProperNoun<"子供">;
+type 彼 = Pronoun<"彼">;
+type 子供 = CommonNoun<"子供">;
 
 // 彼 + は (topic) + 子供 + にすぎません (polite)
 type 彼は子供にすぎません = \`\${PhraseWithParticle<彼, "は">}\${子供}にすぎません\`;
@@ -64,10 +64,10 @@ type 彼は子供にすぎません = \`\${PhraseWithParticle<彼, "は">}\${子
           reading: "せいこうはどりょくにほかならない",
           en: "Success is nothing but effort.",
           zh: "成功无非就是努力。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, PhraseWithParticle } from "typed-japanese";
 
-type 成功 = ProperNoun<"成功">;
-type 努力 = ProperNoun<"努力">;
+type 成功 = CommonNoun<"成功">;
+type 努力 = CommonNoun<"努力">;
 
 // 成功 + は (topic) + 努力 + にほかならない
 type 成功は努力にほかならない = \`\${PhraseWithParticle<成功, "は">}\${努力}にほかならない\`;
@@ -78,10 +78,10 @@ type 成功は努力にほかならない = \`\${PhraseWithParticle<成功, "は
           reading: "これはしょうこにほかなりません",
           en: "This is none other than proof.",
           zh: "这正是证据,不会是别的。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type これ = ProperNoun<"これ">;
-type 証拠 = ProperNoun<"証拠">;
+type これ = Pronoun<"これ">;
+type 証拠 = CommonNoun<"証拠">;
 
 // これ + は (topic) + 証拠 + にほかなりません (polite)
 type これは証拠にほかなりません = \`\${PhraseWithParticle<これ, "は">}\${証拠}にほかなりません\`;
@@ -103,10 +103,10 @@ type これは証拠にほかなりません = \`\${PhraseWithParticle<これ, "
           reading: "はんにんはかれにちがいない",
           en: "The culprit must be him.",
           zh: "犯人一定是他。",
-          code: `import type { ProperNoun, PhraseWithParticle } from "typed-japanese";
+          code: `import type { CommonNoun, Pronoun, PhraseWithParticle } from "typed-japanese";
 
-type 犯人 = ProperNoun<"犯人">;
-type 彼 = ProperNoun<"彼">;
+type 犯人 = CommonNoun<"犯人">;
+type 彼 = Pronoun<"彼">;
 
 // 犯人 + は (topic) + 彼 + にちがいない
 type 犯人は彼にちがいない = \`\${PhraseWithParticle<犯人, "は">}\${彼}にちがいない\`;
@@ -117,9 +117,9 @@ type 犯人は彼にちがいない = \`\${PhraseWithParticle<犯人, "は">}\${
           reading: "かれはくるにちがいない",
           en: "He will surely come.",
           zh: "他肯定会来。",
-          code: `import type { ProperNoun, PhraseWithParticle, IrregularVerb, ConjugateVerb } from "typed-japanese";
+          code: `import type { Pronoun, PhraseWithParticle, IrregularVerb, ConjugateVerb } from "typed-japanese";
 
-type 彼 = ProperNoun<"彼">;
+type 彼 = Pronoun<"彼">;
 type 来る = IrregularVerb & { dictionary: "来る" };
 
 // 彼 + は (topic) + 来る (辞書形 = 来る) + にちがいない
@@ -131,13 +131,14 @@ type 彼は来るにちがいない = \`\${PhraseWithParticle<彼, "は">}\${Con
           reading: "あのみせはたかいにちがいありません",
           en: "That shop must be expensive.",
           zh: "那家店肯定很贵。",
-          code: `import type { ProperNoun, PhraseWithParticle, IAdjective, ConjugateAdjective } from "typed-japanese";
+          code: `import type { CommonNoun, Adnominal, PhraseWithParticle, IAdjective, ConjugateAdjective } from "typed-japanese";
 
-type あの店 = ProperNoun<"あの店">;
+type あの = Adnominal<"あの">;
+type 店 = CommonNoun<"店">;
 type 高い = IAdjective & { stem: "高"; ending: "い" };
 
-// あの店 + は (topic) + 高い (基本形) + にちがいありません (polite)
-type あの店は高いにちがいありません = \`\${PhraseWithParticle<あの店, "は">}\${ConjugateAdjective<高い, "Basic">}にちがいありません\`;
+// あの + 店 (phrase) + は (topic) + 高い (基本形) + にちがいありません (polite)
+type あの店は高いにちがいありません = \`\${PhraseWithParticle<\`\${あの}\${店}\`, "は">}\${ConjugateAdjective<高い, "Basic">}にちがいありません\`;
 `,
         },
       ],
